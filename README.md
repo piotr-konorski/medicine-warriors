@@ -17,7 +17,6 @@ https://code4ukraine.devpost.com/project-gallery
 
 
 ### Development
-
 Build the images and spin up the containers:
 
 ```sh
@@ -26,7 +25,6 @@ $ docker-compose up -d --build
 
 
 ### Production
-
 Build the images and run the containers:
 
 ```sh
