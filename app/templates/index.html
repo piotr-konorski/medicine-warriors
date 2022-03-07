@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Medicine Warriors</title>
+    
+    <link rel="stylesheet" type="text/css" href="{{ url_for('static', path='/css/style.css') }}" />
+    <script src="{{ url_for('static', path='/js/google_maps.js') }}"></script>
+
+</head>
+
+
+<body onload="updatePharmacies()">
+<!-- <body> -->
+  
+  <!-- <p align="right">
+    <a href="/send">Subscribe to notifications</a>
+  </p> -->
+  
+  <div class="header">
+    <img src="{{ url_for('static', path='/logo.png') }}" alt="logo" />
+    <h1>Insulin Warriors</h1>
+    <h3>На варті Вашого здоров'я! - We are guarding your health!</h3>
+  </div>
+
+  <br>
+
+  
+  <div>
+    <center>
+      <h2>Про нас</h2>
+      <h4>About</h4>
+      <p>
+        Ми надаємо найсвіжішу інформацію з офіційних джерел про наявність інсуліну в аптеках по всій Україні
+      </p>
+    </center>
+  </div>
+  <br>
+
+  <div>
+    <center>
+      <h2>Як отримати рецепт?</h2>
+      <h4>How to get a prescription?</h4>
+      <p>
+        Отримати паперовий рецепт можна у лікаря, з яким підписано декларацію на обслуговування (в Центрах первинної-медико-санітарної допомоги), або у  вузького спеціаліста (в Консультативно-діагностичних центрах). Для цього хворому або його представнику необхідно звернутися у заклад без попереднього запису, але з урахуванням вимог комендантської години.
+        Окрім інсулінів паперові рецепти наразі діють і на життєво необхідні ліки для хронічних хворих, а також препарати, які відпускаються по програмі <a href="https://moz.gov.ua/dostupni-liki">Доступні ліки</a>. 
+        Якщо поблизу вас є одинокі хворі люди – дізнайтеся, чи потрібні їм ліки. Якщо є можливість – сходіть отримати їх рецепт та придбайте медикаменти, які збережуть їм життя.
+      </p>
+    </center>
+  </div>
+  <br>
+
+  <div>
+    <center>
+      <h2>Карта</h2>
+      <h4>Map</h4>
+      <p>
+        Перелік відкритих аптек може змінюватися з огляду на питання безпеки роботи закладів за конкретними адресами.
+        Перед тим як звернутись до найближчої до вас аптеки, варто зателефонувати до неї, щоб дізнатися години її роботи та уточнити наявність інсуліну.
+      </p>
+    </center>
+  </div>
+
+  <div id="map" class="mapDiv">
+    <script
+      src="https://maps.googleapis.com/maps/api/js?key={{googlemaps_api_key}}&callback=initMap&libraries=&v=weekly"
+      async
+    ></script>
+
+    <!-- Async script executes immediately and must be after any DOM elements used in callback. -->
+    <!-- <script src="https://maps.googleapis.com/maps/api/js?key={{googlemaps_api_key}}&callback=initMap&libraries=&v=weekly" async></script> -->
+      <!-- <iframe class="iframeMap" src="https://www.google.com/maps/d/u/0/embed?mid=1yyKMC__4a1y-E-z4juRwm4YgTXeYfleL&ehbc=2E312F&z=6&hl=uk"></iframe> -->
+  </div>
+
+  <div>
+    <center>
+      <h2>Контакти</h2>
+      <h4>Contacts</h4>
+      <p>
+        - Гаряча лінія МОЗ 0 800 60 20 19
+        <br>
+        - Донейтнути закупівлю ліків для тих, хто не має змоги їх отримати, можна на карту: 4441 1144 5098 0337
+        <br>
+        - Офіційний сайт Міністерства охорони здоров’я: <a href="https://moz.gov.ua/">https://moz.gov.ua/</a>
+        <br>
+        - Список аптек у вигляді таблиці, опублікований Міністерством охорони здоров'я: <a href="https://bit.ly/apteky_insul">https://bit.ly/apteky_insul</a>
+        <br>
+        - Якщо ви маєте можливість поділитися ліками чи потребуєте їх, долучайтеся до чату в Telegram: <a href="https://t.me/diapidtrymka">https://t.me/diapidtrymka</a>
+      </p>
+    </center>
+  </div>
+  <br>
+
+
+  <!-- <div id="sfc2l36yq5awq68bt9zappkx7668fbksep5"></div><script type="text/javascript" src="https://counter4.stat.ovh/private/counter.js?c=2l36yq5awq68bt9zappkx7668fbksep5&down=async" async></script><noscript><a href="https://www.freecounterstat.com" title="website counter"><img src="https://counter4.stat.ovh/private/freecounterstat.php?c=2l36yq5awq68bt9zappkx7668fbksep5" border="0" title="website counter" alt="website counter"></a></noscript> -->
+
+</body>
+</html>
