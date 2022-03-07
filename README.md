@@ -1,6 +1,8 @@
 # Medicine Warriors
 (*previously: InsulineWarriors*)
 
+All relevant information about insulin availability in war zones, currently focusing on Ukraine
+
 Implementing the winning solution of the Core4Ukraine hackathon:
 https://code4ukraine.devpost.com/project-gallery
 
