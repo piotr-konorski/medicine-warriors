@@ -8,4 +8,5 @@ class Settings(BaseSettings):
     db_name: str = Field(..., env='DB_NAME')
     googlemaps_api_key: str = Field(..., env='GOOGLEMAPS_API_KEY')
 
+
 settings = Settings()
