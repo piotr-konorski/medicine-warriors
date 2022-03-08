@@ -22,7 +22,8 @@ https://code4ukraine.devpost.com/project-gallery
 Build the images and spin up the containers:
 
 ```sh
-$ docker-compose up -d --build
+$ docker-compose -f docker-compose.dev.yml up -d --build
+$ docker-compose -f docker-compose.dev.yml up
 ```
 
 
@@ -31,4 +32,5 @@ Build the images and run the containers:
 
 ```sh
 $ docker-compose -f docker-compose.yml up -d --build
+$ docker-compose -f docker-compose.yml up
 ```
