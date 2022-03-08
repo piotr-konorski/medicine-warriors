@@ -51,12 +51,18 @@ services:
       - "--certificatesresolvers.myresolver.acme.email=piotr.konorski@gmail.com"
       - "--certificatesresolvers.myresolver.acme.storage=/letsencrypt/acme.json"
     ports:
-      - "443:443"
-      - "8080:8080"
+      - 80:80
+      - 443:443
+      - 8080:8080
     volumes:
       - ./letsencrypt:/letsencrypt
       - /var/run/docker.sock:/var/run/docker.sock:ro
+    # networks:
+    #   - web
 
+# networks:
+#   web:
+#     external: true
 
 volumes:
   postgres_data:
