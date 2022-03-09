@@ -1,0 +1,28 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: medicine-warriors
+spec:
+  replicas: 3
+  selector:
+    matchLabels:
+      app: medicine-warriors-pods
+  template:
+    metadata:
+      labels:
+        app: medicine-warriors-pods
+    spec:
+      containers:
+      - name: medicine-warriors-ctr
+        image: medicinewarriors/medicine-warriors
+        imagePullPolicy: Always
+        ports:
+        - name: http
+          containerPort: 80
+        resources:
+          requests:
+            memory: "100Mi"
+            cpu: "30m"
+          limits:
+            memory: "300Mi"
+            cpu: "100m"

@@ -8,7 +8,7 @@ services:
     container_name: web
     build:
       context: .
-      dockerfile: Dockerfile.web
+      dockerfile: Dockerfile
     expose:
       - 80
     environment:
@@ -38,8 +38,8 @@ services:
 
 
   traefik:
-    image: traefik:v2.6.1
     container_name: traefik
+    image: traefik:v2.6.1
     command:
       #- "--log.level=DEBUG"
       - "--api.insecure=true"
