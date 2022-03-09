@@ -18,7 +18,6 @@ static_path = 'static'
 templates = Jinja2Templates(directory="templates")
 app.mount(f'/{static_path}', StaticFiles(directory=f'{static_path}'), name="static")
 
-db.get_db_handler()
 
 def get_static_file(file_name):
     return os.path.join(static_path, file_name)
@@ -39,7 +38,6 @@ app.add_middleware(
 
 @app.on_event("startup")
 async def startup():
-    print("TEST")
     db.get_db_handler()
 
 

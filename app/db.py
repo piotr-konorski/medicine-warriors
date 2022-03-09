@@ -4,10 +4,6 @@ import sqlalchemy
 import sqlalchemy_utils
 from config import settings
 
-Base = sqlalchemy.ext.declarative.declarative_base()
-
-class Place():
-    
 
 def get_db_handler():
     database_url = f'{settings.db_url}/{settings.db_name}'
