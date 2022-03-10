@@ -1,5 +1,3 @@
-# app/config.py
-
 from pydantic import BaseSettings, Field
 
 
