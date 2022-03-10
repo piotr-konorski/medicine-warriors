@@ -36,4 +36,4 @@ ENV PYTHONPATH=/app
 EXPOSE 80
 
 # run
-CMD ["gunicorn -k uvicorn.workers.UvicornWorker -c /gunicorn_conf.py app"]
+CMD ["gunicorn", "-k", "uvicorn.workers.UvicornWorker",  "-c", "/gunicorn_conf.py", "app"]
