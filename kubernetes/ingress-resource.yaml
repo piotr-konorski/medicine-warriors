@@ -1,13 +1,9 @@
-apiVersion: extensions/v1beta1
+apiVersion: networking.k8s.io/v1
 kind: Ingress
 metadata:
   annotations:
     kubernetes.io/ingress.class: "nginx"
     nginx.ingress.kubernetes.io/ssl-redirect: "false"
-    nginx.ingress.kubernetes.io/rewrite-target: /$2
-    nginx.ingress.kubernetes.io/proxy-body-size: 20m
-    nginx.ingress.kubernetes.io/proxy-read-timeout: '10800000'
-    nginx.ingress.kubernetes.io/proxy-send-timeout: '10800000'
   labels:
     app: medicine-warriors
     app.kubernetes.io/instance: medicine-warriors
@@ -15,16 +11,14 @@ metadata:
   name: medicine-warriors
   namespace: default
 spec:
+  ingressClassName: nginx
   rules:
-    - host: medicinewarriors.org
-      http:
+    - http:
         paths:
-          - backend:
-              serviceName: medicine-warriors
-              servicePort: 80
-            path: /()(.*)
-            pathType: Prefix
-  # tls:
-  #   - hosts:
-  #       - medicinewarriors.org
-  #     secretName: medicinewarriors.org-tls-certificates
+        - backend:
+            service:
+              name: medicine-warriors
+              port: 
+                number: 80
+          path: /
+          pathType: Prefix

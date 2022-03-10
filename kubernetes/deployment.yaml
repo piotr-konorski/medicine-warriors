@@ -1,28 +1,49 @@
-apiVersion: apps/v1
-kind: Deployment
-metadata:
-  name: medicine-warriors
-spec:
-  replicas: 3
-  selector:
-    matchLabels:
-      app: medicine-warriors-pods
-  template:
-    metadata:
-      labels:
+  apiVersion: apps/v1
+  kind: Deployment
+  metadata:
+    name: medicine-warriors
+  spec:
+    replicas: 1
+    selector:
+      matchLabels:
         app: medicine-warriors-pods
-    spec:
-      containers:
-      - name: medicine-warriors-ctr
-        image: medicinewarriors/medicine-warriors
-        imagePullPolicy: Always
-        ports:
-        - name: http
-          containerPort: 80
-        resources:
-          requests:
-            memory: "100Mi"
-            cpu: "30m"
-          limits:
-            memory: "300Mi"
-            cpu: "100m"
+    template:
+      metadata:
+        labels:
+          app: medicine-warriors-pods
+      spec:
+        containers:
+        - name: medicine-warriors-ctr
+          image: medicinewarriors/medicine-warriors:9e4ba485a04de5900d80242fc1976875848c9877
+          imagePullPolicy: Always
+          ports:
+          - name: http
+            containerPort: 80
+          resources:
+            requests:
+              memory: "100Mi"
+              cpu: "30m"
+            limits:
+              memory: "300Mi"
+              cpu: "100m"
+          env:
+          - name: DB_URL
+            valueFrom:
+              secretKeyRef:
+                name: medicine-secrets
+                key: DB_URL
+          - name: DB_NAME
+            valueFrom:
+              secretKeyRef:
+                name: medicine-secrets
+                key: DB_NAME
+          - name: DB_PORT
+            valueFrom:
+              secretKeyRef:
+                name: medicine-secrets
+                key: DB_PORT
+          - name: GOOGLEMAPS_API_KEY
+            valueFrom:
+              secretKeyRef:
+                name: medicine-secrets
+                key: GOOGLEMAPS_API_KEY
