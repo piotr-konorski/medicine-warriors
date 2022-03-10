@@ -12,7 +12,9 @@ services:
     expose:
       - 80
     environment:
-      - DB_URL=postgresql://${DB_USER}:${DB_PASS}@db:${DB_PORT}
+      - DB_HOST=${DB_HOST}
+      - DB_PORT=${DB_PORT}
+      - DB_URL=postgresql://${DB_USER}:${DB_PASS}@${DB_HOST}:${DB_PORT}
       - DB_NAME=${DB_NAME}
       - GOOGLEMAPS_API_KEY=${GOOGLEMAPS_API_KEY}
     depends_on:

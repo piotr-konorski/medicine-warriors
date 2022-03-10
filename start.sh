@@ -20,4 +20,5 @@ if [ -f $PRE_START_PATH ] ; then
 fi
 
 # Start gunicorn
+echo "Running gunicorn: gunicorn -k $WORKER_CLASS -c $GUNICORN_CONF $APP_MODULE"
 exec gunicorn -k "$WORKER_CLASS" -c "$GUNICORN_CONF" "$APP_MODULE"

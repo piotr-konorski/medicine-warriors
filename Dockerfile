@@ -25,6 +25,12 @@ RUN apt-get update && apt-get install -y netcat
 # copy gunicorn config
 COPY ./gunicorn_conf.py /gunicorn_conf.py
 
+# copy startup scripts (& make them executable)
+COPY ./prestart.sh /prestart.sh
+RUN chmod +x /prestart.sh
+COPY ./start.sh /start.sh
+RUN chmod +x /start.sh
+
 # copy application
 COPY ./app /app
 
@@ -36,4 +42,4 @@ ENV PYTHONPATH=/app
 EXPOSE 80
 
 # run
-CMD ["gunicorn", "-k", "uvicorn.workers.UvicornWorker",  "-c", "/gunicorn_conf.py", "app"]
+CMD ["/start.sh"]

@@ -27,6 +27,11 @@
               memory: "300Mi"
               cpu: "100m"
           env:
+          - name: DB_HOST
+            valueFrom:
+              secretKeyRef:
+                name: medicine-secrets
+                key: DB_HOST
           - name: DB_URL
             valueFrom:
               secretKeyRef:
