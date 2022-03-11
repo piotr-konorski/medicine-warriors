@@ -39,13 +39,14 @@ app.add_middleware(
 
 @app.on_event("startup")
 async def startup():
-    while not database.is_connected:
-        try:
-            await database.connect()
-        except Exception as msg:
-            print("app.py : database.connect() - db connection problem!", msg)
-            time.sleep(0.2)
-            continue
+    pass
+    # while not database.is_connected:
+    #     try:
+    #         await database.connect()
+    #     except Exception as msg:
+    #         print("app.py : database.connect() - db connection problem!", msg)
+    #         time.sleep(0.2)
+    #         continue
 
 
 @app.on_event("shutdown")
@@ -75,10 +76,19 @@ async def index(request: Request):
 async def return_json(request: Request):
     """ load pharmacies from db - TODO: now only tempprary db """
     pharmacies = []
+    pharmacy_records = []
 
     # Run a database query.
     query = "SELECT * FROM locations_temp"
-    pharmacy_records = await database.fetch_all(query=query)
+
+    try:
+        if not database.is_connected:
+            await database.connect()
+        pharmacy_records = await database.fetch_all(query=query)
+    except Exception as e:
+        print('! db:', e)
+        pass
+
     
     for pharmacy_record in pharmacy_records:
         pharmacy = dict(pharmacy_record.items())
