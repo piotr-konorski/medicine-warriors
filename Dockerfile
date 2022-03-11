@@ -29,6 +29,7 @@ USER 10000:10001
 
 WORKDIR /home/med
 COPY --chown=med:med ./gunicorn_conf.py ./prestart.sh ./start.sh ./
+RUN chmod +x ./start.sh ./prestart.sh
 
 # copy application
 COPY ./app /home/med
