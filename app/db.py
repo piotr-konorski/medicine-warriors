@@ -3,5 +3,7 @@
 import databases
 from config import settings
 
-database_url = f'{settings.db_url}/{settings.db_name}'
+url = settings.db_url.strip()
+db_name = settings.db_name.strip()
+database_url = f'{url}/{db_name}'
 database = databases.Database(database_url)

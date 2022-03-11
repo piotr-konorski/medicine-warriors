@@ -48,15 +48,16 @@ function makeInfoWindowEvent(map, infowindow, contentString, marker) {
 }
 
 function setPharmacies(pharmacies) {
-  console.log('pharmacies:' + pharmacies.length)
+  console.log('-> pharmacies:' + pharmacies.length)
 
   var infowindow = new google.maps.InfoWindow();
 
   for (let i=0; i<pharmacies.length; i++) {
     let pharmacy = pharmacies[i];
-
+    let pharmacy_position = {lat: pharmacy.latitude, lng: pharmacy.longitude};
+    
     var marker = new google.maps.Marker({
-      position: pharmacy.position,
+      position: pharmacy_position,
       map: map,
       title: pharmacy.name,
       icon: icons[pharmacy.type].icon
