@@ -39,12 +39,13 @@ app.add_middleware(
 
 @app.on_event("startup")
 async def startup():
-    if not database.is_connected:
+    while not database.is_connected:
         try:
             await database.connect()
         except Exception as msg:
-            print("app.py : database.connect() - db connection problem!")
-            raise msg
+            print("app.py : database.connect() - db connection problem!", msg)
+            time.sleep(0.2)
+            continue
 
 
 @app.on_event("shutdown")
