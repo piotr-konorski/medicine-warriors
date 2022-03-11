@@ -1,6 +1,6 @@
 # docker-compose.yml
 
-version: '3.8'
+version: '3.3'
 
 services:
   
@@ -10,7 +10,7 @@ services:
       context: .
       dockerfile: Dockerfile
     ports:
-      - 8080:80
+      - 8085:8080
     environment:
       - DB_HOST=${DB_HOST}
       - DB_PORT=${DB_PORT}
@@ -19,9 +19,6 @@ services:
       - GOOGLEMAPS_API_KEY=${GOOGLEMAPS_API_KEY}
     depends_on:
       - db
-    labels:
-      - "traefik.enable=true"
-      - "traefik.http.routers.fastapi.rule=Host(`fastapi.localhost`)"
 
   db:
     container_name: db
@@ -34,22 +31,6 @@ services:
       - POSTGRES_USER=${DB_USER}
       - POSTGRES_PASSWORD=${DB_PASS}
       - POSTGRES_DB=${DB_NAME}
-
-
-  traefik:
-    container_name: traefik
-    build:
-      context: .
-      dockerfile: Dockerfile.traefik
-    ports:
-      - 8008:80
-      - 8081:8080
-    volumes:
-      - "./traefik.toml:/etc/traefik/traefik.toml"
-      - "/var/run/docker.sock:/var/run/docker.sock:ro"
-    labels:
-      - "traefik.enable=true"
-      - "traefik.http.routers.fastapi.rule=Host(`fastapi.localhost`)"
 
 volumes:
   postgres_data:

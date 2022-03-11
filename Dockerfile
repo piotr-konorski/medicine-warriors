@@ -22,24 +22,28 @@ COPY --from=builder /install /usr/local
 # install netcat for internal network inspection
 RUN apt-get update && apt-get install -y netcat
 
+RUN groupadd -g 10001 med && \
+    useradd -u 10000 -g med med \
+    && mkdir -p /home/med \
+    && chown -R med:med /home/med
+USER 10000:10001
+
 # copy gunicorn config
-COPY ./gunicorn_conf.py /gunicorn_conf.py
+COPY --chown=med:med ./gunicorn_conf.py /gunicorn_conf.py
 
 # copy startup scripts (& make them executable)
-COPY ./prestart.sh /prestart.sh
-RUN chmod +x /prestart.sh
-COPY ./start.sh /start.sh
-RUN chmod +x /start.sh
+COPY --chown=med:med ./prestart.sh /prestart.sh
+COPY --chown=med:med ./start.sh /start.sh
 
 # copy application
-COPY ./app /app
+COPY ./app /home/med
 
 # set work directory and python path
-WORKDIR /app
-ENV PYTHONPATH=/app
+WORKDIR /home/med
+ENV PYTHONPATH=/home/med
 
 # expose port
-EXPOSE 80
+EXPOSE 8080
 
 # run
 CMD ["/start.sh"]
