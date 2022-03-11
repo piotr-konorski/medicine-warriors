@@ -27,22 +27,17 @@ RUN groupadd -g 10001 med && \
     && chown -R med:med /home/med
 USER 10000:10001
 
-# copy gunicorn config
-COPY --chown=med:med ./gunicorn_conf.py /gunicorn_conf.py
-
-# copy startup scripts (& make them executable)
-COPY --chown=med:med ./prestart.sh /prestart.sh
-COPY --chown=med:med ./start.sh /start.sh
+WORKDIR /home/med
+COPY --chown=med:med ./gunicorn_conf.py ./prestart.sh ./start.sh ./
 
 # copy application
 COPY ./app /home/med
 
 # set work directory and python path
-WORKDIR /home/med
 ENV PYTHONPATH=/home/med
 
 # expose port
 EXPOSE 8080
 
 # run
-CMD ["/start.sh"]
+CMD ["./start.sh"]
