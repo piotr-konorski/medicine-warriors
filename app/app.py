@@ -84,7 +84,7 @@ async def return_json(request: Request):
     for pharmacy_record in pharmacy_records:
         pharmacy = dict(pharmacy_record.items())
         for field in ['longitude', 'latitude']:
-            pharmacy[field] = float(pharmacy['field'])
+            pharmacy[field] = float(pharmacy[field])
         pharmacies.append(pharmacy)
 
     return pharmacies
