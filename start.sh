@@ -8,7 +8,7 @@ VARIABLE_NAME=${VARIABLE_NAME:-app}
 export APP_MODULE=${APP_MODULE:-"$MODULE_NAME:$VARIABLE_NAME"}
 
 # setup gunicorn config
-DEFAULT_GUNICORN_CONF=/gunicorn_conf.py
+DEFAULT_GUNICORN_CONF=/home/med/gunicorn_conf.py
 export GUNICORN_CONF=${GUNICORN_CONF:-$DEFAULT_GUNICORN_CONF}
 export WORKER_CLASS=${WORKER_CLASS:-"uvicorn.workers.UvicornWorker"}
 

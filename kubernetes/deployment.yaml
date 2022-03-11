@@ -13,12 +13,10 @@
           app: medicine-warriors-pods
       spec:
         securityContext:
-          runAsUser: 10000
           runAsNonRoot: true
-          runAsGroup: 10001
         containers:
         - name: medicine-warriors-ctr
-          image: medicinewarriors/medicine-warriors:9e4ba485a04de5900d80242fc1976875848c9877
+          image: medicinewarriors/medicine-warriors:9ddd4f74672eb53d2999644eb05cb77a139b14c6
           imagePullPolicy: Always
           ports:
           - name: http
