@@ -1,4 +1,0 @@
-# Dockerfile.traefik
-
-FROM traefik:v2.6.1
-COPY ./traefik.toml ./etc/traefik/traefik.toml
