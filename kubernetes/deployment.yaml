@@ -16,7 +16,7 @@
           runAsNonRoot: true
         containers:
         - name: medicine-warriors-ctr
-          image: medicinewarriors/medicine-warriors:d15440eca5b6389e9d72acfc76171eb98d61eb05
+          image: medicinewarriors/medicine-warriors:9ddd4f74672eb53d2999644eb05cb77a139b14c6
           imagePullPolicy: Always
           ports:
           - name: http
