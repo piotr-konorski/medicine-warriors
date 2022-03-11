@@ -4,7 +4,6 @@ FROM base as builder
 # update system & install c/c++ (required)
 RUN apt-get update && apt-get install -y build-essential
 
-# set env variables
 # prevents Python from writing pyc files
 ENV PYTHONDONTWRITEBYTECODE 1
 # prevents Python from buffering stdout and stderr 
