@@ -74,7 +74,17 @@ async def index(request: Request):
 
 @app.get('/pharmacies')
 async def return_json(request: Request):
-    """ load pharmacies from db - TODO """
-    pharmacies = []  # DEV
+    """ load pharmacies from db - TODO: now only tempprary db """
+    pharmacies = []
+
+    # Run a database query.
+    query = "SELECT * FROM locations_temp"
+    pharmacy_records = await database.fetch_all(query=query)
+    
+    for pharmacy_record in pharmacy_records:
+        pharmacy = dict(pharmacy_record.items())
+        for field in ['longitude', 'latitude']:
+            pharmacy[field] = float(pharmacy['field'])
+        pharmacies.append(pharmacy)
 
     return pharmacies
