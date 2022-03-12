@@ -30,11 +30,11 @@ function dictGet(object, key, default_value) {
 
 
 function initMap() {
-  const kiev = { lat: 50.4021368, lng: 30.2525061 };
+  const ukraine_center = { lat: 49.339110578227455, lng: 31.602030139697213 };
   
   map = new google.maps.Map(document.getElementById("map"), {
-    zoom: 6,
-    center: kiev,
+    zoom: 7,
+    center: ukraine_center,
   });
   
   geocoder = new google.maps.Geocoder();
@@ -76,8 +76,8 @@ function setPharmacies(pharmacies) {
 
 
 async function getPharmacies() {
-  const response = await fetch('/pharmacies');
-  const pharmacies = await response.json();
+  console.log('-> fetching..')
+  const pharmacies = await fetch('/pharmacies').then(response => response.json());
   return pharmacies;
 }
 

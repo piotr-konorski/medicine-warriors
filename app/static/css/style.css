@@ -56,7 +56,18 @@ h4 {
 .mapDiv {
   position: relative;
   overflow: hidden;
-  width: 95%;
+  width: 99%;
   padding-top: 56.25%;
   margin: 0 auto;
 }
+
+@media (max-width: 1000px) {
+  .mapDiv {
+    position: relative;
+    overflow: hidden;
+    width: 99%;
+    height: 70vh;
+    /* padding-top: 56.25%; */
+    margin: 0 auto;
+  }
+}  
