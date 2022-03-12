@@ -38,7 +38,7 @@ COPY ./app /home/med
 ENV PYTHONPATH=/home/med
 
 # expose port
-EXPOSE 8080
+EXPOSE 5000
 
 # run
 CMD ["./start.sh"]

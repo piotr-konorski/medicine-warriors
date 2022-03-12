@@ -21,11 +21,19 @@ jobs:
       with:
         username: ${{ secrets.DOCKERHUB_USERNAME }}
         password: ${{ secrets.DOCKERHUB_TOKEN }}
-    - name: Build and push Docker images
+    - name: Build and push backend Docker image
       uses: docker/build-push-action@v2
       with:
-          context: .
+          context: backend
           push: true
           tags: |
-            ${{ secrets.DOCKERHUB_USERNAME }}/medicine-warriors:latest
-            ${{ secrets.DOCKERHUB_USERNAME }}/medicine-warriors:${{ github.sha }}
+            ${{ secrets.DOCKERHUB_USERNAME }}/medicine-warriors-backend:latest
+            ${{ secrets.DOCKERHUB_USERNAME }}/medicine-warriors-backend:${{ github.sha }}
+    - name: Build and push frontend Docker image
+      uses: docker/build-push-action@v2
+      with:
+          context: frontend
+          push: true
+          tags: |
+            ${{ secrets.DOCKERHUB_USERNAME }}/medicine-warriors-frontend:latest
+            ${{ secrets.DOCKERHUB_USERNAME }}/medicine-warriors-frontend:${{ github.sha }}

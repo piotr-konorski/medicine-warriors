@@ -2,3 +2,6 @@ __pycache__
 .DS_Store
 .idea/
 letsencrypt/
+node_modules/
+/dist/
+env/

@@ -77,7 +77,7 @@ function setPharmacies(pharmacies) {
 
 async function getPharmacies() {
   console.log('-> fetching..')
-  const pharmacies = await fetch('/pharmacies').then(response => response.json());
+  const pharmacies = await fetch('http://localhost:5000/pharmacies').then(response => response.json());
   return pharmacies;
 }
 

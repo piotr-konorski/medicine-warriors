@@ -3,7 +3,7 @@
   metadata:
     name: medicine-warriors
   spec:
-    replicas: 3
+    replicas: 1
     selector:
       matchLabels:
         app: medicine-warriors-pods
@@ -15,12 +15,25 @@
         securityContext:
           runAsNonRoot: true
         containers:
-        - name: medicine-warriors-ctr
-          image: medicinewarriors/medicine-warriors:5eeb444f333a89531ec998018ac1c1a8c7e374d2
+        - name: medicine-warriors-frontend
+          image: medicinewarriors/medicine-warriors-frontend:5eeb444f333a89531ec998018ac1c1a8c7e374d2
           imagePullPolicy: Always
           ports:
           - name: http
             containerPort: 8080
+          resources:
+            requests:
+              memory: "100Mi"
+              cpu: "30m"
+            limits:
+              memory: "300Mi"
+              cpu: "100m"
+        - name: medicine-warriors-backend
+          image: medicinewarriors/medicine-warriors-backend:5eeb444f333a89531ec998018ac1c1a8c7e374d2
+          imagePullPolicy: Always
+          ports:
+          - name: http
+            containerPort: 5000
           resources:
             requests:
               memory: "100Mi"
@@ -49,8 +62,3 @@
               secretKeyRef:
                 name: medicine-secrets
                 key: DB_PORT
-          - name: GOOGLEMAPS_API_KEY
-            valueFrom:
-              secretKeyRef:
-                name: medicine-secrets
-                key: GOOGLEMAPS_API_KEY
