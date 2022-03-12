@@ -14,11 +14,17 @@ COPY nginx.conf /etc/nginx/
 WORKDIR /app
 
 ## add permissions
-RUN chown -R nginx:nginx /app && chmod -R 755 /app && chown -R nginx:nginx /var/cache/nginx && chown -R nginx:nginx /var/log/nginx && chown -R nginx:nginx /etc/nginx/conf.d
+RUN groupadd -g 10001 nginx && \
+    useradd -u 10000 -g nginx nginx && \
+    chown -R nginx:nginx /app && \
+    chmod -R 755 /app && \
+    chown -R nginx:nginx /var/cache/nginx && \
+    chown -R nginx:nginx /var/log/nginx && \
+    chown -R nginx:nginx /etc/nginx/conf.d
 RUN touch /var/run/nginx.pid && chown -R nginx:nginx /var/run/nginx.pid
 
 ## switch to non-root user
-USER nginx
+USER 10000:10001
 
 # run
 EXPOSE 8080
