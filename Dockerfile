@@ -28,7 +28,7 @@ RUN groupadd -g 10001 med && \
 USER 10000:10001
 
 WORKDIR /home/med
-COPY --chown=med:med ./gunicorn_conf.py ./prestart.sh ./start.sh ./
+COPY --chown=med:med ./prestart.sh ./start.sh ./
 RUN chmod +x ./start.sh ./prestart.sh
 
 # copy application

@@ -1,17 +1,6 @@
 #! /usr/bin/env sh
 set -e
 
-# setup main app module
-DEFAULT_MODULE_NAME=app
-MODULE_NAME=${MODULE_NAME:-$DEFAULT_MODULE_NAME}
-VARIABLE_NAME=${VARIABLE_NAME:-app}
-export APP_MODULE=${APP_MODULE:-"$MODULE_NAME:$VARIABLE_NAME"}
-
-# setup gunicorn config
-DEFAULT_GUNICORN_CONF=/home/med/gunicorn_conf.py
-export GUNICORN_CONF=${GUNICORN_CONF:-$DEFAULT_GUNICORN_CONF}
-export WORKER_CLASS=${WORKER_CLASS:-"uvicorn.workers.UvicornWorker"}
-
 # if present, run prestart.sh script
 PRE_START_PATH=/prestart.sh
 if [ -f $PRE_START_PATH ] ; then
@@ -19,6 +8,5 @@ if [ -f $PRE_START_PATH ] ; then
     . "$PRE_START_PATH"
 fi
 
-# Start gunicorn
-echo "Running gunicorn: gunicorn -k $WORKER_CLASS -c $GUNICORN_CONF $APP_MODULE"
-exec gunicorn -k "$WORKER_CLASS" -c "$GUNICORN_CONF" "$APP_MODULE"
+# Start uvicorn
+exec uvicorn app:app --host 0.0.0.0 --port 8080
