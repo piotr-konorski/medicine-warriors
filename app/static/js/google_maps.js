@@ -56,13 +56,20 @@ function setPharmacies(pharmacies) {
     let pharmacy = pharmacies[i];
     let pharmacy_position = {lat: pharmacy.latitude, lng: pharmacy.longitude};
     
+    // set marker
     var marker = new google.maps.Marker({
       position: pharmacy_position,
       map: map,
       title: pharmacy.name,
       icon: icons[pharmacy.type].icon
     });
-    makeInfoWindowEvent(map, infowindow, pharmacy.info, marker);
+    
+    // prepare info bubble shown on click
+    let info = `<p>${pharmacy.name}</p>${pharmacy.address}`
+    if (!!pharmacy.contact) {
+      info += `<br>${pharmacy.contact}`
+    }
+    makeInfoWindowEvent(map, infowindow, info, marker);
 
   }
 }

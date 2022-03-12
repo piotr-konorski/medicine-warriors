@@ -79,7 +79,7 @@ async def return_json(request: Request):
     pharmacy_records = []
 
     # Run a database query.
-    query = "SELECT * FROM locations_temp"
+    query = "SELECT name,address,contact,longitude,latitude,type FROM locations_temp"
 
     try:
         if not database.is_connected:
@@ -89,11 +89,5 @@ async def return_json(request: Request):
         print('! db:', e)
         pass
 
-    
-    for pharmacy_record in pharmacy_records:
-        pharmacy = dict(pharmacy_record.items())
-        for field in ['longitude', 'latitude']:
-            pharmacy[field] = float(pharmacy[field])
-        pharmacies.append(pharmacy)
-
+    pharmacies = [dict(p.items()) for p in pharmacy_records]
     return pharmacies
