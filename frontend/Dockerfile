@@ -14,14 +14,14 @@ COPY nginx.conf /etc/nginx/
 WORKDIR /app
 
 ## add permissions
-RUN groupadd -g 10001 nginx && \
-    useradd -u 10000 -g nginx nginx && \
-    chown -R nginx:nginx /app && \
+RUN addgroup -g 10000 unginx && \
+    adduser -u 10000 -G unginx -h /home/unginx -D unginx && \
+    chown -R unginx:unginx /app && \
     chmod -R 755 /app && \
-    chown -R nginx:nginx /var/cache/nginx && \
-    chown -R nginx:nginx /var/log/nginx && \
-    chown -R nginx:nginx /etc/nginx/conf.d
-RUN touch /var/run/nginx.pid && chown -R nginx:nginx /var/run/nginx.pid
+    chown -R unginx:unginx /var/cache/nginx && \
+    chown -R unginx:unginx /var/log/nginx && \
+    chown -R unginx:unginx /etc/nginx/conf.d
+RUN touch /var/run/nginx.pid && chown -R unginx:unginx /var/run/nginx.pid
 
 ## switch to non-root user
 USER 10000:10001
