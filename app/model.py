@@ -1,50 +1,30 @@
-import uuid
-
-from sqlalchemy import Column, ForeignKey, String, Integer
-from sqlalchemy.dialects.postgresql import UUID
-from sqlalchemy.ext.declarative import declarative_base
-from sqlalchemy.orm import relationship
-
-Base = declarative_base()
+from tortoise import fields
+from tortoise.models import Model
 
 
-class Place(Base):
+class Place(Model):
     __tablename__ = 'Places'
 
-    id = Column(UUID(as_uuid=True), primary_key=True, default=uuid.uuid4)
-    name = Column(String)
-    city = Column(String)
-    address = Column(String)
-
-    # todo: add place type
-
-    def __init__(self, name, city, address):
-        self.name = name
-        self.city = city
-        self.address = address
+    id = fields.UUIDField(pk=True, null=False)
+    name = fields.TextField(null=False)
+    city = fields.TextField(null=False)
+    address = fields.TextField(null=False)
+    latitude = fields.FloatField()
+    longitude = fields.FloatField()
 
 
-class Medicine(Base):
+class Medicine(Model):
     __tablename__ = 'Medicines'
 
-    name = Column(String, primary_key=True)
-
-    def __init__(self, name):
-        self.name = name
+    id = fields.UUIDField(pk=True, null=False)
+    name = fields.TextField(null=False)
 
 
-class MedicineAvailability(Base):
+class MedicineAvailability(Model):
     __tablename__ = "MedicineAvailabilities"
 
-    place_id = Column(ForeignKey('Places.id'), primary_key=True, nullable=False)
-    place = relationship(Place)
-    medicine_name = Column(ForeignKey('Medicines.name'), primary_key=True, nullable=False)
-    medicine = relationship(Medicine)
-    quantity = Column(Integer)
-
-    # todo: add the date of last update
-
-    def __init__(self, place, medicine, quantity):
-        self.place_id = place.id
-        self.medicine_name = medicine.name
-        self.quantity = quantity
+    id = fields.UUIDField(pk=True, null=False)
+    quantity = fields.IntField(default=0)
+    updated_at = fields.data.DatetimeField(null=False)
+    place = fields.relational.ForeignKeyField('models.Place')
+    medicine = fields.relational.ForeignKeyField('models.Medicine')

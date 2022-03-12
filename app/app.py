@@ -10,8 +10,7 @@ from fastapi.templating import Jinja2Templates
 from fastapi.middleware.cors import CORSMiddleware
 
 from config import settings
-from db import database
-
+from db import database, Migrator
 
 app = FastAPI(title="Medicine Warriors")
 
@@ -36,11 +35,13 @@ app.add_middleware(
     allow_headers=["*"],
 )
 
+database = Migrator()
+
 
 @app.on_event("startup")
 async def startup():
-    if not database.is_connected:
-        await database.connect()
+    # if not database.is_connected:
+    #     await database.connect()
     # pass
     # while not database.is_connected:
     #     try:
@@ -49,12 +50,14 @@ async def startup():
     #         print("app.py : database.connect() - db connection problem!", msg)
     #         time.sleep(0.2)
     #         continue
+    await database.register_database(app, settings.db_url)
 
 
 @app.on_event("shutdown")
 async def shutdown():
-    if database.is_connected:
-        await database.disconnect()
+    pass
+    # if database.is_connected:
+    #     await database.disconnect()
 
 
 ## Router
