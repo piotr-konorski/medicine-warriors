@@ -17,7 +17,7 @@ spec:
         paths:
         - backend:
             service:
-              name: medicine-warriors-frontend
+              name: medicine-warriors
               port: 
                 number: 80
           path: /()(.*)
