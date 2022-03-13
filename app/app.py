@@ -9,8 +9,9 @@ from fastapi.staticfiles import StaticFiles
 from fastapi.templating import Jinja2Templates
 from fastapi.middleware.cors import CORSMiddleware
 
+from db import start_database
+from model import Place, Medicine, MedicineAvailability, Place_Pydantic
 from config import settings
-from db import database, Migrator
 
 app = FastAPI(title="Medicine Warriors")
 
@@ -18,6 +19,7 @@ app = FastAPI(title="Medicine Warriors")
 static_path = 'static'
 templates = Jinja2Templates(directory="templates")
 app.mount(f'/{static_path}', StaticFiles(directory=f'{static_path}'), name="static")
+
 
 def get_static_file(file_name):
     return os.path.join(static_path, file_name)
@@ -35,35 +37,22 @@ app.add_middleware(
     allow_headers=["*"],
 )
 
-database = Migrator()
-
 
 @app.on_event("startup")
 async def startup():
-    # if not database.is_connected:
-    #     await database.connect()
-    # pass
-    # while not database.is_connected:
-    #     try:
-    #         await database.connect()
-    #     except Exception as msg:
-    #         print("app.py : database.connect() - db connection problem!", msg)
-    #         time.sleep(0.2)
-    #         continue
-    await database.register_database(app, settings.db_url)
+    await start_database(app)
 
 
 @app.on_event("shutdown")
 async def shutdown():
     pass
-    # if database.is_connected:
-    #     await database.disconnect()
 
 
 ## Router
 @app.head("/")
 async def read_root():
     return {"status": "ok"}
+
 
 @app.get('/favicon.ico')
 async def favicon():
@@ -96,3 +85,20 @@ async def return_json(request: Request):
 
     pharmacies = [dict(p.items()) for p in pharmacy_records]
     return pharmacies
+
+
+@app.get('/seed-database-with-dummy-data')
+async def seed_database_with_dummy_data():
+
+    place_1 = await Place.create(name="Place 1", city="Lviv", address="Test", latitude=10.5, longitude=10.5)
+    place_2 = await Place.create(name="Place 2", city="Kyiv", address="Test", latitude=10.5, longitude=10.5)
+
+    medicine = await Medicine.create(name="Medicine 1")
+
+    await MedicineAvailability.create(quantity=10, place=place_1, medicine=medicine)
+    await MedicineAvailability.create(quantity=20, place=place_2, medicine=medicine)
+
+
+@app.get('/places')
+async def get_places():
+    return await Place_Pydantic.from_queryset(Place.all())
