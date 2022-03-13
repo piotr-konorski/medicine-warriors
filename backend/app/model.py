@@ -11,10 +11,16 @@ class Place(Model):
     latitude = fields.FloatField()
     longitude = fields.FloatField()
 
+    class Meta:
+        table = "places"
+
 
 class Medicine(Model):
     id = fields.UUIDField(pk=True, null=False)
     name = fields.TextField(null=False)
+
+    class Meta:
+        table = "medicines"
 
 
 class MedicineAvailability(Model):
@@ -23,6 +29,9 @@ class MedicineAvailability(Model):
     updated_at = fields.data.DatetimeField(null=False, auto_now=True)
     place = fields.relational.ForeignKeyField('models.Place')
     medicine = fields.relational.ForeignKeyField('models.Medicine')
+
+    class Meta:
+        table = "medicine_availabilities"
 
 
 Place_Pydantic = pydantic_model_creator(Place, name="Place")

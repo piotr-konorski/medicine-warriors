@@ -75,7 +75,7 @@ async def create_database_if_not_exists(database_url, database_name):
 
 
 async def migrate_latest():
-    # Initial migration should be present. If not - use 'aerich init -t path.to.config' and 'aerich init-db'
+    # Initial migration should be present. If not - use 'aerich init -t db.tortoise_aerich_config' and 'aerich init-db'
     command = Command(tortoise_config=tortoise_aerich_config)
     await command.init()
     await command.upgrade()
