@@ -77,8 +77,9 @@ function setPharmacies(pharmacies) {
 
 async function getPharmacies() {
   console.log('-> fetching..')
-  const pharmacies = await fetch('/pharmacies').then(response => response.json());
-  return pharmacies;
+  // let api = `${process.env.API_HOST}:${process.env.API_PORT}`
+  // const pharmacies = await fetch(`http://${api}/pharmacies`).then(response => response.json());
+  // return pharmacies;
 }
 
 

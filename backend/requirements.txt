@@ -1,6 +1,5 @@
 aerich==0.6.2
 aiosqlite==0.17.0
-alembic==1.7.6
 anyio==3.5.0
 asgiref==3.5.0
 asyncpg==0.25.0
@@ -18,7 +17,6 @@ httptools==0.3.0
 idna==3.3
 iso8601==0.1.16
 Jinja2==3.0.3
-Mako==1.2.0
 MarkupSafe==2.1.0
 psycopg2-binary==2.9.3
 pydantic==1.9.0

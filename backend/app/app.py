@@ -1,17 +1,13 @@
-# app/main.py
-
 import os
-import time
 
 from fastapi import FastAPI, Request
-from fastapi.responses import HTMLResponse, FileResponse
+from fastapi.middleware.cors import CORSMiddleware
+from fastapi.responses import FileResponse
 from fastapi.staticfiles import StaticFiles
 from fastapi.templating import Jinja2Templates
-from fastapi.middleware.cors import CORSMiddleware
 
 from db import start_database
 from model import Place, Medicine, MedicineAvailability, Place_Pydantic
-from config import settings
 
 app = FastAPI(title="Medicine Warriors")
 
@@ -49,10 +45,6 @@ async def shutdown():
 
 
 ## Router
-@app.head("/")
-async def read_root():
-    return {"status": "ok"}
-
 
 @app.get('/favicon.ico')
 async def favicon():
@@ -61,9 +53,9 @@ async def favicon():
     return FileResponse(path=file_path, headers={"Content-Disposition": "attachment; filename=" + file_name})
 
 
-@app.get("/", response_class=HTMLResponse)
-async def index(request: Request):
-    return templates.TemplateResponse("index.html", {'request': request, 'googlemaps_api_key': settings.googlemaps_api_key})
+@app.head("/")
+async def index_head():
+    return {"backend_status": "ok"}
 
 
 @app.get('/pharmacies')
