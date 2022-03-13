@@ -29,6 +29,9 @@ services:
       - ./frontend:/app
     ports:
       - 8080:8080
+    environment:
+      - API_HOST=${API_HOST}
+      - API_PORT=${API_PORT}
 
   db:
     container_name: db
