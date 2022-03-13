@@ -4,8 +4,6 @@ from tortoise.models import Model
 
 
 class Place(Model):
-    __tablename__ = 'Places'
-
     id = fields.UUIDField(pk=True, null=False)
     name = fields.TextField(null=False)
     city = fields.TextField(null=False)
@@ -15,15 +13,11 @@ class Place(Model):
 
 
 class Medicine(Model):
-    __tablename__ = 'Medicines'
-
     id = fields.UUIDField(pk=True, null=False)
     name = fields.TextField(null=False)
 
 
 class MedicineAvailability(Model):
-    __tablename__ = "MedicineAvailabilities"
-
     id = fields.UUIDField(pk=True, null=False)
     quantity = fields.IntField(default=0)
     updated_at = fields.data.DatetimeField(null=False, auto_now=True)
