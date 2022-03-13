@@ -1,6 +1,5 @@
 from fastapi import FastAPI, Request
 from fastapi.middleware.cors import CORSMiddleware
-from fastapi.responses import FileResponse
 
 from db import start_database
 from model import Place, Medicine, MedicineAvailability, Place_Pydantic
