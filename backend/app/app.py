@@ -1,24 +1,11 @@
-import os
-
 from fastapi import FastAPI, Request
 from fastapi.middleware.cors import CORSMiddleware
 from fastapi.responses import FileResponse
-from fastapi.staticfiles import StaticFiles
-from fastapi.templating import Jinja2Templates
 
 from db import start_database
 from model import Place, Medicine, MedicineAvailability, Place_Pydantic
 
 app = FastAPI(title="Medicine Warriors")
-
-
-static_path = 'static'
-templates = Jinja2Templates(directory="templates")
-app.mount(f'/{static_path}', StaticFiles(directory=f'{static_path}'), name="static")
-
-
-def get_static_file(file_name):
-    return os.path.join(static_path, file_name)
 
 
 origins = [
@@ -45,17 +32,14 @@ async def shutdown():
 
 
 ## Router
-
-@app.get('/favicon.ico')
-async def favicon():
-    file_name = "favicon.ico"
-    file_path = get_static_file(file_name)
-    return FileResponse(path=file_path, headers={"Content-Disposition": "attachment; filename=" + file_name})
-
-
 @app.head("/")
 async def index_head():
     return {"backend_status": "ok"}
+
+
+@app.get("/")
+async def index(request: Request):
+    return {'backend_status': 'ok'}
 
 
 @app.get('/pharmacies')
