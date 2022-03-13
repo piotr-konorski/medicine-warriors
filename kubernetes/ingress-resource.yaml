@@ -2,23 +2,30 @@ apiVersion: networking.k8s.io/v1
 kind: Ingress
 metadata:
   annotations:
+    # cert-manager.io/cluster-issuer: letsencrypt  # -- certificate issuer
+    # kubernetes.io/tls-acme: "true"
+    kubernetes.io/ingress.class: nginx
     nginx.ingress.kubernetes.io/rewrite-target: /$2
-    nginx.ingress.kubernetes.io/ssl-redirect: "false"
+    nginx.ingress.kubernetes.io/ssl-redirect: "false"  #  -- true for http -> https redirection
   labels:
     app: medicine-warriors
     app.kubernetes.io/instance: medicine-warriors
-    env: prod
+    env: dev
   name: medicine-warriors
   namespace: default
 spec:
-  ingressClassName: nginx
   rules:
-    - http:
-        paths:
-        - backend:
-            service:
-              name: medicine-warriors
-              port: 
-                number: 80
-          path: /()(.*)
-          pathType: Prefix
+  - host: #  -- target host url --
+    http:
+      paths:
+      - backend:
+          service:
+            name: medicine-warriors
+            port:
+              number: 80
+        path: /()(.*)
+        pathType: Prefix
+  # tls:
+  # - hosts:
+  #   -  #  -- target host url --
+  #   secretName: external-domain-tls

@@ -30,7 +30,7 @@ services:
     ports:
       - 8080:8080
     environment:
-      - API_HOST=${API_HOST}
+      - API_URL=${API_URL}
 
   db:
     container_name: db

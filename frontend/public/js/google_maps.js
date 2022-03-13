@@ -1,7 +1,5 @@
 var map;
 var geocoder;
-// var markers;
-
 
 // Red circle -https://storage.googleapis.com/support-kms-prod/SNP_2752125_en_v0
 // Blue circle - https://storage.googleapis.com/support-kms-prod/SNP_2752068_en_v0
@@ -76,10 +74,10 @@ function setPharmacies(pharmacies) {
 
 
 async function getPharmacies() {
-  console.log('-> fetching..')
-  // let api = `${process.env.API_HOST}:${process.env.API_PORT}`
-  // const pharmacies = await fetch(`http://${api}/pharmacies`).then(response => response.json());
-  // return pharmacies;
+  let pharmacies = [];
+  // console.log('-> fetching..')
+  // const pharmacies = await fetch(api_url).then(response => response.json());
+  return pharmacies;
 }
 
 
