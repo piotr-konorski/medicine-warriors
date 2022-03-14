@@ -139,6 +139,11 @@ spec:
         env:
         - name: API_URL
           value: "http://medicine-warriors-backend.default.svc.cluster.local"
+        - name: GOOGLEMAPS_API_KEY
+          valueFrom:
+            secretKeyRef:
+              name: medicine-secrets
+              key: GOOGLEMAPS_API_KEY
         volumeMounts:
         - mountPath: /etc/nginx/conf.d # mount nginx-conf volume to /etc/nginx/conf.d
           readOnly: true
@@ -168,4 +173,4 @@ spec:
   - port: 80
     targetPort: 8080
   selector:
-    app: medicine-warriors-frontend-pods
+    name: medicine-warriors-frontend
