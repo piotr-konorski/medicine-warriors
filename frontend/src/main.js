@@ -9,7 +9,7 @@ axios.defaults.baseURL = `${window._env_.API_URL}/`
 instance.interceptors.request.use(function(config) {
   config.url = config.url.replace('http://', 'https://')
   return config
-})
+});
 
 // axios.interceptors.response.use(undefined, function (error) {
 //   if (error) {
