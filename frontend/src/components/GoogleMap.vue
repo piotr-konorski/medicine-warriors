@@ -91,9 +91,19 @@ export default {
     },
     
     mounted () {
-    axios
-    //   .get('pharmacies')
-      .get('http://medicine-warriors-backend.default.svc.cluster.local/pharmacies')
+    const axios_instance = axios.create({
+        baseURL: 'http://medicine-warriors-backend.default.svc.cluster.local/',
+    })
+
+    axios_instance.interceptors.request.use(function(config) {
+        // change the url scheme from http to https
+        config.url = config.url.replace('http://', 'https://')
+
+        return config
+    })
+    axios_instance
+      .get('pharmacies')
+    //   .get('http://medicine-warriors-backend.default.svc.cluster.local/pharmacies')
     //   .then(response => console.log(response.data.pharmacies))
       .then(response => (this.markers = response.data.pharmacies))
       .catch(error => console.log(error))

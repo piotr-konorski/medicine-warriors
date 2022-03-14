@@ -1,15 +1,15 @@
 const { createApp } = require("vue");
-import axios from 'axios';
+// import axios from 'axios';
 import App from "./App.vue";
 import VueGoogleMaps from "@fawmi/vue-google-maps";
 
-axios.defaults.withCredentials = false;
-axios.defaults.baseURL = `${window._env_.API_URL}/`
+// axios.defaults.withCredentials = false;
+// axios.defaults.baseURL = `${window._env_.API_URL}/`
 
-axios.interceptors.request.use(function(config) {
-  config.url = config.url.replace('http://', 'https://')
-  return config
-});
+// axios.interceptors.request.use(function(config) {
+//   config.url = config.url.replace('http://', 'https://')
+//   return config
+// });
 
 // axios.interceptors.response.use(undefined, function (error) {
 //   if (error) {
