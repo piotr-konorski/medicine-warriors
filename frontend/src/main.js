@@ -4,7 +4,8 @@ import App from "./App.vue";
 import VueGoogleMaps from "@fawmi/vue-google-maps";
 
 axios.defaults.withCredentials = true;
-axios.defaults.baseURL = process.env.VUE_APP_API_URL;  // the FastAPI backend
+axios.defaults.baseURL = `${window._env_.API_URL}/`
+process.env.API_URL;  // the FastAPI backend
 
 axios.interceptors.response.use(undefined, function (error) {
   if (error) {
@@ -23,11 +24,11 @@ app.config.productionTip = false;
 
 app.use(VueGoogleMaps, {
     load: {
-      key: 'AIzaSyBKLILjbLg26NUDEbmLdohzaFZY3Qu9tbg'
+      key: `${window._env_.GOOGLEMAPS_API_KEY}`
     }
   });
 
-console.log('gmaps api: ' + process.env.VUE_APP_GOOGLEMAPS_API_KEY);
-console.log('backend api: ' + process.env.VUE_APP_API_URL);
+console.log(`gmaps api: ${window._env_.GOOGLEMAPS_API_KEY}`);
+console.log(`backend api: ${window._env_.API_URL}`);
 
 app.mount("#app");
