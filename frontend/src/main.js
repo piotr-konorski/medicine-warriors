@@ -23,8 +23,11 @@ app.config.productionTip = false;
 
 app.use(VueGoogleMaps, {
     load: {
-      key: process.env.VUE_APP_GOOGLEMAPS_API_KEY
+      key: 'AIzaSyBKLILjbLg26NUDEbmLdohzaFZY3Qu9tbg'
     }
   });
+
+console.log('gmaps api: ' + process.env.VUE_APP_GOOGLEMAPS_API_KEY);
+console.log('backend api: ' + process.env.VUE_APP_API_URL);
 
 app.mount("#app");

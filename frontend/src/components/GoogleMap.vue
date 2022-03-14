@@ -92,7 +92,7 @@ export default {
     
     mounted () {
     axios
-      .get('/pharmacies')
+      .get('http://localhost:5000/pharmacies')
     //   .then(response => console.log(response.data.pharmacies))
       .then(response => (this.markers = response.data.pharmacies))
       .catch(error => console.log(error))
