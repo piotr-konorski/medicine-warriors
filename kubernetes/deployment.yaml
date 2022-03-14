@@ -1,7 +1,7 @@
   apiVersion: apps/v1
   kind: Deployment
   metadata:
-    name: medicine-warriors
+    name: medicine-warriors-backend
   spec:
     replicas: 3
     selector:
@@ -11,8 +11,6 @@
       metadata:
         labels:
           app: medicine-warriors-backend-pods
-        annotations:
-          container.apparmor.security.beta.kubernetes.io/ctr-backend: runtime/default
       spec:
         securityContext:
           runAsNonRoot: true
@@ -75,8 +73,6 @@
       metadata:
         labels:
           app: medicine-warriors-frontend-pods
-        annotations:
-          container.apparmor.security.beta.kubernetes.io/ctr-frontend: runtime/default
       spec:
         securityContext:
           runAsNonRoot: true
