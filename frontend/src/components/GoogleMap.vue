@@ -97,6 +97,7 @@ export default {
 
     axios_instance.interceptors.request.use(function(config) {
         config.url = config.url.replace('https://', 'http://')
+        config.baseURL = config.baseURL.replace('https://', 'http://')
         return config
     })
     axios_instance
