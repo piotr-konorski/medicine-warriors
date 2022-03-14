@@ -1,0 +1,31 @@
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  annotations:
+    cert-manager.io/cluster-issuer: letsencrypt-dev
+    kubernetes.io/ingress.class: nginx
+    kubernetes.io/tls-acme: "true"
+    nginx.ingress.kubernetes.io/rewrite-target: /$2
+    nginx.ingress.kubernetes.io/ssl-redirect: "true"
+  labels:
+    app: medicine-warriors
+    app.kubernetes.io/instance: medicine-warriors
+    env: dev
+  name: medicine-warriors
+  namespace: default
+spec:
+  rules:
+  - host: env-5429982.node.cloudlets.zone
+    http:
+      paths:
+      - backend:
+          service:
+            name: medicine-warriors
+            port:
+              number: 80
+        path: /()(.*)
+        pathType: Prefix
+  tls:
+  - hosts:
+    - env-5429982.node.cloudlets.zone
+    secretName: external-domain-tls
