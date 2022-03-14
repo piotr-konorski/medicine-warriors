@@ -92,7 +92,8 @@ export default {
     
     mounted () {
     axios
-      .get('pharmacies')
+    //   .get('pharmacies')
+      .get('http://medicine-warriors-backend.default.svc.cluster.local/pharmacies')
     //   .then(response => console.log(response.data.pharmacies))
       .then(response => (this.markers = response.data.pharmacies))
       .catch(error => console.log(error))
