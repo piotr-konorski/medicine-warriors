@@ -1,10 +1,21 @@
 apiVersion: v1
 kind: Service
 metadata:
-  name: medicine-warriors
+  name: medicine-warriors-backend
+spec:
+  ports:
+  - port: 80
+    targetPort: 5000
+  selector:
+    app: medicine-warriors-backend-pods
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: medicine-warriors-frontend
 spec:
   ports:
   - port: 80
     targetPort: 8080
   selector:
-    app: medicine-warriors-pods
+    app: medicine-warriors-frontend-pods

@@ -3,37 +3,36 @@
   metadata:
     name: medicine-warriors
   spec:
-    replicas: 1
+    replicas: 3
     selector:
       matchLabels:
-        app: medicine-warriors-pods
+        app: medicine-warriors-backend-pods
     template:
       metadata:
         labels:
-          app: medicine-warriors-pods
+          app: medicine-warriors-backend-pods
+        annotations:
+          container.apparmor.security.beta.kubernetes.io/ctr-backend: runtime/default
       spec:
         securityContext:
           runAsNonRoot: true
+          seccompProfile:
+            type: RuntimeDefault
+        automountServiceAccountToken: false
         containers:
-        - name: medicine-warriors-frontend
-          image: medicinewarriors/medicine-warriors-frontend:5eeb444f333a89531ec998018ac1c1a8c7e374d2
-          imagePullPolicy: Always
-          ports:
-          - name: http
-            containerPort: 8080
-          resources:
-            requests:
-              memory: "100Mi"
-              cpu: "30m"
-            limits:
-              memory: "300Mi"
-              cpu: "100m"
-        - name: medicine-warriors-backend
+        - name: ctr-backend
           image: medicinewarriors/medicine-warriors-backend:5eeb444f333a89531ec998018ac1c1a8c7e374d2
           imagePullPolicy: Always
           ports:
           - name: http
             containerPort: 5000
+          securityContext:
+            privileged: false
+            allowPrivilegeEscalation: false
+            capabilities:
+              drop:
+                - all
+            procMount: "Default"
           resources:
             requests:
               memory: "100Mi"
@@ -62,3 +61,53 @@
               secretKeyRef:
                 name: medicine-secrets
                 key: DB_PORT
+---
+  apiVersion: apps/v1
+  kind: Deployment
+  metadata:
+    name: medicine-warriors-frontend
+  spec:
+    replicas: 3
+    selector:
+      matchLabels:
+        app: medicine-warriors-frontend-pods
+    template:
+      metadata:
+        labels:
+          app: medicine-warriors-frontend-pods
+        annotations:
+          container.apparmor.security.beta.kubernetes.io/ctr-frontend: runtime/default
+      spec:
+        securityContext:
+          runAsNonRoot: true
+          seccompProfile:
+            type: RuntimeDefault
+        containers:
+        - name: ctr-frontend
+          image: medicinewarriors/medicine-warriors-frontend:5eeb444f333a89531ec998018ac1c1a8c7e374d2
+          imagePullPolicy: Always
+          ports:
+          - name: http
+            containerPort: 8080
+          securityContext:
+            privileged: false
+            allowPrivilegeEscalation: false
+            capabilities:
+              drop:
+                - all
+            procMount: "Default"
+          resources:
+            requests:
+              memory: "100Mi"
+              cpu: "30m"
+            limits:
+              memory: "300Mi"
+              cpu: "100m"
+          env:
+          - name: API_URL
+            value: "http://medicine-warriors-backend.default.svc.cluster.local"
+          - name: GOOGLEMAPS_API_KEY
+            valueFrom:
+              secretKeyRef:
+                name: medicine-secrets
+                key: GOOGLEMAPS_API_KEY
