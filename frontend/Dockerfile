@@ -7,25 +7,23 @@ COPY . .
 RUN npm run build
 
 # production stage
-FROM nginx:stable-alpine as production-stage
+FROM nginx:1.21.6 as production-stage
 COPY --from=build-stage /app/dist /usr/share/nginx/html
-COPY nginx_default.conf /etc/nginx/conf.d/default.conf
 
-WORKDIR /app
+RUN groupadd -g 5001 app && \
+    useradd -u 5000 -g app app && \
+    mkdir -p /var/run/nginx /var/tmp/nginx &&\
+    chown -R app:app /usr/share/nginx /var/run/nginx /var/tmp/nginx
 
-## add permissions
-RUN addgroup -g 10000 unginx && \
-    adduser -u 10000 -G unginx -h /home/unginx -D unginx && \
-    chown -R unginx:unginx /app && \
-    chmod -R 755 /app && \
-    chown -R unginx:unginx /var/cache/nginx && \
-    chown -R unginx:unginx /var/log/nginx && \
-    chown -R unginx:unginx /etc/nginx/conf.d
-RUN touch /var/run/nginx.pid && chown -R unginx:unginx /var/run/nginx.pid
+COPY ./nginx.conf /etc/nginx/nginx.conf
+COPY ./nginx_default.conf /etc/nginx/conf.d/
 
-## switch to non-root user
-USER 10000:10001
+WORKDIR /usr/share/nginx/html
+COPY ./env.sh .env ./
+RUN chmod +x env.sh
 
-# run
+USER 5000:5001
+
 EXPOSE 8080
-CMD ["nginx", "-g", "daemon off;"]
+
+CMD ["/bin/sh", "-c", "/usr/share/nginx/html/env.sh && nginx -g \"daemon off;\""]
