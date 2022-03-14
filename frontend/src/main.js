@@ -3,7 +3,7 @@ import axios from 'axios';
 import App from "./App.vue";
 import VueGoogleMaps from "@fawmi/vue-google-maps";
 
-axios.defaults.withCredentials = true;
+// axios.defaults.withCredentials = true;
 axios.defaults.baseURL = `${window._env_.API_URL}/`
 process.env.API_URL;  // the FastAPI backend
 
