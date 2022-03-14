@@ -111,11 +111,11 @@ spec:
       labels:
         name: medicine-warriors-frontend
     spec:
-      securityContext:
-        runAsNonRoot: true
-        runAsUser: 5000
-        runAsGroup: 5000
-        fsGroup: 5000
+      # securityContext:
+      #   runAsNonRoot: true
+      #   runAsUser: 5000
+      #   runAsGroup: 5000
+      #   fsGroup: 5000
       containers:
       - name: frontend
         image: medicinewarriors/medicine-warriors-frontend:3028f8f217efe570dc5213251a6c51d8629705c6
