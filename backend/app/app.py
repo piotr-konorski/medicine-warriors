@@ -1,13 +1,6 @@
-# import os
-# import time
-
 from fastapi import FastAPI, Request
 from fastapi.middleware.cors import CORSMiddleware
-# from fastapi.responses import HTMLResponse, FileResponse
-# from fastapi.staticfiles import StaticFiles
-# from fastapi.templating import Jinja2Templates
 
-# from config import settings
 from db import database
 
 
@@ -47,18 +40,25 @@ async def index_head():
 
 
 @app.get("/")
-async def index(request: Request):
+async def index():
     return {'backend_status': 'ok'}
 
 
+@app.get('/pharmacies_test')
+async def return_json():
+    pharmacies = [{'id': n, 'position': {'lat': 49.439110578227455, 'lng': 31.302030139697213}, 'name': "Аптека №3", 'address': "м.Вінниця, вул.Коріатовичів Князів, 181а, прим.186, 187, Вінницька обл, Україна"} 
+                    for n in range(10000)]
+    return {'pharmacies': pharmacies}
+
+
 @app.get('/pharmacies')
-async def return_json(request: Request):
+async def return_json():
     """ load pharmacies from db - TODO: now only tempprary db """
     pharmacies = []
     pharmacy_records = []
 
     # Run a database query.
-    query = "SELECT name,address,contact,longitude,latitude,type FROM locations_temp"
+    query = "SELECT id,name,address,contact,longitude,latitude,type FROM locations_temp"
 
     try:
         if not database.is_connected:
@@ -67,6 +67,10 @@ async def return_json(request: Request):
     except Exception as e:
         print('! db:', e)
         pass
-
-    pharmacies = [dict(p.items()) for p in pharmacy_records]
-    return pharmacies
+    
+    pharmacies = []
+    for pharmacy_record in pharmacy_records:
+        pharmacy = dict(pharmacy_record.items())
+        pharmacy['position'] = {'lat': pharmacy.get('latitude'), 'lng': pharmacy.get('longitude')}
+        pharmacies.append(pharmacy)
+    return {'pharmacies': pharmacies}

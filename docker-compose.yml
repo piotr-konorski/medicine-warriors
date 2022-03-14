@@ -30,7 +30,8 @@ services:
     ports:
       - 8080:8080
     environment:
-      - API_URL=${API_URL}
+      - VUE_APP_API_URL=${API_URL}
+      - VUE_APP_GOOGLEMAPS_API_KEY=${GOOGLEMAPS_API_KEY}
 
   db:
     container_name: db
