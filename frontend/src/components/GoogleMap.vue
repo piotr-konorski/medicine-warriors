@@ -96,9 +96,7 @@ export default {
     })
 
     axios_instance.interceptors.request.use(function(config) {
-        // change the url scheme from http to https
-        config.url = config.url.replace('http://', 'https://')
-
+        config.url = config.url.replace('https://', 'http://')
         return config
     })
     axios_instance
