@@ -3,20 +3,19 @@ import axios from 'axios';
 import App from "./App.vue";
 import VueGoogleMaps from "@fawmi/vue-google-maps";
 
-// axios.defaults.withCredentials = true;
+axios.defaults.withCredentials = false;
 axios.defaults.baseURL = `${window._env_.API_URL}/`
-process.env.API_URL;  // the FastAPI backend
 
-axios.interceptors.response.use(undefined, function (error) {
-  if (error) {
-    const originalRequest = error.config;
-    if (error.response.status === 401 && !originalRequest._retry) {
-      originalRequest._retry = true;
-      // store.dispatch('logOut');
-      return  // router.push('/login')
-    }
-  }
-});
+// axios.interceptors.response.use(undefined, function (error) {
+//   if (error) {
+//     const originalRequest = error.config;
+//     if (error.response.status === 401 && !originalRequest._retry) {
+//       originalRequest._retry = true;
+//       // store.dispatch('logOut');
+//       return  // router.push('/login')
+//     }
+//   }
+// });
 
 
 const app = createApp(App);
