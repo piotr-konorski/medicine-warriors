@@ -19,7 +19,7 @@
         automountServiceAccountToken: false
         containers:
         - name: ctr-backend
-          image: medicinewarriors/medicine-warriors-backend:3028f8f217efe570dc5213251a6c51d8629705c6
+          image: medicinewarriors/medicine-warriors-backend:adaf46d9ec10a0fcafb019e00c7774f4aa661fcb
           imagePullPolicy: Always
           ports:
           - name: http
@@ -118,7 +118,7 @@ spec:
       #   fsGroup: 5000
       containers:
       - name: frontend
-        image: medicinewarriors/medicine-warriors-frontend:3028f8f217efe570dc5213251a6c51d8629705c6
+        image: medicinewarriors/medicine-warriors-frontend:adaf46d9ec10a0fcafb019e00c7774f4aa661fcb
         ports:
           - name: http
             containerPort: 8080
