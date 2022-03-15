@@ -1,44 +1,19 @@
-FROM python:3.9-slim as base
-FROM base as builder
+FROM node:16.13.1-buster-slim
 
-# update system & install c/c++ (required)
-RUN apt-get update && apt-get install -y build-essential
+ARG NODE_ENV=production
+ENV NODE_ENV $NODE_ENV
 
-# prevents Python from writing pyc files
-ENV PYTHONDONTWRITEBYTECODE 1
-# prevents Python from buffering stdout and stderr 
-ENV PYTHONUNBUFFERED 1
+WORKDIR /app
 
-RUN mkdir /install
-WORKDIR /install
-COPY requirements.txt /requirements.txt
-RUN pip install --upgrade pip
-RUN pip install --no-cache-dir --prefix="/install" -r /requirements.txt
+ARG PORT=5000
+ENV PORT $PORT
 
-FROM base
-COPY --from=builder /install /usr/local
+COPY package.json package-lock.json ./
 
-# install netcat for internal network inspection
-RUN apt-get update && apt-get install -y netcat
+RUN npm ci
 
-RUN groupadd -g 10001 med && \
-    useradd -u 10000 -g med med && \
-    mkdir -p /home/med && \
-    chown -R med:med /home/med
-USER 10000:10001
+COPY . /app
 
-WORKDIR /home/med
-COPY --chown=med:med ./prestart.sh ./start.sh ./
-RUN chmod +x ./start.sh ./prestart.sh
+USER node
 
-# copy application
-COPY ./app /home/med
-
-# set work directory and python path
-ENV PYTHONPATH=/home/med
-
-# expose port
-EXPOSE 5000
-
-# run
-CMD ["./start.sh"]
+CMD [ "node", "src/server.js" ]

@@ -5,12 +5,19 @@ version: '3.8'
 services:
   
   backend:
-    container_name: backend
+    image: medwar-backend
     build:
       context: backend
       dockerfile: Dockerfile
+      args:
+        NODE_ENV: production
+        PORT: 5000
     ports:
       - 5000:5000
+
+
+
+
     environment:
       - DB_HOST=${DB_HOST}
       - DB_PORT=${DB_PORT}
@@ -19,19 +26,21 @@ services:
     depends_on:
       - db
 
-  # frontend:
-  #   container_name: frontend
-  #   build:
-  #     context: frontend
-  #     dockerfile: Dockerfile
-  #   volumes:
-  #     - /app/node_modules
-  #     - ./frontend:/app
-  #   ports:
-  #     - 8080:8080
-  #   environment:
-  #     - VUE_APP_API_URL=${API_URL}
-  #     - VUE_APP_GOOGLEMAPS_API_KEY=${GOOGLEMAPS_API_KEY}
+  frontend:
+    image: medwar-frontend
+    container_name: frontend
+    build:
+      context: frontend
+      dockerfile: Dockerfile
+      args:
+        NODE_ENV: production
+    environment: 
+      - API_URL=${API_URL}
+      - GOOGLEMAPS_API_KEY=${GOOGLEMAPS_API_KEY}
+    ports:
+      - 8080:8080
+    depends_on: 
+      - backend
 
   db:
     container_name: db

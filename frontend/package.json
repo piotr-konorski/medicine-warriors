@@ -1,44 +1,38 @@
 {
-  "name": "sb-vue",
-  "version": "0.1.0",
-  "private": true,
-  "scripts": {
-    "serve": "vue-cli-service serve",
-    "build": "vue-cli-service build",
-    "lint": "vue-cli-service lint"
-  },
-  "dependencies": {
-    "@fawmi/vue-google-maps": "^0.9.3",
-    "axios": "^0.26.1",
-    "bootstrap": "^5.1.3",
-    "vue": "^3.2.11"
-  },
-  "devDependencies": {
-    "@vue/cli-plugin-babel": "^4.4.0",
-    "@vue/cli-plugin-eslint": "^4.4.0",
-    "@vue/cli-service": "^4.4.0",
-    "babel-eslint": "^10.1.0",
-    "eslint": "^6.7.2",
-    "eslint-plugin-vue": "^8.5.0",
-    "vue-template-compiler": "^2.6.11"
-  },
-  "eslintConfig": {
-    "root": true,
-    "env": {
-      "node": true
+    "name": "medicinewarriors-frontend",
+    "version": "0.1.0",
+    "private": true,
+    "author": "Medicine Warriors",
+    "description": "www.medicinewarriors.org",  
+    "dependencies": {
+        "@react-google-maps/api": "^2.7.0",
+        "@testing-library/jest-dom": "^5.16.2",
+        "@testing-library/react": "^12.1.4",
+        "@testing-library/user-event": "^13.5.0",
+        "bootstrap": "^5.1.3",
+        "react": "^17.0.2",
+        "react-dom": "^17.0.2",
+        "react-scripts": "5.0.0"
     },
-    "extends": [
-      "plugin:vue/essential",
-      "eslint:recommended"
-    ],
-    "parserOptions": {
-      "parser": "babel-eslint"
+    "scripts": {
+        "start": "react-scripts start",
+        "build": "react-scripts build",
+        "test": "react-scripts test",
+        "eject": "react-scripts eject"
     },
-    "rules": {}
-  },
-  "browserslist": [
-    "> 1%",
-    "last 2 versions",
-    "not dead"
-  ]
+    "eslintConfig": {
+        "extends": "react-app"
+    },
+    "browserslist": {
+        "production": [
+            ">0.2%",
+            "not dead",
+            "not op_mini all"
+        ],
+        "development": [
+            "last 1 chrome version",
+            "last 1 firefox version",
+            "last 1 safari version"
+        ]
+    }
 }
