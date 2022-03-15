@@ -3,9 +3,8 @@ import { LoadScript, GoogleMap, InfoWindow, Marker, MarkerClusterer } from "@rea
 import locationService from './services/locations'
 
 
-const GMAPS_API_KEY = "AIzaSyDYp1te-bQEhWE9P9yehRE3biB7LpSEh4U";  // AIzaSyBKLILjbLg26NUDEbmLdohzaFZY3Qu9tbg
+const GMAPS_API_KEY = window._env_.GOOGLEMAPS_API_KEY || "AIzaSyDYp1te-bQEhWE9P9yehRE3biB7LpSEh4U";
 
-// const GMAPS_API_KEY = `${window._env_.API_URL}`;
 const map_center = { lat: 49.339110578227455, lng: 31.602030139697213 }
 
 const getDataFromApi = async () => {
@@ -58,9 +57,9 @@ const Map = () => {
     const onLoad = React.useCallback(function callback(map) {
         var locationsPromise = MakeQuerablePromise(getDataFromApi());
         locationsPromise.then(function(locations){
-            console.log("locations: " + typeof(locations) + " " + locations);
+            // console.log("locations: " + typeof(locations) + " " + locations.code);
             if (locations && locations !== "undefined" && "locations" in locations) {
-                setMarkers(locations);
+                setMarkers(locations.locations);
             };
         });
     },[])
@@ -102,7 +101,7 @@ const Map = () => {
                             return (
                                 <Marker
                                     key={marker.id}
-                                    position={{lat: marker.latitude, lng: marker.longitude}}
+                                    position={{lat: parseFloat(marker.latitude), lng: parseFloat(marker.longitude)}}
                                     clusterer={clusterer}
                                     icon= {{
                                         url: "http://maps.google.com/mapfiles/ms/icons/green-dot.png",

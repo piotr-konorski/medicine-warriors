@@ -1,16 +1,6 @@
 const express = require( 'express' )
 const app = express()
 const cors = require( 'cors' )
-const { Pool, Client } = require("pg");
-
-const db_credentials = {
-  user: "postgres",
-  host: "localhost",
-  database: "nodedemo",
-  password: "yourpassword",
-  port: 5432,
-};
-
 
 const port = process.env.PORT || 5000
 
@@ -46,7 +36,6 @@ let liveCheck = new health.LivenessCheck("LivenessCheck", livePromise);
 healthCheck.registerLivenessCheck(liveCheck);
 
 //readiness
-//let readyCheck = new health.PingCheck("/services/projects");
 let readinessCheck = new health.LivenessCheck("ReadinessCheck", livePromise);
 healthCheck.registerReadinessCheck(readinessCheck);
 
@@ -65,6 +54,5 @@ const server = app.listen(port, function() {
 
 // This is somewhat of a hack and should be handle better in a production server. ??
 server.on( 'connection', socket => socket.unref() )
-
 
 app.use( require( './routes.js' ) )

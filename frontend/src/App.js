@@ -69,7 +69,6 @@ export default function App() {
         </center>
       </div>
       <br/>
-
     </div>
   );
 }

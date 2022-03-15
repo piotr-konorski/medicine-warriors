@@ -1,8 +1,7 @@
 async function getAll() {
-  // const response = await fetch( `${window._env_.API_URL}/locations` )
-  const response = await fetch( `http://localhost:5000/locations_test` )
+  const api_url = `${window._env_.API_URL}/locations` || 'http://localhost:5000/locations_test'
+  const response = await fetch( api_url )
   const data_json = await response.json()
-  // console.log(json)
   return data_json
   
 }
