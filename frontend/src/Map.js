@@ -104,7 +104,7 @@ const Map = () => {
                                     position={{lat: parseFloat(marker.latitude), lng: parseFloat(marker.longitude)}}
                                     clusterer={clusterer}
                                     icon= {{
-                                        url: "http://maps.google.com/mapfiles/ms/icons/green-dot.png",
+                                        url: "/green_marker.png",
                                         scaledSize: {width: 40, height: 40},
                                         labelOrigin: {x: 16, y: -10}
                                     }}
