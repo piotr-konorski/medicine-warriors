@@ -19,19 +19,19 @@ services:
     depends_on:
       - db
 
-  frontend:
-    container_name: frontend
-    build:
-      context: frontend
-      dockerfile: Dockerfile
-    volumes:
-      - /app/node_modules
-      - ./frontend:/app
-    ports:
-      - 8080:8080
-    environment:
-      - VUE_APP_API_URL=${API_URL}
-      - VUE_APP_GOOGLEMAPS_API_KEY=${GOOGLEMAPS_API_KEY}
+  # frontend:
+  #   container_name: frontend
+  #   build:
+  #     context: frontend
+  #     dockerfile: Dockerfile
+  #   volumes:
+  #     - /app/node_modules
+  #     - ./frontend:/app
+  #   ports:
+  #     - 8080:8080
+  #   environment:
+  #     - VUE_APP_API_URL=${API_URL}
+  #     - VUE_APP_GOOGLEMAPS_API_KEY=${GOOGLEMAPS_API_KEY}
 
   db:
     container_name: db

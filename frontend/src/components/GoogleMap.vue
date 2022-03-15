@@ -74,7 +74,7 @@
 // https://www.digitalocean.com/community/tutorials/vuejs-vue-google-maps
 // https://developers.google.com/maps/documentation/javascript/reference/map#MapOptions.gestureHandling
 // vue gmaps - blog: https://tighten.com/blog/improving-google-maps-performance-on-large-datasets/
-import axios from 'axios'
+// import axios from 'axios'
 export default {
     data() {
         return {
@@ -91,20 +91,40 @@ export default {
     },
     
     mounted () {
-    const axios_instance = axios.create({
-        baseURL: 'http://medicine-warriors-backend.default.svc.cluster.local/',
-    })
+        fetch("http://medicine-warriors-backend.default.svc.cluster.local/pharmacies")
+            .then(async response => {
+                const responseData = await response.json();
 
-    axios_instance.interceptors.request.use(function(config) {
-        config.url = config.url.replace('https://', 'http://')
-        return config
-    })
-    axios_instance
-      .get('pharmacies')
-    //   .get('http://medicine-warriors-backend.default.svc.cluster.local/pharmacies')
-    //   .then(response => console.log(response.data.pharmacies))
-      .then(response => (this.markers = response.data.pharmacies))
-      .catch(error => console.log(error))
+                // check for error response
+                if (!response.ok) {
+                    // get error message from body or default to response statusText
+                    const error = (responseData && responseData.message) || response.statusText;
+                    return Promise.reject(error);
+                }
+
+                this.markers = responseData.pharmacies;
+            })
+            .catch(error => {
+                this.errorMessage = error;
+                console.error("There was an error!", error);
+            });
+
+
+
+    // const axios_instance = axios.create({
+    //     baseURL: 'http://medicine-warriors-backend.default.svc.cluster.local/',
+    // })
+
+    // axios_instance.interceptors.request.use(function(config) {
+    //     config.url = config.url.replace('https://', 'http://')
+    //     return config
+    // })
+    // axios_instance
+    //   .get('pharmacies')
+    // //   .get('http://medicine-warriors-backend.default.svc.cluster.local/pharmacies')
+    // //   .then(response => console.log(response.data.pharmacies))
+    //   .then(response => (this.markers = response.data.pharmacies))
+    //   .catch(error => console.log(error))
   }
 };
 </script>

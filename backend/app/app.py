@@ -1,3 +1,7 @@
+# https://testdriven.io/blog/developing-a-single-page-app-with-fastapi-and-vuejs/#fastapi-setup
+
+import random
+
 from fastapi import FastAPI, Request
 from fastapi.middleware.cors import CORSMiddleware
 
@@ -45,18 +49,18 @@ async def index():
     return {'backend_status': 'ok'}
 
 
-@app.get('/pharmacies_test')
-async def return_json():
-    pharmacies = [{'id': n, 'position': {'lat': 49.439110578227455, 'lng': 31.302030139697213}, 'name': "Аптека №3", 'address': "м.Вінниця, вул.Коріатовичів Князів, 181а, прим.186, 187, Вінницька обл, Україна"} 
-                    for n in range(10000)]
-    return {'pharmacies': pharmacies}
+@app.get('/locations_test')
+async def locations_test():
+    locations = [{'id': n, 'latitude': 49.439110578227455+random.random(), 'longitude': 31.302030139697213+random.random(), 'name': "Аптека №3", 'address': "м.Вінниця, вул.Коріатовичів Князів, 181а, прим.186, 187, Вінницька обл, Україна", 'contact': "contact details"} 
+                    for n in range(100)]
+    return {'locations': locations}
 
 
-@app.get('/pharmacies')
-async def return_json():
-    """ load pharmacies from db - TODO: now only tempprary db """
-    pharmacies = []
-    pharmacy_records = []
+@app.get('/locations')
+async def locations():
+    """ load locations from db - TODO: now only tempprary db """
+    locations = []
+    location_records = []
 
     # Run a database query.
     query = "SELECT id,name,address,contact,longitude,latitude,type FROM locations_temp"
@@ -64,14 +68,14 @@ async def return_json():
     try:
         if not database.is_connected:
             await database.connect()
-        pharmacy_records = await database.fetch_all(query=query)
+        location_records = await database.fetch_all(query=query)
     except Exception as e:
         print('! db:', e)
         pass
     
-    pharmacies = []
-    for pharmacy_record in pharmacy_records:
-        pharmacy = dict(pharmacy_record.items())
-        pharmacy['position'] = {'lat': pharmacy.get('latitude'), 'lng': pharmacy.get('longitude')}
-        pharmacies.append(pharmacy)
-    return {'pharmacies': pharmacies}
+    locations = [dict(location_record.items()) for location_record in location_records]
+    # for location_record in location_records:
+    #     location = dict(location_record.items())
+    #     location['position'] = {'lat': location.get('latitude'), 'lng': location.get('longitude')}
+    #     locations.append(location)
+    return {'locations': locations}
