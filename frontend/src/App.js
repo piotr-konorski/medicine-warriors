@@ -69,6 +69,8 @@ export default function App() {
         </center>
       </div>
       <br/>
+      
+      <center><font color="black" face="Geneva, sans-serif" size="0">Powered by <a href="https://cloudlets.zone">Cloudlets.Zone</a></font></center>
     </div>
   );
 }
