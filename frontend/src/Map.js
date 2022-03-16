@@ -3,9 +3,16 @@ import { LoadScript, GoogleMap, InfoWindow, Marker, MarkerClusterer } from "@rea
 import locationService from './services/locations'
 
 
-const GMAPS_API_KEY = window._env_.GOOGLEMAPS_API_KEY || "AIzaSyDYp1te-bQEhWE9P9yehRE3biB7LpSEh4U";
+const map_center = { lat: 49.339110578227455, lng: 31.602030139697213 } // center of Ukraine
 
-const map_center = { lat: 49.339110578227455, lng: 31.602030139697213 }
+function get_gmaps_apikey() {
+    try {
+        return window._env_.GOOGLEMAPS_API_KEY;
+    } catch (err) {
+        return "AIzaSyDYp1te-bQEhWE9P9yehRE3biB7LpSEh4U"; // some publically available Google Maps api key
+    }
+}
+const GMAPS_API_KEY = get_gmaps_apikey();
 
 const getDataFromApi = async () => {
     try {
