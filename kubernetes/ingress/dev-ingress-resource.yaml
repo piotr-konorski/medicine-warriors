@@ -8,10 +8,10 @@ metadata:
     nginx.ingress.kubernetes.io/rewrite-target: /$2
     nginx.ingress.kubernetes.io/ssl-redirect: "true"
   labels:
-    app: medicine-warriors-backend
-    app.kubernetes.io/instance: medicine-warriors-backend
+    app: medicine-warriors
+    app.kubernetes.io/instance: medicine-warriors
     env: dev
-  name: medicine-warriors-backend
+  name: medicine-warriors
   namespace: default
 spec:
   rules:

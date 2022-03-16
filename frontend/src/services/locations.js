@@ -6,6 +6,8 @@ async function getAll() {
   
 }
 
-export default {
+const exportedObject = {
   getAll
-}
+};
+
+export default exportedObject;
