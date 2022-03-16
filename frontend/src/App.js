@@ -7,8 +7,8 @@ export default function App() {
     <div className="App">
       <div className="header">
         <div className="topnav">
-          <a href="#mapSection">Map / Карта</a>
           <div className="topnav-right">
+            <a href="#mapSection">Map / Карта</a>
             <a href="https://github.com/rupikon/medicine-warriors">Project information / Інформація про проект</a>
           </div>
         </div>
