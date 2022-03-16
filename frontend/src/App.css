@@ -1,14 +1,48 @@
 .App {
   height: 100vh;
+  background: rgb(255, 255, 255);
 }
 
-.header img {
+.topnav {
+  background-color: rgb(255, 255, 255);
+  overflow: hidden;
+}
+
+.topnav a {
+  float: left;
+  color: rgb(15, 15, 70);
+  font-size: 17px;
+  font-weight: bold;
+  text-align: center;
+  padding: 14px 16px;
+  text-decoration: none;
+}
+
+.topnav a:hover {
+  background-color: rgb(12, 22, 161);
+  color: #ddd;
+}
+
+.topnav a.active {
+  background-color: #04AA6D;
+  color: white;
+}
+
+.topnav-right {
+  float: right;
+}
+
+.header {
+  padding: 0 -10px;
+}
+
+.logoTitle img {
   float: left;
   height: 100px;
   background: rgb(255, 255, 255);
 }
 
-.header h1 {
+.logoTitle h1 {
   position: relative;
   font-family: 'Trebuchet MS';
   font-size: 3em;
@@ -17,7 +51,7 @@
   left: 10px;
 }
 
-.header h3 {
+.logoTitle h3 {
   position: relative;
   font-family: 'Trebuchet MS';
   font-size: 1em;
@@ -32,6 +66,16 @@ p {
   color:rgb(20, 20, 68);
   margin-left: 15%;
   margin-right: 15%;
+}
+
+h1 a {
+  position: relative;
+  font-family: 'Trebuchet MS';
+  /* font-size: 4em; */
+  color:midnightblue;
+  top: 18px;
+  left: 10px;
+  text-decoration: none;
 }
 
 h2 {

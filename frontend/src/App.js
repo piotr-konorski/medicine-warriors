@@ -5,13 +5,21 @@ import "./App.css";
 export default function App() {
   return (
     <div className="App">
-
       <div className="header">
-        <img src="/medicine_warriors_logo.png" alt="logo" />
-        <h1>Medicine Warriors</h1>
-        <h3>На варті Вашого здоров'я! - We are guarding your health!</h3>
-      </div>
-      <br/>
+        <div className="topnav">
+          <a href="#mapSection">Map / Карта</a>
+          <div className="topnav-right">
+            <a href="https://github.com/rupikon/medicine-warriors">Project information / Інформація про проект</a>
+          </div>
+        </div>
+
+        <div className="logoTitle">
+          <img src="/medicine_warriors_logo.png" alt="logo" />
+          <h1><a href="https://medicinewarriors.org">Medicine Warriors</a></h1>
+          <h3>На варті Вашого здоров'я! - We are guarding your health!</h3>
+        </div>
+        <br/>
+      </div>  
       
       <div>
         <center>
@@ -37,7 +45,7 @@ export default function App() {
       </div>
       <br/>
 
-      <div>
+      <div id="mapSection">
         <center>
           <h2>Карта</h2>
           <h4>Map</h4>
@@ -47,7 +55,6 @@ export default function App() {
           </p>
         </center>
       </div>
-      
       
       <Map />
       
@@ -70,7 +77,8 @@ export default function App() {
       </div>
       <br/>
       
-      <center><font color="black" face="Geneva, sans-serif" size="0">Powered by <a href="https://cloudlets.zone">Cloudlets.Zone</a></font></center>
+      <hr/>
+      <center><font color="black" face="Geneva, sans-serif" size="1">Powered by <a href="https://cloudlets.zone">Cloudlets.Zone</a></font></center>
     </div>
   );
 }
