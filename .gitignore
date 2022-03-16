@@ -5,3 +5,5 @@ letsencrypt/
 node_modules/
 /dist/
 env/
+private/
+data/
