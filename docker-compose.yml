@@ -6,6 +6,7 @@ services:
   
   backend:
     image: medwar-backend
+    container_name: backend
     build:
       context: backend
       dockerfile: Dockerfile
