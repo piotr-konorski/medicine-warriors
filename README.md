@@ -1,6 +1,6 @@
 # Medicine Warriors
 
-[www.medicinewarriors.org](www.medicinewarriors.org)
+[www.medicinewarriors.org](https://www.medicinewarriors.org)
 
 All relevant information about insulin availability in war zones, currently focusing on **Ukraine** :ukraine:
 - **Up to date** map with locations of **insulin availability** - sourced from ukrainian government notices
