@@ -131,8 +131,8 @@ const Map = () => {
                                     >
                                         <div>
                                             <p><b>{marker.name}</b></p>{marker.address}
-                                            <br/>
-                                            Contact: {marker.contact}
+                                            {/* <br/> */}
+                                            {/* Contact: {marker.contact} */}
                                         </div>
                                     </InfoWindow>
                                 ) : null}
