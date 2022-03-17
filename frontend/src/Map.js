@@ -83,7 +83,8 @@ const Map = () => {
                     onLoad={onLoad}
                     version="weekly"
                     options={{
-                        gestureHandling:'cooperative',
+                        minZoom: 7,
+                        gestureHandling: 'cooperative',
                         zoomControl: false,
                         mapTypeControl: false,
                         scaleControl: false,
