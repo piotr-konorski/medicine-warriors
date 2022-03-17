@@ -83,7 +83,7 @@ const Map = () => {
                     onLoad={onLoad}
                     version="weekly"
                     options={{
-                        minZoom: 7,
+                        minZoom: 6,
                         gestureHandling: 'cooperative',
                         zoomControl: false,
                         mapTypeControl: false,
@@ -103,6 +103,8 @@ const Map = () => {
                             {url: '/clustering/blue/m4.png', width: '78', height: '77', textColor: 'white', textSize: '14', anchorText: ['1','0'], anchorIcon: ['0', '0']},
                             {url: '/clustering/blue/m5.png', width: '90', height: '89', textColor: 'white', textSize: '12', anchorText: ['1','0'], anchorIcon: ['0', '0']}
                         ]}
+                        averageCenter
+                        maxZoom={17}
                     >
 
                     {(clusterer) => markers.map((marker) => {
