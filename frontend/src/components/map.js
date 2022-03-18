@@ -105,7 +105,7 @@ const Map = (props) => {
           <MarkerClusterer
             styles={[
               {
-                url: '/clustering/blue/m1.png',
+                url: '/map_markers/clustering/blue/m1.png',
                 width: '53',
                 height: '52',
                 textColor: 'white',
@@ -114,7 +114,7 @@ const Map = (props) => {
                 anchorIcon: ['0', '0'],
               },
               {
-                url: '/clustering/blue/m2.png',
+                url: '/map_markers/clustering/blue/m2.png',
                 width: '56',
                 height: '55',
                 textColor: 'white',
@@ -123,7 +123,7 @@ const Map = (props) => {
                 anchorIcon: ['0', '0'],
               },
               {
-                url: '/clustering/blue/m3.png',
+                url: '/map_markers/clustering/blue/m3.png',
                 width: '66',
                 height: '65',
                 textColor: 'white',
@@ -132,7 +132,7 @@ const Map = (props) => {
                 anchorIcon: ['0', '0'],
               },
               {
-                url: '/clustering/blue/m4.png',
+                url: '/map_markers/clustering/blue/m4.png',
                 width: '78',
                 height: '77',
                 textColor: 'white',
@@ -141,7 +141,7 @@ const Map = (props) => {
                 anchorIcon: ['0', '0'],
               },
               {
-                url: '/clustering/blue/m5.png',
+                url: '/map_markers/clustering/blue/m5.png',
                 width: '90',
                 height: '89',
                 textColor: 'white',
@@ -162,7 +162,7 @@ const Map = (props) => {
                     }}
                     clusterer={clusterer}
                     icon={{
-                      url: '/green_marker.png',
+                      url: '/map_markers/green_marker.png',
                       scaledSize: { width: 40, height: 40 },
                       labelOrigin: { x: 16, y: -10 },
                     }}
