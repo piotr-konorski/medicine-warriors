@@ -8,7 +8,7 @@ import {
 } from '@react-google-maps/api'
 import locationService from '../services/locations'
 
-const map_center = { lat: 49.339110578227455, lng: 31.602030139697213 } // center of Ukraine
+const map_center = { lat: 49.339110578227455, lng: 31.602030139697213 } // roughly center of Ukraine
 
 function get_gmaps_apikey() {
   try {
@@ -92,6 +92,7 @@ const Map = (props) => {
           onLoad={onLoad}
           version="weekly"
           options={{
+            minZoom: 6,
             gestureHandling: 'cooperative',
             zoomControl: false,
             mapTypeControl: false,
@@ -150,6 +151,8 @@ const Map = (props) => {
                 anchorIcon: ['0', '0'],
               },
             ]}
+            averageCenter
+            maxZoom={17}
           >
             {(clusterer) =>
               markers.map((marker) => {
