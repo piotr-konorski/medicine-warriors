@@ -6,7 +6,6 @@ export default function Aricle() {
     <div className="p-6 md:py-14 flex items-center justify-center flex-col text-slate-900">
       {content.map(({ id, header, subheader, content, last }) => {
         return (
-          <>
             <div key={id} id={id} className="max-w-3xl">
               <h1 className="text-2xl md:text-4xl font-bold">
                 {header && parse(header)}
@@ -17,7 +16,6 @@ export default function Aricle() {
               <p>{content && content.map((p) => parse(p))}</p>
               {!last && <hr className="my-6 md:my-10" />}
             </div>
-          </>
         )
       })}
     </div>

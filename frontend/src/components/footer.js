@@ -15,11 +15,15 @@ export default function Footer() {
       <a href="https://github.com/rupikon/medicine-warriors">
         <h1>Інформація про проект</h1>
       </a>
-      <div className="flex">
+      <br/>
+
+      <div className="flex" >
+      <small>
         Powered by&nbsp;
-        <a classname="inline" href="https://cloudlets.zone">
+        <a className="inline small" href="https://cloudlets.zone">
           Cloudlets.Zone
         </a>
+      </small>
       </div>
       {/* </div> */}
     </footer>
