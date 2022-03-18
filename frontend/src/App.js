@@ -14,7 +14,7 @@ export default function App() {
         </div>
 
         <div className="logoTitle">
-          <img src="/medicine_warriors_logo.png" alt="logo" />
+          <img src="/images/medicine_warriors_logo.png" alt="logo" />
           <h1><a href="https://medicinewarriors.org">Medicine Warriors</a></h1>
           <h3>На варті Вашого здоров'я! - We are guarding your health!</h3>
         </div>
