@@ -25,8 +25,3 @@ code {
   animation: none !important;
   transition: none !important;
 }
-@media (min-width: 768px) {
-  .pl-33-20rem {
-    padding-left: min(33.3333%, 200px);
-  }
-}

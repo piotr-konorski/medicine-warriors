@@ -6,7 +6,7 @@ function Toggle(props) {
     <>
       <div
         {...props}
-        className="min-h-fill flex flex-col items-center justify-center gap-1 cursor-pointer md:hidden md:justify-center"
+        className="min-h-full px-4 flex flex-col items-center justify-center gap-1 cursor-pointer md:hidden md:justify-center"
       >
         <div className="w-6 h-[2px] bg-black" />
         <div className="w-6 h-[2px] bg-black" />
@@ -19,7 +19,7 @@ function Toggle(props) {
 function Navbar(props) {
   return (
     <>
-      <nav className="fixed top-0 min-w-full h-14 bg-white flex justify-between items-center font-bold pr-4 border-b-[1px] border-solid z-50">
+      <nav className="fixed top-0 min-w-full h-14 bg-white flex justify-between items-center font-bold border-b-[1px] border-solid z-50">
         <a href="http://www.medicinewarriors.org">
           <div className="max-h-full flex flex-row items-center text-xs w-full">
             <img

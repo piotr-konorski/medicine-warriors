@@ -8,19 +8,19 @@ import { useState, useEffect } from 'react'
 export default function App() {
   const [open, setOpen] = useState(false)
   const toggle = () => setOpen(!open)
-  useEffect(() => {
-    let resizeTimer
-    window.addEventListener('resize', () => {
-      document.body.classList.add('resize-animation-stopper')
-      clearTimeout(resizeTimer)
-      resizeTimer = setTimeout(() => {
-        document.body.classList.remove('resize-animation-stopper')
-      }, 400)
-    })
-    return () => {
-      window.removeEventListener('resize')
-    }
-  }, [])
+  // useEffect(() => {
+  //   let resizeTimer
+  //   window.addEventListener('resize', () => {
+  //     document.body.classList.add('resize-animation-stopper')
+  //     clearTimeout(resizeTimer)
+  //     resizeTimer = setTimeout(() => {
+  //       document.body.classList.remove('resize-animation-stopper')
+  //     }, 400)
+  //   })
+  //   return () => {
+  //     window.removeEventListener('resize')
+  //   }
+  // }, [])
   return (
     <>
       <Navbar open={open} toggle={toggle} />
