@@ -4,8 +4,8 @@ export const options = [
     id: 'map',
   },
   {
-    name: 'Pецепт',
-    id: 'prescription',
+    name: 'інсулін',
+    id: 'insulin',
   },
   {
     name: 'Контакти',

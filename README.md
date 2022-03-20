@@ -23,4 +23,4 @@ We are an interdisciplinary group of researchers & IT specialists from Ukraine, 
 - Maia Lortkipanidze ([contact](mailto:mashiko@uni.minerva.edu)) - design & research
 - Damian Naprawa ([contact](mailto:damian@szkoladockera.pl)) - DevOps support
 - Monika Nowobilska-Całus ([contact](mailto:mbnc0000@gmail.com)) - research & presentation preparation during hackathon
-- Krystian Nowak ([contact](https://t.me/krystiannowak)) - design support
+- Krystian Nowak ([contact](krystian@uni.minerva.edu)) - design support
