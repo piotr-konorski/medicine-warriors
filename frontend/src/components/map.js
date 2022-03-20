@@ -21,8 +21,8 @@ const GMAPS_API_KEY = get_gmaps_apikey()
 
 const getDataFromApi = async () => {
   try {
-    const locations = await locationService.getAll()
-    // const locations = locationService.getAll_test_v2()  // ---- dev ----
+    // const locations = await locationService.getAll()
+    const locations = locationService.getAll_test_v2()  // ---- dev ----
     return locations
   } catch (reason) {
     console.log('Error - request: ' + reason)
@@ -178,9 +178,9 @@ const Map = (props) => {
                 
                 let locTel = null
                 if (marker.google_international_phone_number !== null)
-                  locTel = marker.google_international_phone_number
+                  locTel = "tel:"+marker.google_international_phone_number
                 else if (marker.google_formatted_phone_number !== null)
-                  locTel = marker.google_formatted_phone_number
+                  locTel = "tel:"+marker.google_formatted_phone_number
                 
                 let locMapUrl = null
                 if (marker.google_map_url !== null)
@@ -228,20 +228,20 @@ const Map = (props) => {
                           
                           {locTel !== null && 
                             <div>
-                              <a className="a_info" href="tel:{locTel}">{locTel}</a>
+                              <a className="a_info" href={locTel}>{locTel}</a>
                             </div>
                           }
                           {locMapUrl !== null && 
                             <div>
                               <br/>
-                              Google Maps: <a className="a_info" href="{locMapUrl}">{locMapUrl}</a>
+                              Google Maps: <a className="a_info" href={locMapUrl}>{locMapUrl}</a>
                             </div>
                           }
 
                           {locUrl !== null && 
                             <div>
                               <br/>
-                              www: <a className="a_info" href="{locUrl}">{locUrl}</a>
+                              www: <a className="a_info" href={locUrl}>{locUrl}</a>
                             </div>
                           }
                         </div>
