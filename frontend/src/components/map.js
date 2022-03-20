@@ -4,7 +4,7 @@ import {
   GoogleMap,
   InfoWindow,
   Marker,
-  MarkerClusterer,
+  MarkerClusterer
 } from '@react-google-maps/api'
 import locationService from '../services/locations'
 
@@ -22,6 +22,7 @@ const GMAPS_API_KEY = get_gmaps_apikey()
 const getDataFromApi = async () => {
   try {
     const locations = await locationService.getAll()
+    // const locations = locationService.getAll_test_v2()  // ---- dev ----
     return locations
   } catch (reason) {
     console.log('Error - request: ' + reason)
@@ -75,9 +76,8 @@ const Map = (props) => {
   const onLoad = React.useCallback(function callback(map) {
     var locationsPromise = MakeQuerablePromise(getDataFromApi())
     locationsPromise.then(function (locations) {
-      // console.log("locations: " + typeof(locations) + " " + locations.code);
       if (locations && locations !== 'undefined' && 'locations' in locations) {
-        setMarkers(locations.locations)
+        setMarkers(locations.locations);
       }
     })
   }, [])
@@ -156,12 +156,46 @@ const Map = (props) => {
           >
             {(clusterer) =>
               markers.map((marker) => {
+                let locLat = marker.latitude
+                if (marker.google_latitude !== null)
+                  locLat = marker.google_latitude
+
+                let locLng = marker.longitude
+                if (marker.google_latitude !== null)
+                  locLng = marker.google_longitude
+
+                let locName = marker.name
+                if (marker.google_name !== null)
+                  locName = locName + ' ('+marker.google_name+')'
+                
+                let locAddress = marker.address
+                if (marker.google_address !== null)
+                  locAddress = marker.google_address
+                
+                let locContact = null
+                if (marker.contact !== null)
+                  locContact = 'Contact: ' + marker.contact
+                
+                let locTel = null
+                if (marker.google_international_phone_number !== null)
+                  locTel = marker.google_international_phone_number
+                else if (marker.google_formatted_phone_number !== null)
+                  locTel = marker.google_formatted_phone_number
+                
+                let locMapUrl = null
+                if (marker.google_map_url !== null)
+                  locMapUrl = marker.google_map_url
+                
+                let locUrl = null
+                if (marker.google_url !== null)
+                  locUrl = marker.google_url
+
                 return (
                   <Marker
                     key={marker.id}
                     position={{
-                      lat: parseFloat(marker.latitude),
-                      lng: parseFloat(marker.longitude),
+                      lat: parseFloat(locLat),
+                      lng: parseFloat(locLng),
                     }}
                     clusterer={clusterer}
                     icon={{
@@ -184,12 +218,32 @@ const Map = (props) => {
                         }}
                       >
                         <div>
-                          <p>
-                            <b>{marker.name}</b>
-                          </p>
-                          {marker.address}
-                          {/* <br/> */}
-                          {/* Contact: {marker.contact} */}
+                          <h1 className="h1_info" >{locName}</h1>
+                          {locAddress}
+                          {locContact !== null && 
+                            <div>
+                              {locContact}
+                            </div>
+                          }
+                          
+                          {locTel !== null && 
+                            <div>
+                              <a className="a_info" href="tel:{locTel}">{locTel}</a>
+                            </div>
+                          }
+                          {locMapUrl !== null && 
+                            <div>
+                              <br/>
+                              Google Maps: <a className="a_info" href="{locMapUrl}">{locMapUrl}</a>
+                            </div>
+                          }
+
+                          {locUrl !== null && 
+                            <div>
+                              <br/>
+                              www: <a className="a_info" href="{locUrl}">{locUrl}</a>
+                            </div>
+                          }
                         </div>
                       </InfoWindow>
                     ) : null}

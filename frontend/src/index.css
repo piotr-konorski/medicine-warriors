@@ -25,3 +25,12 @@ code {
   animation: none !important;
   transition: none !important;
 }
+
+.a_info {
+  color: blue;
+}
+
+.h1_info {
+  font-size: larger;
+  font-weight: bolder;
+}
