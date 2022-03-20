@@ -21,8 +21,8 @@ const GMAPS_API_KEY = get_gmaps_apikey()
 
 const getDataFromApi = async () => {
   try {
-    // const locations = await locationService.getAll()
-    const locations = locationService.getAll_test_v2()  // ---- dev ----
+    const locations = await locationService.getAll()
+    // const locations = locationService.getAll_test_v2()  // ---- dev ----
     return locations
   } catch (reason) {
     console.log('Error - request: ' + reason)
