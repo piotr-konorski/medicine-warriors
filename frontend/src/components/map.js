@@ -66,11 +66,11 @@ const Map = (props) => {
   const [markers, setMarkers] = useState([])
   const [activeMarker, setActiveMarker] = useState(null)
 
-  const handleActiveMarker = (marker) => {
-    if (marker === activeMarker) {
-      return
+  const handleActiveMarker = (marker_id) => {
+    if (marker_id === activeMarker) {
+      setActiveMarker(null)
     }
-    setActiveMarker(marker)
+    setActiveMarker(marker_id)
   }
 
   const onLoad = React.useCallback(function callback(map) {
