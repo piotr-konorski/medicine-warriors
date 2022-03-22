@@ -16,6 +16,10 @@ code {
     monospace;
 }
 
+/* a {
+  color: black;
+} */
+
 .map {
   width: 100%;
   min-height: calc(100vh - 56px);
@@ -33,4 +37,8 @@ code {
 .h1_info {
   font-size: larger;
   font-weight: bolder;
+}
+
+.poweredbyStype {
+  font-size: 0.7em;
 }
