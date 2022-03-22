@@ -16,10 +16,6 @@ code {
     monospace;
 }
 
-/* a {
-  color: black;
-} */
-
 .map {
   width: 100%;
   min-height: calc(100vh - 56px);
@@ -39,6 +35,6 @@ code {
   font-weight: bolder;
 }
 
-.poweredbyStype {
+.poweredbyStyle {
   font-size: 0.7em;
 }
