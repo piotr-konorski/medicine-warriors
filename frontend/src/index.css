@@ -3,6 +3,8 @@
 @tailwind utilities;
 
 body {
+  /* disable pinch zoom */
+  touch-action: pan-x pan-y;
   margin: 0;
   font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
     'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
@@ -33,8 +35,4 @@ code {
 .h1_info {
   font-size: larger;
   font-weight: bolder;
-}
-
-.poweredbyStyle {
-  font-size: 0.5em;
 }

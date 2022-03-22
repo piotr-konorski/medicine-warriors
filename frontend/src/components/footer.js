@@ -41,12 +41,14 @@ export default function Footer() {
         </a>
 
         <br />
-          <div className="flex poweredbyStype">
+        <small>
+          <div className="flex">
             Powered by&nbsp;
             <a classname="inline" href="https://cloudlets.zone">
               Cloudlets.Zone
             </a>
           </div>
+        </small>
       </footer>
     </>
   )
