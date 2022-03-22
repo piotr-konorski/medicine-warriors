@@ -13,7 +13,7 @@ export default function Footer() {
       </a>
 
       <a href="https://github.com/rupikon/medicine-warriors">
-        <h1>Інформація про проект</h1>
+        <h1>Репозиторій коду</h1>
       </a>
       <br/>
 
