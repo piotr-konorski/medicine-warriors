@@ -19,8 +19,8 @@ We are an interdisciplinary group of researchers & IT specialists from Ukraine, 
 - [Cloudlets.Zone](http://cloudlets.zone) - cluster hosting (special thanks to Tomasz Magda ([contact](mailto:t.magda@produkcjachmur.pl)) for organizational support)
 - [Code4Ukraine](https://www.nonprofit.org.pl) hackathon organizers: [hackathon@nonprofit.org.pl](mailto:hackathon@nonprofit.org.pl)
 - Rafal Dziwiński ([contact](mailto:rafal.dziwinski@korbank.pl)) - DevOps support
-- Paweł Klimczuk ([contact](mailto:pklimczu)) - database design support
-- Maia Lortkipanidze ([contact](mailto:mashiko@uni.minerva.edu)) - design & research
+- Paweł Klimczuk ([contact](mailto:pklimczu@gmail.com)) - database design support
+- Maia Lortkipanidze ([contact](mailto:mashiko@uni.minerva.edu)) - design & research, social media
 - Damian Naprawa ([contact](mailto:damian@szkoladockera.pl)) - DevOps support
-- Monika Nowobilska-Całus ([contact](mailto:mbnc0000@gmail.com)) - research & presentation preparation during hackathon
-- Krystian Nowak ([contact](krystian@uni.minerva.edu)) - design support
+- Monika Nowobilska-Całus ([contact](mailto:mbnc0000@gmail.com)) - research, social media
+- Krystian Nowak ([contact](krystian@uni.minerva.edu)) - frontend design support

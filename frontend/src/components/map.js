@@ -74,12 +74,27 @@ const Map = (props) => {
   }
 
   const onLoad = React.useCallback(function callback(map) {
+    // get locations
     var locationsPromise = MakeQuerablePromise(getDataFromApi())
     locationsPromise.then(function (locations) {
       if (locations && locations !== 'undefined' && 'locations' in locations) {
         setMarkers(locations.locations);
       }
     })
+
+    // set geolocation
+    // navigator?.geolocation.getCurrentPosition(
+    //   ({ coords: { latitude: lat, longitude: lng } }) => {
+    //     const pos = { lat, lng };
+    //     console.log('- current location', pos)
+    //     map.setCenter(pos);
+    //     map.setZoom(11)
+
+    //   }, function(positionError) {
+    //     console.log('- cannot get geolocation:', positionError)
+    //   }
+    // );
+
   }, [])
 
   return (
