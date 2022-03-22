@@ -11,6 +11,7 @@ export default function Footer() {
           We are guarding your health!
         </h3>
       </a>
+      <br/>
 
       <a href="https://github.com/rupikon/medicine-warriors">
         <h1>Репозиторій коду</h1>
