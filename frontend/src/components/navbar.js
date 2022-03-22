@@ -19,7 +19,7 @@ function Toggle(props) {
 function Navbar(props) {
   return (
     <>
-      <nav className="fixed top-0 min-w-full h-14 bg-white flex justify-between items-center font-bold border-b-[1px] border-solid z-50">
+      <nav className="fixed top-0 min-w-full h-14 bg-white flex justify-between items-center font-bold border-b-[1px] border-solid z-50 md:pr-2">
         <a href="http://www.medicinewarriors.org">
           <div className="max-h-full flex flex-row items-center text-xs w-full">
             <img

@@ -5,6 +5,12 @@
     "author": "Medicine Warriors",
     "description": "www.medicinewarriors.org",
     "dependencies": {
+        "@fortawesome/fontawesome-free": "^6.1.0",
+        "@fortawesome/fontawesome-svg-core": "^6.1.0",
+        "@fortawesome/free-brands-svg-icons": "^6.1.0",
+        "@fortawesome/free-regular-svg-icons": "^6.1.0",
+        "@fortawesome/free-solid-svg-icons": "^6.1.0",
+        "@fortawesome/react-fontawesome": "^0.1.18",
         "@react-google-maps/api": "^2.7.0",
         "@testing-library/jest-dom": "^5.16.2",
         "@testing-library/react": "^12.1.4",

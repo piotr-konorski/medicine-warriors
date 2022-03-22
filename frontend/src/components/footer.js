@@ -1,27 +1,54 @@
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
+import {
+  faGithub,
+  faFacebookSquare,
+  faInstagramSquare,
+} from '@fortawesome/free-brands-svg-icons'
+
 export default function Footer() {
   return (
-    <footer className="px-6 py-12 text-center bg-slate-800 text-white flex flex-col justify-center items-center bottom-0">
-      {/* <div className="max-w-2xl"> */}
-      <a href="https://medicinewarriors.org">
-        <h1 className="text-xl md:text-2xl font-bold ">Medicine Warriors</h1>
-        <h2 className="text-bg md:text-xl font-semibold">
-          На варті Вашого здоров'я!
-        </h2>
-        <h3 className="text-md md:text-bg font-medium">
-          We are guarding your health!
-        </h3>
-      </a>
-
-      <a href="https://github.com/rupikon/medicine-warriors">
-        <h1>Інформація про проект</h1>
-      </a>
-      <div className="flex">
-        Powered by&nbsp;
-        <a classname="inline" href="https://cloudlets.zone">
-          Cloudlets.Zone
+    <>
+      <div className="min-w-full bg-slate-500 py-3 flex flex-row justify-center items-center gap-4 text-white text-2xl md:text-3xl">
+        <a
+          href="https://www.facebook.com/Medicine-Warriors-101508442510908"
+          className="hover:text-gray-200"
+        >
+          <FontAwesomeIcon icon={faFacebookSquare} size="fa-lg" />
+        </a>
+        <a
+          href="https://instagram.com/medicinewarriors?utm_medium=copy_link"
+          className="hover:text-gray-200"
+        >
+          <FontAwesomeIcon icon={faInstagramSquare} size="fa-lg" />
+        </a>
+        <a
+          href="https://github.com/rupikon/medicine-warriors"
+          className="hover:text-gray-200"
+        >
+          <FontAwesomeIcon icon={faGithub} size="fa-lg" />
         </a>
       </div>
-      {/* </div> */}
-    </footer>
+      <footer className="px-6 py-12 text-center bg-slate-800 text-white flex flex-col justify-center items-center bottom-0">
+        <a href="https://medicinewarriors.org">
+          <h1 className="text-xl md:text-2xl font-bold ">Medicine Warriors</h1>
+          <h2 className="text-bg md:text-xl font-semibold">
+            На варті Вашого здоров'я!
+          </h2>
+          <h3 className="text-md md:text-bg font-medium">
+            We are guarding your health!
+          </h3>
+        </a>
+
+        <a href="https://github.com/rupikon/medicine-warriors">
+          <h1>Інформація про проект</h1>
+        </a>
+        <div className="flex">
+          Powered by&nbsp;
+          <a classname="inline" href="https://cloudlets.zone">
+            Cloudlets.Zone
+          </a>
+        </div>
+      </footer>
+    </>
   )
 }
