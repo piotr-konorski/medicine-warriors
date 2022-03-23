@@ -11,4 +11,8 @@ export const options = [
     name: 'Контакти',
     id: 'contacts',
   },
+  {
+    name: 'Про нас',
+    id: 'about',
+  },
 ]

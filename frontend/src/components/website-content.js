@@ -39,7 +39,7 @@ export const content = [
   {
     id: 'about',
     header: 'Про нас',
-    subheader: 'About',
+    subheader: 'About us',
     content: [
       `Ми - багатонаціональна команда молодих людей, натхненних ідеєю допомогти інсулінозалежним українцям, що опинились у скруті. Об’єднавшись задля досягнення цієї мети під час участі в Міжнародному хакатоні Code4Ukraine, ми розробили цей інформаційний ресурс, що надає найсвіжішу інформацію з офіційних джерел про наявність інсуліну в аптеках по всій Україні. Перемога у хакатоні не стала фінальним акордом в історії нашого проекту, а лише спонукала до ще активнішої роботи над його розвитком. Чим ми наразі й займаємось.`,
       `<br /><a class="a_info" href="PressRelease.pdf">Більше інформації</a>`
@@ -53,8 +53,7 @@ export const content = [
     type: 'inline',
     content: [
       `<a key="partner1" className="inline" href="https://www.fundacja-cukrzyca.pl"><img className="parnerLogo" src="https://www.fundacja-cukrzyca.pl/images/logo-cukrzyca.png"></a>`,
-      `<a key="partner2" className="inline" href="https://gdsc.community.dev/national-technical-university-of-ukraine-kyiv-polytechnic-institute-natsionalnii-tekhnichnii-universitet-ukrayini-kiyivskii-politekhnichnii-institut"><img className="parnerLogo" src="https://res.cloudinary.com/startup-grind/image/upload/dpr_2.0,fl_sanitize/v1/gcs/platform-data-dsc/contentbuilder/logo_dark_stacked_5giak2X.svg"></a>`,
-      // '<br />',
+      `<a key="partner2" className="inline" href="https://gdsc.community.dev/national-technical-university-of-ukraine-kyiv-polytechnic-institute-natsionalnii-tekhnichnii-universitet-ukrayini-kiyivskii-politekhnichnii-institut"><img className="parnerLogo" src="logos/gdsc.svg"></a>`,
     ],
     last: true,
   },

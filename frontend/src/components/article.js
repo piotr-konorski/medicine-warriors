@@ -15,10 +15,13 @@ export default function Aricle() {
                 {subheader && parse(subheader)}
               </h2>
 
+              {/* text */}
               {!type && <p>{content && content.map((p) => parse(p))}</p>}
               
-              {type=='inline' && <div className="flex flex-item">{content && content.map((p) => parse(p))}</div>}
+              {/* partner logos */}
+              {type==='inline' && <div className="flex flex-item">{content && content.map((p) => parse(p))}</div>}
               
+              {/* horizonal bar */}
               {!last && <hr className="my-6 md:my-10" />}
             </div>
         )
