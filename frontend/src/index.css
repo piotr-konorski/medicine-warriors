@@ -36,3 +36,12 @@ code {
   font-size: larger;
   font-weight: bolder;
 }
+
+.flex-item {
+  margin: 0em;
+  padding: 1em;
+}
+
+.parnerLogo {
+  height: calc(50% );
+}
