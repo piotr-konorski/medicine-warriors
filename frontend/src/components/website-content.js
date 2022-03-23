@@ -55,6 +55,6 @@ export const content = [
       `<a key="partner1" className="inline" href="https://www.fundacja-cukrzyca.pl"><img className="parnerLogo" src="https://www.fundacja-cukrzyca.pl/images/logo-cukrzyca.png"></a>`,
       `<a key="partner2" className="inline" href="https://gdsc.community.dev/national-technical-university-of-ukraine-kyiv-polytechnic-institute-natsionalnii-tekhnichnii-universitet-ukrayini-kiyivskii-politekhnichnii-institut"><img className="parnerLogo" src="logos/gdsc.svg"></a>`,
     ],
-    last: true,
+    last: true
   },
 ]
