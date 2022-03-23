@@ -2,13 +2,15 @@ const express 	= require( 'express' )
 const appRouter = express.Router()
 const { Pool } = require('pg')
 
+appRouter.use(express.json());
+
 // DB pool
 const credentials = {
-  host: process.env.DB_HOST || localhost,
+  host: process.env.DB_HOST || 'localhost',
   port: process.env.DB_PORT || 5432,
-  user: process.env.DB_USER || postgres,
-  password: process.env.DB_PASS || postgres,
-  database: process.env.DB_NAME || postgresdb
+  user: process.env.DB_USER || 'postgres',
+  password: process.env.DB_PASS || 'postgres',
+  database: process.env.DB_NAME || 'postgresdb'
 };
 const pool = new Pool(credentials)
 pool.on('error', (err, client) => {
@@ -35,7 +37,7 @@ appRouter.get( '/locations_v2_test', function( req, res ) {
   res.json({ code: 'success', locations: locations_v2_test })
 })
 
-// DB: locations
+// DB: locations        // id,name,address,contact,longitude,latitude,type,status,google_place_id,google_latitude,google_longitude,google_name,google_address,google_formatted_phone_number,google_international_phone_number,google_map_url,google_url
 appRouter.get( '/locations', async function( req, res, next ) {
   try{
     pool
@@ -43,7 +45,51 @@ appRouter.get( '/locations', async function( req, res, next ) {
       .then(async client => {
         try {
           const db_response = await client
-            .query('SELECT id,name,address,contact,longitude,latitude,type,status,google_place_id,google_latitude,google_longitude,google_name,google_address,google_formatted_phone_number,google_international_phone_number,google_map_url,google_url FROM locations_v2');
+            .query('SELECT * FROM locations_v2');
+          client.release();
+          res.json({ code: 'success', locations: db_response.rows });
+        } catch (err_client) {
+          client.release();
+          console.log(err_client.stack);
+        }
+      })
+  } catch (err_pool) {
+    console.log(err_pool.stack);
+  }
+})
+
+
+// DB: locations nearby
+appRouter.post( '/locationsNearby', async function( req, res, next ) {
+  // get body data
+  let query_latitude, query_longitude, query_distance, query_limit;
+  try{
+    query_latitude = req.body.location.lat
+    query_longitude = req.body.location.lng
+    query_distance = req.body.distance
+    query_limit = req.body.limit
+  } catch (err_pool) {
+    console.log(err_pool.stack);
+  }
+
+
+  // prepare query
+  const query = `SELECT * from (
+                    SELECT  *, calculate_distance(${query_latitude}, ${query_longitude}, latitude, longitude, 'K') AS distance 
+                    FROM locations_v2
+                   ) al
+                where distance < ${query_distance}
+                ORDER BY distance
+                LIMIT ${query_limit};`
+
+  // run query and respond
+  try{
+    pool
+      .connect()
+      .then(async client => {
+        try {
+          const db_response = await client
+            .query(query);
           client.release();
           res.json({ code: 'success', locations: db_response.rows });
         } catch (err_client) {

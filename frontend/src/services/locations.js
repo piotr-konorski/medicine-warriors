@@ -1,21 +1,50 @@
+function get_api_url() {
+  try {
+    return `${window._env_.API_URL}`
+  } catch (err) {
+    return 'http://localhost:5000'
+  }
+}
+
 async function getAll() {
-  const api_url = `${window._env_.API_URL}/locations` || 'http://localhost:5000/locations_test'
-  const response = await fetch( api_url )
+  const api_url = get_api_url()
+  const url_endpoint = `${api_url}/locations`
+  const response = await fetch( url_endpoint )
   const data_json = await response.json()
   return data_json;
 }
 
-function getAll_test_v1() {
-  const data = {
-    locations: [
-      {id: 1, latitude: 49.439110578227455, longitude: 31.302030139697213, name: "Аптека №3", address: "м.Вінниця, вул.Коріатовичів Князів, 181а, прим.186, 187, Вінницька обл, Україна", contact: "contact details"}, 
-      {id: 2, latitude: 49.539110578227455, longitude: 31.202030139697213, name: "Аптека №3", address: "м.Вінниця, вул.Коріатовичів Князів, 181а, прим.186, 187, Вінницька обл, Україна", contact: "contact details"}, 
-      {id: 3, latitude: 49.339110578227455, longitude: 31.502030139697213, name: "Аптека №3", address: "м.Вінниця, вул.Коріатовичів Князів, 181а, прим.186, 187, Вінницька обл, Україна", contact: "contact details"}, 
-      {id: 4, latitude: 49.499110578227455, longitude: 31.392030139697213, name: "Аптека №3", address: "м.Вінниця, вул.Коріатовичів Князів, 181а, прим.186, 187, Вінницька обл, Україна", contact: "contact details"}
-    ]
+
+async function getNearby(location, distance, limit=10) {
+  // prepare request
+  const api_url = get_api_url()
+  const url_endpoint = `${api_url}/locationsNearby`
+  
+  const request_body = {
+    location: location,
+    distance: distance,
+    limit: limit
   }
-  return data
+
+  const request_settings = {
+    method: 'POST',
+    headers: {
+        Accept: 'application/json',
+        'Content-Type': 'application/json',
+    },
+    body: JSON.stringify(request_body)
+  };
+
+  // run request
+  try {
+      const fetchResponse = await fetch(url_endpoint, request_settings);
+      const data = await fetchResponse.json();
+      return data;
+  } catch (e) {
+      console.log('Error processing POST request', e)
+  }
 }
+
 
 function getAll_test_v2() {
   const data = {
@@ -32,7 +61,7 @@ function getAll_test_v2() {
 
 const exportedObject = {
   getAll,
-  getAll_test_v1,
+  getNearby,
   getAll_test_v2
 };
 

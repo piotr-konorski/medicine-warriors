@@ -13,19 +13,19 @@ export default function Footer() {
           href="https://www.facebook.com/MedicineWarriors.org"
           className="hover:text-gray-200"
         >
-          <FontAwesomeIcon icon={faFacebookSquare} size="fa-lg" />
+          <FontAwesomeIcon icon={faFacebookSquare} size="lg" />
         </a>
         <a
           href="https://instagram.com/MedicineWarriors"
           className="hover:text-gray-200"
         >
-          <FontAwesomeIcon icon={faInstagramSquare} size="fa-lg" />
+          <FontAwesomeIcon icon={faInstagramSquare} size="lg" />
         </a>
         <a
           href="https://github.com/rupikon/Medicine-Warriors"
           className="hover:text-gray-200"
         >
-          <FontAwesomeIcon icon={faGithub} size="fa-lg" />
+          <FontAwesomeIcon icon={faGithub} size="lg" />
         </a>
       </div>
 
@@ -44,7 +44,7 @@ export default function Footer() {
         <small>
           <div className="flex">
             Powered by&nbsp;
-            <a classname="inline" href="https://cloudlets.zone">
+            <a className="inline" href="https://cloudlets.zone">
               Cloudlets.Zone
             </a>
           </div>

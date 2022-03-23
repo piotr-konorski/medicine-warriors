@@ -19,7 +19,8 @@ function get_gmaps_apikey() {
 }
 const GMAPS_API_KEY = get_gmaps_apikey()
 
-const getDataFromApi = async () => {
+
+const getAllLocations = async () => {
   try {
     const locations = await locationService.getAll()
     // const locations = locationService.getAll_test_v2()  // ---- dev ----
@@ -29,6 +30,18 @@ const getDataFromApi = async () => {
     return
   }
 }
+
+
+const getLocationsNearby = async (pos, distance, limit) => {
+  try {
+    const locations = await locationService.getNearby(pos, distance, limit)
+    return locations
+  } catch (reason) {
+    console.log('Error - request: ' + reason)
+    return
+  }
+}
+
 
 function MakeQuerablePromise(promise) {
   if (promise.isFulfilled) return promise
@@ -75,7 +88,7 @@ const Map = (props) => {
 
   const onLoad = React.useCallback(function callback(map) {
     // get locations
-    var locationsPromise = MakeQuerablePromise(getDataFromApi())
+    var locationsPromise = MakeQuerablePromise(getAllLocations())
     locationsPromise.then(function (locations) {
       if (locations && locations !== 'undefined' && 'locations' in locations) {
         setMarkers(locations.locations);
@@ -83,17 +96,35 @@ const Map = (props) => {
     })
 
     // set geolocation
-    // navigator?.geolocation.getCurrentPosition(
-    //   ({ coords: { latitude: lat, longitude: lng } }) => {
-    //     const pos = { lat, lng };
-    //     console.log('- current location', pos)
-    //     map.setCenter(pos);
-    //     map.setZoom(11)
+    navigator?.geolocation.getCurrentPosition(
+      ({ coords: { latitude: lat, longitude: lng } }) => {
+        // const pos = { lat, lng };
+        const pos = { lat: 50.44682311508944, lng: 30.508645914869078 };  // DEV - somewhere in Kyiv
+        console.log('current geolocation:', pos)
+        
+        // set map accordingly
+        // map.setCenter(pos);
+        // map.setZoom(11)
+        
+        
+        // *********  DEV - testing Nearby *********
+        const distance = 5;  // return locations within radius of {distance} kilometers
+        const limit_locations = 20;  // return first {limit_locations} locations, sorted by distance
+        var locationsNearbyPromise = MakeQuerablePromise(getLocationsNearby(pos, distance, limit_locations))
+        locationsNearbyPromise.then(function (locations) {
 
-    //   }, function(positionError) {
-    //     console.log('- cannot get geolocation:', positionError)
-    //   }
-    // );
+          if (locations && locations !== 'undefined' && 'locations' in locations) {
+            console.log('locationsNearby:', locations.locations)
+            // setMarkers(locations.locations);
+          }
+        })
+        // *********  end: DEV - testing Nearby *********
+    
+
+      }, function(positionError) {
+        console.log('- cannot get geolocation:', positionError)
+      }
+    );
 
   }, [])
 
