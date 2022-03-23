@@ -38,10 +38,17 @@ code {
 }
 
 .flex-item {
-  margin: 0em;
-  padding: 1em;
+  margin: 2em;
+  padding: 2em;
+  gap: 10px;
+  align-items: stretch;
+  width: 100%;
 }
 
 .parnerLogo {
-  height: 50%;
+  display: block;
+  max-width:230px;
+  max-height:95px;
+  width: auto;
+  height: auto;
 }
