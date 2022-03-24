@@ -1,12 +1,13 @@
-import React, { useState } from 'react'
+import React, {useEffect, useRef, useState} from 'react'
 import {
-  LoadScript,
-  GoogleMap,
-  InfoWindow,
-  Marker,
-  MarkerClusterer
+    LoadScript,
+    GoogleMap,
+    InfoWindow,
+    Marker,
+    MarkerClusterer, useGoogleMap
 } from '@react-google-maps/api'
 import locationService from '../services/locations'
+import LocationButton from "./location-button";
 
 const map_center = { lat: 49.339110578227455, lng: 31.602030139697213 } // roughly center of Ukraine
 
@@ -88,47 +89,45 @@ const Map = (props) => {
 
   const onLoad = React.useCallback(function callback(map) {
     // get all locations
-    var locationsPromise = MakeQuerablePromise(getAllLocations())
-    locationsPromise.then(function (locations) {
+      const locationsPromise = MakeQuerablePromise(getAllLocations());
+      locationsPromise.then(function (locations) {
       if (locations && locations !== 'undefined' && 'locations' in locations) {
         setMarkers(locations.locations);
       }
     })
-
-    // set geolocation
-    if (false) {
-      navigator?.geolocation.getCurrentPosition(
-        ({ coords: { latitude: lat, longitude: lng } }) => {
-          // const pos = { lat, lng };
-          const pos = { lat: 50.44682311508944, lng: 30.508645914869078 };  // DEV - somewhere in Kyiv
-          console.log('current geolocation:', pos)
-          
-          // set map accordingly
-          // map.setCenter(pos);
-          // map.setZoom(11)
-          
-          
-          // *********  DEV - testing Nearby *********
-          const distance = 5;  // return locations within radius of {distance} kilometers
-          const limit_locations = 20;  // return first {limit_locations} locations, sorted by distance
-          var locationsNearbyPromise = MakeQuerablePromise(getLocationsNearby(pos, distance, limit_locations))
-          locationsNearbyPromise.then(function (locations) {
-
-            if (locations && locations !== 'undefined' && 'locations' in locations) {
-              console.log('locationsNearby:', locations.locations)
-              // setMarkers(locations.locations);
-            }
-          })
-          // *********  end: DEV - testing Nearby *********
-      
-
-        }, function(positionError) {
-          console.log('- cannot get geolocation:', positionError)
-        }
-      );
-    }
-
   }, [])
+
+  const localizeMe = (map) => {
+
+      navigator?.geolocation.getCurrentPosition(
+              ({ coords: { latitude: lat, longitude: lng } }) => {
+                  const pos = { lat, lng };
+                  console.log('current geolocation:', pos)
+
+                  // set map accordingly
+                  map.setCenter(pos);
+                  map.setZoom(11)
+
+                  console.log("TEST")
+                  // *********  DEV - testing Nearby *********
+                  const distance = 5;  // return locations within radius of {distance} kilometers
+                  const limit_locations = 20;  // return first {limit_locations} locations, sorted by distance
+                  const locationsNearbyPromise = MakeQuerablePromise(getLocationsNearby(pos, distance, limit_locations));
+                  locationsNearbyPromise.then(function (locations) {
+
+                      if (locations && locations !== 'undefined' && 'locations' in locations) {
+                          console.log('locationsNearby:', locations.locations)
+                          // setMarkers(locations.locations);
+                      }
+                  })
+                  // *********  end: DEV - testing Nearby *********
+
+
+              }, function(positionError) {
+                  console.log('- cannot get geolocation:', positionError)
+              }
+          );
+  }
 
   return (
     <div id={props.id}>
@@ -151,6 +150,7 @@ const Map = (props) => {
           }}
           on
         >
+            <LocationButton localizeMe={localizeMe} />
           <MarkerClusterer
             styles={[
               {

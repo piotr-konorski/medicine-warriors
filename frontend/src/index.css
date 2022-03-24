@@ -49,3 +49,12 @@ code {
   width: auto;
   height: auto;
 }
+
+#geolocationButton {
+  font-family: Arial, sans-serif;
+  background: #fff;
+  color:blue;
+  padding: 10px;
+  margin: 10px;
+  border: 0;
+}
