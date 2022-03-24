@@ -37,6 +37,15 @@ code {
   font-weight: bolder;
 }
 
+
+.markerInfo {
+  color:rgb(7, 88, 7);
+}
+
+.markerUrgentInfo {
+  color:crimson;
+}
+
 .flex-item {
   margin: 0em;
   padding: 2em;
@@ -45,7 +54,7 @@ code {
 
 .parnerLogo {
   display: block;
-  max-height:150px;
+  max-height:100px;
   width: auto;
   height: auto;
 }

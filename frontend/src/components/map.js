@@ -9,6 +9,13 @@ import {
 import locationService from '../services/locations'
 
 const map_center = { lat: 49.339110578227455, lng: 31.602030139697213 } // roughly center of Ukraine
+const marker_types = ['pharmacy', 'storage', 'location_cukrzyca.pl'];
+const map_icons = {
+  'default': '/map_markers/blue_marker.png',
+  'pharmacy': '/map_markers/blue_marker.png',
+  'storage': '/map_markers/blue_marker.png',
+  'location_cukrzyca.pl': '/map_markers/green_marker.png'
+}
 
 function get_gmaps_apikey() {
   try {
@@ -211,10 +218,17 @@ const Map = (props) => {
                 let locLng = marker.longitude
                 if (marker.google_latitude !== null)
                   locLng = marker.google_longitude
+                
+                let locType = marker.type
+                if (!marker_types.includes(locType))
+                  locType = "default";
 
                 let locName = marker.name
                 if (marker.google_name !== null)
                   locName = locName + ' ('+marker.google_name+')'
+                
+                let locInfo = marker.info
+                let locUrgentInfo = marker.urgent_info
                 
                 let locAddress = marker.address
                 if (marker.google_address !== null)
@@ -247,7 +261,7 @@ const Map = (props) => {
                     }}
                     clusterer={clusterer}
                     icon={{
-                      url: '/map_markers/green_marker.png',
+                      url: `${map_icons[locType]}`,
                       scaledSize: { width: 40, height: 40 },
                       labelOrigin: { x: 16, y: -10 },
                     }}
@@ -290,6 +304,20 @@ const Map = (props) => {
                             <div>
                               <br/>
                               www: <a className="a_info" href={locUrl}>{locUrl}</a>
+                            </div>
+                          }
+
+                          {locInfo && locInfo !== null &&
+                            <div>
+                              <br/>
+                              <p className="markerInfo">{locInfo}</p>
+                            </div>
+                          }
+
+                          {locUrgentInfo && locUrgentInfo !== null &&
+                            <div>
+                              <br/>
+                              <p className="markerUrgentInfo">{locUrgentInfo}</p>
                             </div>
                           }
                         </div>
