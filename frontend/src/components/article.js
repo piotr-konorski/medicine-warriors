@@ -34,11 +34,11 @@ export default function Aricle(props) {
           </h2>
           {locations.map((loc) => {
             return (
-              <>
+              <div key={loc.id}>
                 <h3 className="font-semibold">{loc.name}</h3>
                 <p>{loc.address}</p>
                 <p>{loc.contact}</p>
-              </>
+              </div>
             )
           })}
           <hr className="my-6 md:my-10" />

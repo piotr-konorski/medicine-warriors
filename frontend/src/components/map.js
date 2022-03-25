@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react'
+import React, { useState } from 'react'
 import {
   LoadScript,
   GoogleMap,
@@ -15,15 +15,24 @@ import {
 } from './helpers'
 
 const Map = (props) => {
+  const GMAPS_API_KEY = get_gmaps_apikey()
+
   const [markers, setMarkers] = useState([])
   const [activeMarker, setActiveMarker] = useState(null)
+  
+  // initial map center: roughly center of Ukraine
   const mapCenter = props.location ?? {
     lat: 49.339110578227455,
     lng: 31.602030139697213,
   }
 
-  // roughly center of Ukraine
-  const GMAPS_API_KEY = get_gmaps_apikey()
+  const marker_types = ['pharmacy', 'storage', 'location_cukrzyca.pl'];
+  const map_icons = {
+    'default': '/map_markers/blue_marker.png',
+    'pharmacy': '/map_markers/blue_marker.png',
+    'storage': '/map_markers/blue_marker.png',
+    'location_cukrzyca.pl': '/map_markers/green_marker.png'
+  }
 
   const handleActiveMarker = (marker_id) => {
     if (marker_id === activeMarker) {
@@ -189,6 +198,9 @@ const Map = (props) => {
                 let locUrl = null
                 if (marker.google_url !== null) locUrl = marker.google_url
 
+                let locInfo = marker.info
+                let locUrgentInfo = marker.urgent_info
+
                 return (
                   <Marker
                     key={marker.id}
@@ -247,6 +259,20 @@ const Map = (props) => {
                               </a>
                             </div>
                           )}
+
+                          {locInfo && locInfo !== null &&
+                            <div>
+                              <br/>
+                              <p className="markerInfo">{locInfo}</p>
+                            </div>
+                          }
+
+                          {locUrgentInfo && locUrgentInfo !== null &&
+                            <div>
+                              <br/>
+                              <p className="markerUrgentInfo">{locUrgentInfo}</p>
+                            </div>
+                          }
                         </div>
                       </InfoWindow>
                     ) : null}
