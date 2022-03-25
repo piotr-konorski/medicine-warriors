@@ -283,9 +283,9 @@ const Map = (props) => {
           </MarkerClusterer>
         </GoogleMap>
       </LoadScript>
-      <div className="absolute top-0 left-2 text-xs bg-gray-100 bg-opacity-80 px-2">
+      {/* <div className="absolute top-0 left-2 text-xs bg-gray-100 bg-opacity-80 px-2">
         Last Update: {'2022-03-25'}
-      </div>
+      </div> */}
     </div>
   )
 }
