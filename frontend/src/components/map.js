@@ -4,76 +4,15 @@ import {
   GoogleMap,
   InfoWindow,
   Marker,
-  MarkerClusterer
+  MarkerClusterer,
 } from '@react-google-maps/api'
-import locationService from '../services/locations'
 
-const map_center = { lat: 49.339110578227455, lng: 31.602030139697213 } // roughly center of Ukraine
-
-function get_gmaps_apikey() {
-  try {
-    return window._env_.GOOGLEMAPS_API_KEY
-  } catch (err) {
-    return 'AIzaSyDYp1te-bQEhWE9P9yehRE3biB7LpSEh4U' // some publically available Google Maps api key
-  }
-}
-const GMAPS_API_KEY = get_gmaps_apikey()
-
-
-const getAllLocations = async () => {
-  try {
-    const locations = await locationService.getAll()
-    // const locations = locationService.getAll_test_v2()  // ---- dev ----
-    return locations
-  } catch (reason) {
-    console.log('Error - request: ' + reason)
-    return
-  }
-}
-
-
-const getLocationsNearby = async (pos, distance, limit) => {
-  try {
-    const locations = await locationService.getNearby(pos, distance, limit)
-    return locations
-  } catch (reason) {
-    console.log('Error - request: ' + reason)
-    return
-  }
-}
-
-
-function MakeQuerablePromise(promise) {
-  if (promise.isFulfilled) return promise
-
-  var isPending = true
-  var isRejected = false
-  var isFulfilled = false
-
-  var result = promise.then(
-    function (v) {
-      isFulfilled = true
-      isPending = false
-      return v
-    },
-    function (e) {
-      isRejected = true
-      isPending = false
-      throw e
-    }
-  )
-
-  result.isFulfilled = function () {
-    return isFulfilled
-  }
-  result.isPending = function () {
-    return isPending
-  }
-  result.isRejected = function () {
-    return isRejected
-  }
-  return result
-}
+import {
+  get_gmaps_apikey,
+  getAllLocations,
+  getLocationsNearby,
+  MakeQuerablePromise,
+} from './helpers'
 
 const Map = (props) => {
   const [markers, setMarkers] = useState([])
@@ -86,12 +25,15 @@ const Map = (props) => {
     setActiveMarker(marker_id)
   }
 
+  const map_center = { lat: 49.339110578227455, lng: 31.602030139697213 } // roughly center of Ukraine
+  const GMAPS_API_KEY = get_gmaps_apikey()
+
   const onLoad = React.useCallback(function callback(map) {
     // get all locations
     var locationsPromise = MakeQuerablePromise(getAllLocations())
     locationsPromise.then(function (locations) {
       if (locations && locations !== 'undefined' && 'locations' in locations) {
-        setMarkers(locations.locations);
+        setMarkers(locations.locations)
       }
     })
 
@@ -100,38 +42,40 @@ const Map = (props) => {
       navigator?.geolocation.getCurrentPosition(
         ({ coords: { latitude: lat, longitude: lng } }) => {
           // const pos = { lat, lng };
-          const pos = { lat: 50.44682311508944, lng: 30.508645914869078 };  // DEV - somewhere in Kyiv
+          const pos = { lat: 50.44682311508944, lng: 30.508645914869078 } // DEV - somewhere in Kyiv
           console.log('current geolocation:', pos)
-          
+
           // set map accordingly
           // map.setCenter(pos);
           // map.setZoom(11)
-          
-          
-          // *********  DEV - testing Nearby *********
-          const distance = 5;  // return locations within radius of {distance} kilometers
-          const limit_locations = 20;  // return first {limit_locations} locations, sorted by distance
-          var locationsNearbyPromise = MakeQuerablePromise(getLocationsNearby(pos, distance, limit_locations))
-          locationsNearbyPromise.then(function (locations) {
 
-            if (locations && locations !== 'undefined' && 'locations' in locations) {
+          // *********  DEV - testing Nearby *********
+          const distance = 5 // return locations within radius of {distance} kilometers
+          const limit_locations = 20 // return first {limit_locations} locations, sorted by distance
+          var locationsNearbyPromise = MakeQuerablePromise(
+            getLocationsNearby(pos, distance, limit_locations)
+          )
+          locationsNearbyPromise.then(function (locations) {
+            if (
+              locations &&
+              locations !== 'undefined' &&
+              'locations' in locations
+            ) {
               console.log('locationsNearby:', locations.locations)
               // setMarkers(locations.locations);
             }
           })
           // *********  end: DEV - testing Nearby *********
-      
-
-        }, function(positionError) {
+        },
+        function (positionError) {
           console.log('- cannot get geolocation:', positionError)
         }
-      );
+      )
     }
-
   }, [])
 
   return (
-    <div id={props.id}>
+    <div id={props.id} className="relative">
       <LoadScript googleMapsApiKey={GMAPS_API_KEY}>
         <GoogleMap
           mapContainerClassName="map"
@@ -214,29 +158,28 @@ const Map = (props) => {
 
                 let locName = marker.name
                 if (marker.google_name !== null)
-                  locName = locName + ' ('+marker.google_name+')'
-                
+                  locName = locName + ' (' + marker.google_name + ')'
+
                 let locAddress = marker.address
                 if (marker.google_address !== null)
                   locAddress = marker.google_address
-                
+
                 let locContact = null
                 if (marker.contact !== null)
                   locContact = 'Contact: ' + marker.contact
-                
+
                 let locTel = null
                 if (marker.google_international_phone_number !== null)
-                  locTel = "tel:"+marker.google_international_phone_number
+                  locTel = 'tel:' + marker.google_international_phone_number
                 else if (marker.google_formatted_phone_number !== null)
-                  locTel = "tel:"+marker.google_formatted_phone_number
-                
+                  locTel = 'tel:' + marker.google_formatted_phone_number
+
                 let locMapUrl = null
                 if (marker.google_map_url !== null)
                   locMapUrl = marker.google_map_url
-                
+
                 let locUrl = null
-                if (marker.google_url !== null)
-                  locUrl = marker.google_url
+                if (marker.google_url !== null) locUrl = marker.google_url
 
                 return (
                   <Marker
@@ -266,32 +209,36 @@ const Map = (props) => {
                         }}
                       >
                         <div>
-                          <h1 className="h1_info" >{locName}</h1>
+                          <h1 className="h1_info">{locName}</h1>
                           {locAddress}
-                          {locContact !== null && 
-                            <div>
-                              {locContact}
-                            </div>
-                          }
-                          
-                          {locTel !== null && 
-                            <div>
-                              <a className="a_info" href={locTel}>{locTel}</a>
-                            </div>
-                          }
-                          {locMapUrl !== null && 
-                            <div>
-                              <br/>
-                              Google Maps: <a className="a_info" href={locMapUrl}>{locMapUrl}</a>
-                            </div>
-                          }
+                          {locContact !== null && <div>{locContact}</div>}
 
-                          {locUrl !== null && 
+                          {locTel !== null && (
                             <div>
-                              <br/>
-                              www: <a className="a_info" href={locUrl}>{locUrl}</a>
+                              <a className="a_info" href={locTel}>
+                                {locTel}
+                              </a>
                             </div>
-                          }
+                          )}
+                          {locMapUrl !== null && (
+                            <div>
+                              <br />
+                              Google Maps:{' '}
+                              <a className="a_info" href={locMapUrl}>
+                                {locMapUrl}
+                              </a>
+                            </div>
+                          )}
+
+                          {locUrl !== null && (
+                            <div>
+                              <br />
+                              www:{' '}
+                              <a className="a_info" href={locUrl}>
+                                {locUrl}
+                              </a>
+                            </div>
+                          )}
                         </div>
                       </InfoWindow>
                     ) : null}
@@ -302,6 +249,9 @@ const Map = (props) => {
           </MarkerClusterer>
         </GoogleMap>
       </LoadScript>
+      <div className="absolute top-0 left-2 text-xs bg-gray-100 bg-opacity-80 px-2">
+        Last Update: {'2022-03-25'}
+      </div>
     </div>
   )
 }
