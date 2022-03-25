@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, { useState, useEffect } from 'react'
 import {
   LoadScript,
   GoogleMap,
@@ -17,6 +17,13 @@ import {
 const Map = (props) => {
   const [markers, setMarkers] = useState([])
   const [activeMarker, setActiveMarker] = useState(null)
+  const mapCenter = props.location ?? {
+    lat: 49.339110578227455,
+    lng: 31.602030139697213,
+  }
+
+  // roughly center of Ukraine
+  const GMAPS_API_KEY = get_gmaps_apikey()
 
   const handleActiveMarker = (marker_id) => {
     if (marker_id === activeMarker) {
@@ -24,9 +31,6 @@ const Map = (props) => {
     }
     setActiveMarker(marker_id)
   }
-
-  const map_center = { lat: 49.339110578227455, lng: 31.602030139697213 } // roughly center of Ukraine
-  const GMAPS_API_KEY = get_gmaps_apikey()
 
   const onLoad = React.useCallback(function callback(map) {
     // get all locations
@@ -79,7 +83,7 @@ const Map = (props) => {
       <LoadScript googleMapsApiKey={GMAPS_API_KEY}>
         <GoogleMap
           mapContainerClassName="map"
-          center={map_center}
+          center={mapCenter}
           zoom={7}
           onLoad={onLoad}
           version="weekly"

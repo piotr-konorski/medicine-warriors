@@ -1,60 +1,49 @@
 import { content } from './website-content'
 import parse from 'html-react-parser'
-import { useEffect, useState } from 'react'
+import { useState, useEffect } from 'react'
 import { getLocationsNearby, MakeQuerablePromise } from './helpers'
 
-export default function Aricle() {
+export default function Aricle(props) {
   const [locations, setLocations] = useState([])
-
   useEffect(() => {
-    window.alert(
-      'Please enable location services to get the nearest pharmacies.'
-    )
-    if (navigator.geolocation) {
-      let loc
-      navigator.geolocation.getCurrentPosition((position) => {
-        loc = {
-          lat: position.coords.latitude,
-          lng: position.coords.longitude,
-        }
-      })
+    if (props.location) {
+      const distance = 10000
+      const limit_locations = 5
       let locationsNearbyPromise = MakeQuerablePromise(
-        getLocationsNearby(loc, 5, 20)
+        getLocationsNearby(props.location, distance, limit_locations)
       )
-      locationsNearbyPromise.then((locations) => {
+      locationsNearbyPromise.then(function (locations) {
         if (
           locations &&
           locations !== 'undefined' &&
           'locations' in locations
         ) {
-          console.log('locationsNearby:', locations.locations)
           setLocations(locations.locations)
         }
       })
-    } else {
-      // Browser doesn't support Geolocation
-      console.log("Browser doesn't support Geolocation")
     }
-  }, [])
+  }, [props.location])
 
   return (
     <div className="p-6 md:py-14 flex items-center justify-center flex-col text-slate-900">
-      <div className="max-w-3xl w-full">
-        <h1 className="text-2xl md:text-4xl font-bold">Найближчі аптеки</h1>
-        <h2 className="text-xl md:text-2xl font-semibold my-0.5">
-          Nearest pharmacies
-        </h2>
-        {locations.map((loc) => {
-          return (
-            <>
-              <h3 className="font-semibold">{loc.name}</h3>
-              <p>{loc.address}</p>
-              <p>{loc.contact}</p>
-            </>
-          )
-        })}
-        <hr className="my-6 md:my-10" />
-      </div>
+      {props.location && (
+        <div className="max-w-3xl w-full">
+          <h1 className="text-2xl md:text-4xl font-bold">Найближчі аптеки</h1>
+          <h2 className="text-xl md:text-2xl font-semibold my-0.5">
+            Nearest pharmacies
+          </h2>
+          {locations.map((loc) => {
+            return (
+              <>
+                <h3 className="font-semibold">{loc.name}</h3>
+                <p>{loc.address}</p>
+                <p>{loc.contact}</p>
+              </>
+            )
+          })}
+          <hr className="my-6 md:my-10" />
+        </div>
+      )}
 
       {content.map(({ id, header, subheader, type, content, last }) => {
         return (
