@@ -52,8 +52,10 @@ export const content = [
     subheader: 'співпрацюємо з',
     type: 'inline',
     content: [
-      `<a key="partner1" className="inline" href="https://www.fundacja-cukrzyca.pl"><img className="parnerLogo" src="https://www.fundacja-cukrzyca.pl/images/logo-cukrzyca.png"></a>`,
-      `<a key="partner2" className="inline" href="https://gdsc.community.dev/national-technical-university-of-ukraine-kyiv-polytechnic-institute-natsionalnii-tekhnichnii-universitet-ukrayini-kiyivskii-politekhnichnii-institut"><img className="parnerLogo" src="logos/gdsc.svg"></a>`,
+      `<a key="partner1" className="inline" href="https://www.fundacja-cukrzyca.pl"><img className="parnerLogo" src="images/fundacja_cukrzyca_logo.png"></a>`,
+      `<a key="partner2" className="inline" href="https://diabetyk.org.pl/"><img className="parnerLogo" src="images/psd_logo.png"></a>`,
+      `<a key="partner3" className="inline" href="https://gdsc.community.dev/national-technical-university-of-ukraine-kyiv-polytechnic-institute-natsionalnii-tekhnichnii-universitet-ukrayini-kiyivskii-politekhnichnii-institut"><img className="parnerLogo" src="images/gdsc_kiev_logo.svg"></a>`,
+      `<a key="partner4" className="inline" href="https://gdsc.community.dev/eindhoven-university-of-technology"><img className="parnerLogo" src="images/gdsc_eindhoven_logo.svg"></a>`,
     ],
     last: true
   },
