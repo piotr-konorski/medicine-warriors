@@ -8,8 +8,6 @@ export default function App() {
   const [open, setOpen] = useState(false)
   const toggle = () => setOpen(!open)
 
-  const [location, setLocation] = useState(null)
-
   useEffect(() => {
     let resizeTimer
     window.addEventListener('resize', () => {
@@ -24,29 +22,13 @@ export default function App() {
     }
   }, [])
 
-  useEffect(() => {
-    window.alert(
-      'Please enable location services to get the nearest pharmacies.'
-    )
-    if (navigator.geolocation) {
-      navigator.geolocation.getCurrentPosition((position) => {
-        setLocation({
-          lat: position.coords.latitude,
-          lng: position.coords.longitude,
-        })
-      })
-    } else {
-      // Browser doesn't support Geolocation
-      console.log("Browser doesn't support Geolocation")
-    }
-  }, [])
 
   return (
     <>
       <Navbar open={open} toggle={toggle} />
       <main className="pt-14">
-        <Map id="map" location={location} />
-        <Article location={location} />
+        <Map id="map" />
+        <Article />
         <Footer />
       </main>
     </>
