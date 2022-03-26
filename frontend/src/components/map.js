@@ -1,14 +1,12 @@
-import React, { useEffect, useRef, useState } from 'react'
+import React, { useState } from 'react'
+
 import {
   LoadScript,
   GoogleMap,
   InfoWindow,
   Marker,
   MarkerClusterer,
-  useGoogleMap,
 } from '@react-google-maps/api'
-import locationService from '../services/locations'
-import LocationButton from './location-button'
 
 import {
   get_gmaps_apikey,
@@ -17,9 +15,10 @@ import {
   MakeQuerablePromise,
 } from './helpers'
 
+import LocationButton from './locationButton'
+
 const Map = (props) => {
   const GMAPS_API_KEY = get_gmaps_apikey()
-
   const [markers, setMarkers] = useState([])
   const [activeMarker, setActiveMarker] = useState(null)
 
@@ -58,11 +57,11 @@ const Map = (props) => {
     navigator?.geolocation.getCurrentPosition(
       ({ coords: { latitude: lat, longitude: lng } }) => {
         const pos = { lat, lng }
-        console.log('current geolocation:', pos)
+        props.setLocation(pos)
 
         // set map accordingly
         map.setCenter(pos)
-        map.setZoom(11)
+        map.setZoom(15)
 
         console.log('TEST')
         // *********  DEV - testing Nearby *********
@@ -111,6 +110,19 @@ const Map = (props) => {
           on
         >
           <LocationButton localizeMe={localizeMe} />
+          {props.location && (
+            <Marker
+              position={props.location}
+              icon={{
+                fillColor: '#4285F4',
+                fillOpacity: 1,
+                path: window.google.maps.SymbolPath.CIRCLE,
+                scale: 8,
+                strokeColor: 'rgb(255,255,255)',
+                strokeWeight: 2,
+              }}
+            />
+          )}
           <MarkerClusterer
             styles={[
               {
