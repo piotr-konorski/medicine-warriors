@@ -37,13 +37,12 @@ code {
   font-weight: bolder;
 }
 
-
 .markerInfo {
-  color:rgb(7, 88, 7);
+  color: rgb(7, 88, 7);
 }
 
 .markerUrgentInfo {
-  color:crimson;
+  color: crimson;
 }
 
 .flex-item {
@@ -54,7 +53,7 @@ code {
 
 .parnerLogo {
   display: block;
-  max-height:100px;
+  max-height: 100px;
   width: auto;
   height: auto;
 }
