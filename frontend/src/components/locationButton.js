@@ -16,7 +16,7 @@ const LocationButton = ({ localizeMe }) => {
 
   return (
     <button
-      className="text-gray-400 hover:text-blue-600 bg-white rounded-sm m-2 text-[16px] p-2 transition-colors duration-100 ease-in-out"
+      className="text-blue-600 hover:text-blue-500 bg-white rounded-sm m-2 text-[16px] p-2 transition-colors duration-100 ease-in-out"
       ref={ref}
       onClick={() => localizeMe(map)}
     >
