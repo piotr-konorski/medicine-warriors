@@ -1,11 +1,14 @@
-import React, { useState } from 'react'
+import React, { useEffect, useRef, useState } from 'react'
 import {
   LoadScript,
   GoogleMap,
   InfoWindow,
   Marker,
   MarkerClusterer,
+  useGoogleMap,
 } from '@react-google-maps/api'
+import locationService from '../services/locations'
+import LocationButton from './location-button'
 
 import {
   get_gmaps_apikey,
@@ -19,19 +22,19 @@ const Map = (props) => {
 
   const [markers, setMarkers] = useState([])
   const [activeMarker, setActiveMarker] = useState(null)
-  
+
   // initial map center: roughly center of Ukraine
   const mapCenter = props.location ?? {
     lat: 49.339110578227455,
     lng: 31.602030139697213,
   }
 
-  const marker_types = ['pharmacy', 'storage', 'location_cukrzyca.pl'];
+  const marker_types = ['pharmacy', 'storage', 'location_cukrzyca.pl']
   const map_icons = {
-    'default': '/map_markers/blue_marker.png',
-    'pharmacy': '/map_markers/blue_marker.png',
-    'storage': '/map_markers/blue_marker.png',
-    'location_cukrzyca.pl': '/map_markers/green_marker.png'
+    default: '/map_markers/blue_marker.png',
+    pharmacy: '/map_markers/blue_marker.png',
+    storage: '/map_markers/blue_marker.png',
+    'location_cukrzyca.pl': '/map_markers/green_marker.png',
   }
 
   const handleActiveMarker = (marker_id) => {
@@ -43,49 +46,48 @@ const Map = (props) => {
 
   const onLoad = React.useCallback(function callback(map) {
     // get all locations
-    var locationsPromise = MakeQuerablePromise(getAllLocations())
+    const locationsPromise = MakeQuerablePromise(getAllLocations())
     locationsPromise.then(function (locations) {
       if (locations && locations !== 'undefined' && 'locations' in locations) {
         setMarkers(locations.locations)
       }
     })
-
-    // set geolocation
-    if (false) {
-      navigator?.geolocation.getCurrentPosition(
-        ({ coords: { latitude: lat, longitude: lng } }) => {
-          // const pos = { lat, lng };
-          const pos = { lat: 50.44682311508944, lng: 30.508645914869078 } // DEV - somewhere in Kyiv
-          console.log('current geolocation:', pos)
-
-          // set map accordingly
-          // map.setCenter(pos);
-          // map.setZoom(11)
-
-          // *********  DEV - testing Nearby *********
-          const distance = 5 // return locations within radius of {distance} kilometers
-          const limit_locations = 20 // return first {limit_locations} locations, sorted by distance
-          var locationsNearbyPromise = MakeQuerablePromise(
-            getLocationsNearby(pos, distance, limit_locations)
-          )
-          locationsNearbyPromise.then(function (locations) {
-            if (
-              locations &&
-              locations !== 'undefined' &&
-              'locations' in locations
-            ) {
-              console.log('locationsNearby:', locations.locations)
-              // setMarkers(locations.locations);
-            }
-          })
-          // *********  end: DEV - testing Nearby *********
-        },
-        function (positionError) {
-          console.log('- cannot get geolocation:', positionError)
-        }
-      )
-    }
   }, [])
+
+  const localizeMe = (map) => {
+    navigator?.geolocation.getCurrentPosition(
+      ({ coords: { latitude: lat, longitude: lng } }) => {
+        const pos = { lat, lng }
+        console.log('current geolocation:', pos)
+
+        // set map accordingly
+        map.setCenter(pos)
+        map.setZoom(11)
+
+        console.log('TEST')
+        // *********  DEV - testing Nearby *********
+        const distance = 5 // return locations within radius of {distance} kilometers
+        const limit_locations = 20 // return first {limit_locations} locations, sorted by distance
+        const locationsNearbyPromise = MakeQuerablePromise(
+          getLocationsNearby(pos, distance, limit_locations)
+        )
+        locationsNearbyPromise.then(function (locations) {
+          if (
+            locations &&
+            locations !== 'undefined' &&
+            'locations' in locations
+          ) {
+            console.log('locationsNearby:', locations.locations)
+            // setMarkers(locations.locations);
+          }
+        })
+        // *********  end: DEV - testing Nearby *********
+      },
+      function (positionError) {
+        console.log('- cannot get geolocation:', positionError)
+      }
+    )
+  }
 
   return (
     <div id={props.id} className="relative">
@@ -108,6 +110,7 @@ const Map = (props) => {
           }}
           on
         >
+          <LocationButton localizeMe={localizeMe} />
           <MarkerClusterer
             styles={[
               {
@@ -168,10 +171,9 @@ const Map = (props) => {
                 let locLng = marker.longitude
                 if (marker.google_latitude !== null)
                   locLng = marker.google_longitude
-                
+
                 let locType = marker.type
-                if (!marker_types.includes(locType))
-                  locType = "default";
+                if (!marker_types.includes(locType)) locType = 'default'
 
                 let locName = marker.name
                 if (marker.google_name !== null)
@@ -260,19 +262,21 @@ const Map = (props) => {
                             </div>
                           )}
 
-                          {locInfo && locInfo !== null &&
+                          {locInfo && locInfo !== null && (
                             <div>
-                              <br/>
+                              <br />
                               <p className="markerInfo">{locInfo}</p>
                             </div>
-                          }
+                          )}
 
-                          {locUrgentInfo && locUrgentInfo !== null &&
+                          {locUrgentInfo && locUrgentInfo !== null && (
                             <div>
-                              <br/>
-                              <p className="markerUrgentInfo">{locUrgentInfo}</p>
+                              <br />
+                              <p className="markerUrgentInfo">
+                                {locUrgentInfo}
+                              </p>
                             </div>
-                          }
+                          )}
                         </div>
                       </InfoWindow>
                     ) : null}
