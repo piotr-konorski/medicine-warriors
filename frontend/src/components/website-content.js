@@ -42,7 +42,8 @@ export const content = [
     subheader: 'About us',
     content: [
       `Ми - багатонаціональна команда молодих людей, натхненних ідеєю допомогти інсулінозалежним українцям, що опинились у скруті. Об’єднавшись задля досягнення цієї мети під час участі в Міжнародному хакатоні Code4Ukraine, ми розробили цей інформаційний ресурс, що надає найсвіжішу інформацію з офіційних джерел про наявність інсуліну в аптеках по всій Україні. Перемога у хакатоні не стала фінальним акордом в історії нашого проекту, а лише спонукала до ще активнішої роботи над його розвитком. Чим ми наразі й займаємось.`,
-      `<br /><a class="a_info" href="PressRelease.pdf">Більше інформації</a>`
+      // `<br /><a class="a_info" href="PressRelease.pdf">Більше інформації</a>`
+      `<br /><br />Більше інформації:&nbsp;&nbsp;<a class="a_info" href="PressReleaseUA.pdf">український</a>&nbsp;&nbsp;&nbsp;&nbsp;<a class="a_info" href="PressRelease.pdf">English</a>&nbsp;&nbsp;&nbsp;&nbsp;<a class="a_info" href="PressReleasePL.pdf">Polski</a>`
     ],
   },
 
