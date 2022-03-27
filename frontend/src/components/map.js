@@ -53,7 +53,7 @@ const Map = (props) => {
     })
   }, [])
 
-  const localizeMe = (map) => {
+  const localizeMe = (map, setStatus, status) => {
     navigator?.geolocation.getCurrentPosition(
       ({ coords: { latitude: lat, longitude: lng } }) => {
         const pos = { lat, lng }
@@ -86,6 +86,7 @@ const Map = (props) => {
         console.log('- cannot get geolocation:', positionError)
       }
     )
+    setStatus({ ...status, isLoading: false, isDone: true })
   }
 
   return (
