@@ -24,22 +24,6 @@ export default function App() {
     }
   }, [])
 
-  // useEffect(() => {
-  //   window.alert(
-  //     'Please enable location services to get the nearest pharmacies.'
-  //   )
-  //   if (navigator.geolocation) {
-  //     navigator.geolocation.getCurrentPosition((position) => {
-  //       setLocation({
-  //         lat: position.coords.latitude,
-  //         lng: position.coords.longitude,
-  //       })
-  //     })
-  //   } else {
-  //     // Browser doesn't support Geolocation
-  //     console.log("Browser doesn't support Geolocation")
-  //   }
-  // }, [])
 
   return (
     <>

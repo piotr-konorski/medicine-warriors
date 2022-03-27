@@ -11,7 +11,6 @@ import {
 import {
   get_gmaps_apikey,
   getAllLocations,
-  getLocationsNearby,
   MakeQuerablePromise,
 } from './helpers'
 
@@ -62,28 +61,9 @@ const Map = (props) => {
         // set map accordingly
         map.setCenter(pos)
         map.setZoom(15)
-
-        console.log('TEST')
-        // *********  DEV - testing Nearby *********
-        const distance = 5 // return locations within radius of {distance} kilometers
-        const limit_locations = 20 // return first {limit_locations} locations, sorted by distance
-        const locationsNearbyPromise = MakeQuerablePromise(
-          getLocationsNearby(pos, distance, limit_locations)
-        )
-        locationsNearbyPromise.then(function (locations) {
-          if (
-            locations &&
-            locations !== 'undefined' &&
-            'locations' in locations
-          ) {
-            console.log('locationsNearby:', locations.locations)
-            // setMarkers(locations.locations);
-          }
-        })
-        // *********  end: DEV - testing Nearby *********
       },
       function (positionError) {
-        console.log('- cannot get geolocation:', positionError)
+        console.log('Geolocation not available:', positionError)
       }
     )
     setStatus({ ...status, isLoading: false, isDone: true })
@@ -300,9 +280,9 @@ const Map = (props) => {
           </MarkerClusterer>
         </GoogleMap>
       </LoadScript>
-      <div className="absolute top-0 left-2 text-xs bg-gray-100 bg-opacity-80 px-2">
+      {/* <div className="absolute top-0 left-2 text-xs bg-gray-100 bg-opacity-80 px-2">
         Last Update: {'2022-03-25'}
-      </div>
+      </div> */}
     </div>
   )
 }

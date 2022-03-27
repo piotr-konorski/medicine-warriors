@@ -26,7 +26,7 @@ export default function Aricle(props) {
 
   return (
     <div className="p-6 md:py-14 flex items-center justify-center flex-col text-slate-900">
-      {props.location && (
+      {/* {props.location && (
         <div className="max-w-3xl w-full">
           <h1 className="text-2xl md:text-4xl font-bold">Найближчі аптеки</h1>
           <h2 className="text-xl md:text-2xl font-semibold my-0.5">
@@ -43,7 +43,7 @@ export default function Aricle(props) {
           })}
           <hr className="my-6 md:my-10" />
         </div>
-      )}
+      )} */}
 
       {content.map(({ id, header, subheader, type, content, last }) => {
         return (
