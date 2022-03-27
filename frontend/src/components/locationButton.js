@@ -11,6 +11,7 @@ const LocationButton = ({ localizeMe }) => {
   const [status, setStatus] = useState({
     isLoading: false,
     isDone: false,
+    isError: false,
   })
   const ref = useRef()
   useEffect(() => {
@@ -24,8 +25,12 @@ const LocationButton = ({ localizeMe }) => {
   return (
     <button
       className={`${
-        status.isDone ? 'text-blue-700' : 'text-gray-400'
-      } hover:text-blue-600 bg-white rounded-sm m-2 text-[16px] p-2 transition-colors duration-100 ease-in-out`}
+        status.isDone && !status.isError
+          ? 'text-blue-600'
+          : status.isError
+          ? 'text-red-500'
+          : 'text-gray-400'
+      } hover:text-blue-500 bg-white rounded-sm m-2 text-[16px] p-2 transition-colors duration-100 ease-in-out`}
       ref={ref}
       onClick={() => {
         setStatus({ ...status, isLoading: true })

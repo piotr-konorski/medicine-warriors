@@ -15,6 +15,7 @@ import {
 } from './helpers'
 
 import LocationButton from './locationButton'
+import CurrentLocation from './currentLocation'
 
 const Map = (props) => {
   const GMAPS_API_KEY = get_gmaps_apikey()
@@ -59,11 +60,13 @@ const Map = (props) => {
         props.setLocation(pos)
 
         // set map accordingly
-        map.setCenter(pos)
+        map.panTo(pos)
         map.setZoom(15)
       },
       function (positionError) {
         console.log('Geolocation not available:', positionError)
+        setStatus({ ...status, isLoading: false, isError: true })
+        window.alert('Geolocation not available')
       }
     )
     setStatus({ ...status, isLoading: false, isDone: true })
@@ -91,19 +94,7 @@ const Map = (props) => {
           on
         >
           <LocationButton localizeMe={localizeMe} />
-          {props.location && (
-            <Marker
-              position={props.location}
-              icon={{
-                fillColor: '#4285F4',
-                fillOpacity: 1,
-                path: window.google.maps.SymbolPath.CIRCLE,
-                scale: 8,
-                strokeColor: 'rgb(255,255,255)',
-                strokeWeight: 2,
-              }}
-            />
-          )}
+          {props.location && <CurrentLocation location={props.location} />}
           <MarkerClusterer
             styles={[
               {
