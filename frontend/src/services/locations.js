@@ -6,6 +6,16 @@ function get_api_url() {
   }
 }
 
+
+async function getLastUpdate() {
+  const api_url = get_api_url()
+  const url_endpoint = `${api_url}/lastUpdate`
+  const response = await fetch( url_endpoint )
+  const data_json = await response.json()
+  return data_json;
+}
+
+
 async function getAll() {
   const api_url = get_api_url()
   const url_endpoint = `${api_url}/locations`
@@ -60,6 +70,7 @@ function getAll_test_v2() {
 }
 
 const exportedObject = {
+  getLastUpdate,
   getAll,
   getNearby,
   getAll_test_v2

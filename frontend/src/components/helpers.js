@@ -8,10 +8,19 @@ export const get_gmaps_apikey = () => {
   }
 }
 
+export const getLastUpdate = async () => {
+  try {
+    const lastUpdate = await locationService.getLastUpdate()
+    return lastUpdate
+  } catch (reason) {
+    console.log('Error - request: ' + reason)
+    return
+  }
+}
+
 export const getAllLocations = async () => {
   try {
     const locations = await locationService.getAll()
-    // const locations = locationService.getAll_test_v2()  // ---- dev ----
     return locations
   } catch (reason) {
     console.log('Error - request: ' + reason)

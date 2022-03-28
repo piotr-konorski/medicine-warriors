@@ -10,6 +10,7 @@ import {
 
 import {
   get_gmaps_apikey,
+  getLastUpdate,
   getAllLocations,
   MakeQuerablePromise,
 } from './helpers'
@@ -51,6 +52,17 @@ const Map = (props) => {
         setMarkers(locations.locations)
       }
     })
+
+    // set lastUpdated info
+    const lastUpdatePromise = MakeQuerablePromise(getLastUpdate())
+    lastUpdatePromise.then(function (lastUpdate) {
+      if (lastUpdate && lastUpdate !== 'undefined' && 'last_update' in lastUpdate) {
+        const lastUpdateTxt = lastUpdate.last_update;
+        var lastUpdateStatus = document.getElementById('lastUpdateStatus');
+        lastUpdateStatus.innerHTML = `Останнє оновлення: ${lastUpdateTxt}`;
+      }
+    })
+
   }, [])
 
   const localizeMe = (map, setStatus, status) => {
@@ -96,6 +108,7 @@ const Map = (props) => {
         >
           <LocationButton localizeMe={localizeMe} />
           {props.location && <CurrentLocation location={props.location} />}
+          
           <MarkerClusterer
             styles={[
               {
@@ -272,9 +285,9 @@ const Map = (props) => {
           </MarkerClusterer>
         </GoogleMap>
       </LoadScript>
-      {/* <div className="absolute top-0 left-2 text-xs bg-gray-100 bg-opacity-80 px-2">
-        Last Update: {'2022-03-25'}
-      </div> */}
+
+      <div id="lastUpdateStatus" className="absolute top-0 right-1 text-l text-red-700 font-semibold bg-gray-100 bg-opacity-80 px-2" />
+
     </div>
   )
 }

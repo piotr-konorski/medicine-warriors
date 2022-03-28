@@ -37,6 +37,27 @@ appRouter.get( '/locations_v2_test', function( req, res ) {
   res.json({ code: 'success', locations: locations_v2_test })
 })
 
+
+// last data update
+appRouter.get( '/lastUpdate', async function( req, res, next ) {
+  let date_ob = new Date();
+  
+  // current date
+  // adjust 0 before single digit date
+  let day = ("0" + date_ob.getDate()).slice(-2);
+
+  // current month
+  let month = ("0" + (date_ob.getMonth() + 1)).slice(-2);
+
+  // current year
+  let year = date_ob.getFullYear();
+
+  // respond text
+  last_update_date = `${year}-${month}-${day}`;
+  res.json({ code: 'success', last_update: last_update_date });
+})
+
+
 // DB: locations        // id,name,address,contact,longitude,latitude,type,status,google_place_id,google_latitude,google_longitude,google_name,google_address,google_formatted_phone_number,google_international_phone_number,google_map_url,google_url
 appRouter.get( '/locations', async function( req, res, next ) {
   try{
