@@ -5,6 +5,7 @@ export const content = [
     subheader: 'Map',
     content: [
       `На карті зазначені аптеки, про наявність інсуліну в яких йдеться в публікаціях Міністерства охорони здоров’я. Перелік відкритих аптек може змінюватися з огляду на питання безпеки роботи закладів за конкретними адресами. Ми активно працюємо над тим, щоб перевіряти актуальність інформації, додавати нові джерела та реалізувати можливість отримувати достовірні дані від вас – наших користувачів. Втім, на даний момент ми не можемо стовідсотково гарантувати наявність ліків у тій чи іншій локації. Тому перед тим як звернутись до найближчої до вас аптеки, радимо зателефонувати до неї, щоб дізнатися години її роботи та уточнити наявність інсуліну.`,
+      `<br /><br />Шановні користувачі! Функція пошуку найближчих аптек може працювати лише за умови увімкненої геолокації на Вашому пристрої та надання у браузері спеціального дозволу Вами після натискання на кнопку в правому нижньому куті карти. Ми розуміємо, наскільки важливою та цінною для кожного сьогодні є персональна інформація, тому хочемо запевнити, що не збираємо та нікуди не передаємо дані про Ваше місцезнаходження.`,
     ],
   },
 
@@ -52,10 +53,12 @@ export const content = [
     subheader: 'співпрацюємо з',
     type: 'inline',
     content: [
-      `<a key="partner1" className="inline" href="https://www.fundacja-cukrzyca.pl"><img className="parnerLogo" src="images/fundacja_cukrzyca_logo.png"></a>`,
-      `<a key="partner2" className="inline" href="https://diabetyk.org.pl/"><img className="parnerLogo" src="images/psd_logo.png"></a>`,
-      `<a key="partner3" className="inline" href="https://gdsc.community.dev/national-technical-university-of-ukraine-kyiv-polytechnic-institute-natsionalnii-tekhnichnii-universitet-ukrayini-kiyivskii-politekhnichnii-institut"><img className="parnerLogo" src="images/gdsc_kiev_logo.svg"></a>`,
-      `<a key="partner4" className="inline" href="https://gdsc.community.dev/eindhoven-university-of-technology"><img className="parnerLogo" src="images/gdsc_eindhoven_logo.svg"></a>`,
+      `<a key="partner1" className="inline" href="https://www.fundacja-cukrzyca.pl"><img className="parnerLogo" src="images/logo_fundacja_cukrzyca.png"></a>`,
+      `<a key="partner2" className="inline" href="https://diabetyk.org.pl/"><img className="parnerLogo" src="images/logo_psd.png"></a>`,
+      `<a key="partner3" className="inline" href="https://gdsc.community.dev/national-technical-university-of-ukraine-kyiv-polytechnic-institute-natsionalnii-tekhnichnii-universitet-ukrayini-kiyivskii-politekhnichnii-institut"><img className="parnerLogo" src="images/logo_gdsc_kiev.svg"></a>`,
+      `<a key="partner4" className="inline" href="https://gdsc.community.dev/eindhoven-university-of-technology"><img className="parnerLogo" src="images/logo_gdsc_eindhoven.svg"></a>`,
+      // `<br key="br" />`,
+      // `<a key="partner5" className="inline" href="https://mojacukrzyca.org/"><img className="parnerLogo" src="images/logo_mojacukrzycaorg.png"></a>`,
     ],
     last: true
   },
