@@ -45,7 +45,7 @@ export default function Aricle(props) {
         </div>
       )} */}
 
-      {content.map(({ id, header, subheader, type, content, last }) => {
+      {content.map(({ id, header, subheader, type, content, omitSeparator }) => {
         return (
           <div key={id} id={id} className="max-w-3xl w-full">
             <h1 className="text-2xl md:text-4xl font-bold">
@@ -67,7 +67,7 @@ export default function Aricle(props) {
             )}
 
             {/* horizonal bar */}
-            {!last && <hr className="my-6 md:my-10" />}
+            {!omitSeparator && <hr className="my-6 md:my-10" />}
           </div>
         )
       })}

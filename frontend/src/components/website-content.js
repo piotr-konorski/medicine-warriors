@@ -48,18 +48,29 @@ export const content = [
   },
 
   {
-    id: 'partners',
+    id: 'partners1',
     header: 'Партнери',
     subheader: 'співпрацюємо з',
     type: 'inline',
     content: [
-      `<a key="partner1" className="inline" href="https://www.fundacja-cukrzyca.pl"><img className="parnerLogo" src="images/logo_fundacja_cukrzyca.png"></a>`,
-      `<a key="partner2" className="inline" href="https://diabetyk.org.pl/"><img className="parnerLogo" src="images/logo_psd.png"></a>`,
-      `<a key="partner3" className="inline" href="https://gdsc.community.dev/national-technical-university-of-ukraine-kyiv-polytechnic-institute-natsionalnii-tekhnichnii-universitet-ukrayini-kiyivskii-politekhnichnii-institut"><img className="parnerLogo" src="images/logo_gdsc_kiev.svg"></a>`,
-      `<a key="partner4" className="inline" href="https://gdsc.community.dev/eindhoven-university-of-technology"><img className="parnerLogo" src="images/logo_gdsc_eindhoven.svg"></a>`,
-      // `<br key="br" />`,
-      // `<a key="partner5" className="inline" href="https://mojacukrzyca.org/"><img className="parnerLogo" src="images/logo_mojacukrzycaorg.png"></a>`,
+      `<a key="partner1_0" className="inline" href="https://udiabetesf.wordpress.com/"><img className="parnerLogo" src="images/logo_udf.jpeg"></a>`,
+      `<a key="partner1_1" className="inline" href="https://www.fundacja-cukrzyca.pl"><img className="parnerLogo" src="images/logo_fundacja_cukrzyca.png"></a>`,
+      `<a key="partner1_2" className="inline" href="https://diabetyk.org.pl/"><img className="parnerLogo" src="images/logo_psd.png"></a>`,
     ],
-    last: true
+    omitSeparator: true
   },
+
+  {
+    id: 'partners2',
+    header: '',
+    subheader: '',
+    type: 'inline',
+    content: [
+      `<a key="partner2_1" className="inline" href="https://mojacukrzyca.org/"><img className="parnerLogo" src="images/logo_mojacukrzycaorg.png"></a>`,
+      `<a key="partner2_2" className="inline" href="https://gdsc.community.dev/national-technical-university-of-ukraine-kyiv-polytechnic-institute-natsionalnii-tekhnichnii-universitet-ukrayini-kiyivskii-politekhnichnii-institut"><img className="parnerLogo" src="images/logo_gdsc_kiev.svg"></a>`,
+      `<a key="partner2_3" className="inline" href="https://gdsc.community.dev/eindhoven-university-of-technology"><img className="parnerLogo" src="images/logo_gdsc_eindhoven.svg"></a>`,
+    ],
+    omitSeparator: true
+  },
+
 ]
