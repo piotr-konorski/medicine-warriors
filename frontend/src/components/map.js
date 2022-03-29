@@ -74,15 +74,14 @@ const Map = (props) => {
         // set map accordingly
         map.panTo(pos)
         map.setZoom(15)
-        setStatus({ ...status, isError: false, isDone: true })
+        setStatus({ ...status, isLoading: false, isError: false, isDone: true })
       },
       function (positionError) {
         console.log('Geolocation not available:', positionError)
-        setStatus({ ...status, isError: true, isDone: false })
+        setStatus({ ...status, isLoading: false, isError: true, isDone: false })
         window.alert('Geolocation not available')
       }
     )
-    setStatus({ ...status, isLoading: false})
   }
 
   return (
