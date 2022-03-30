@@ -1,4 +1,5 @@
 import React, { useState } from 'react'
+import parse from 'html-react-parser'
 
 import {
   LoadScript,
@@ -179,10 +180,20 @@ const Map = (props) => {
                 let locAddress = marker.address
                 if (marker.google_address !== null)
                   locAddress = marker.google_address
+                
+                // handle special location without address - Cukrzyca.pl
+                if (locAddress.includes('_location_')) locAddress = null
 
                 let locContact = null
                 if (marker.contact !== null)
                   locContact = 'Contact: ' + marker.contact
+                if (marker.contact_type !== null) {
+                  locContact = `Contact: ${marker.contact_type}`
+                  if (marker.contact_person !== null)
+                    locContact += `<br /> ${marker.contact_person}`
+                  if (marker.contact_phone !== null)
+                    locContact += `<br /> ${marker.contact_phone}`
+                }
 
                 let locTel = null
                 if (marker.google_international_phone_number !== null)
@@ -195,10 +206,19 @@ const Map = (props) => {
                   locMapUrl = marker.google_map_url
 
                 let locUrl = null
-                if (marker.google_url !== null) locUrl = marker.google_url
+                if (marker.google_url !== null && marker.google_url !== '') locUrl = marker.google_url
+                if (marker.website_link !== null && marker.website_link !== '') locUrl = marker.website_link
 
-                let locInfo = marker.info
-                let locUrgentInfo = marker.urgent_info
+                let locInfo = null
+                if (marker.info !== null)
+                  locInfo = marker.info
+
+                let locUrgentInfo = null
+                if (marker.urgent_info !== null)
+                  locUrgentInfo = marker.urgent_info
+                
+                if (marker.last_transport !== null)
+                  locUrgentInfo = `Останній транспорт інсуліну: ${marker.last_transport}`
 
                 return (
                   <Marker
@@ -230,7 +250,7 @@ const Map = (props) => {
                         <div>
                           <h1 className="h1_info">{locName}</h1>
                           {locAddress}
-                          {locContact !== null && <div>{locContact}</div>}
+                          {locContact !== null && <div><br />{parse(locContact)}</div>}
 
                           {locTel !== null && (
                             <div>

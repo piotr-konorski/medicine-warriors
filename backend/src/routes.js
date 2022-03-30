@@ -66,7 +66,7 @@ appRouter.get( '/locations', async function( req, res, next ) {
       .then(async client => {
         try {
           const db_response = await client
-            .query('SELECT * FROM locations_v2');
+            .query('SELECT * FROM locations_v3');
           client.release();
           res.json({ code: 'success', locations: db_response.rows });
         } catch (err_client) {
