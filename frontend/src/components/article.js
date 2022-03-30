@@ -36,7 +36,7 @@ export default function Aricle(props) {
                                 text-base text-gray-800 text-left bg-white border-0 rounded-none transition focus:outline-none"
                       type="button" data-bs-toggle="collapse" data-bs-target="#flush-collapseTwo"
                       aria-expanded="false" aria-controls="flush-collapseTwo">
-                Найближчі аптеки - стіл
+                Найближчі аптеки - перелік
               </button>
             </h2>
             <div id="flush-collapseTwo" className="accordion-collapse border-0 collapse" aria-labelledby="flush-headingTwo"
