@@ -45,7 +45,7 @@ export default function Aricle(props) {
                 {locations.map((loc) => {
                 return (
                   <div key={loc.id}>
-                    <h3 className="font-semibold">{loc.name}</h3>
+                    <h3 className="font-semibold">{loc.name} ({parseFloat(loc.distance).toFixed(1)} km)</h3>
                     <p>{loc.address}</p>
                     <p>{loc.contact}</p>
                   </div>
