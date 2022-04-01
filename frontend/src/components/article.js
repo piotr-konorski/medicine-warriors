@@ -31,7 +31,7 @@ export default function Aricle(props) {
       {/* legend */}
       {legendItems &&
       (
-        <div className="flex flex-item">
+        <div className="max-w-3xl w-full md:flex flex-item">
           {legendItems.map(({ id, image, alt, title }) => {
             return (
               <div key={id} className="max-h-full flex flex-row items-center text-xs w-full">
