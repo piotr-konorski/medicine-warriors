@@ -38,7 +38,7 @@ appRouter.get( '/locations_v2_test', function( req, res ) {
 })
 
 
-// last data update
+// last data update  - TODO: quick fix! currently manually updated every day -> automate!
 appRouter.get( '/lastUpdate', async function( req, res, next ) {
   let date_ob = new Date();
   

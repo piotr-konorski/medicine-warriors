@@ -1,4 +1,5 @@
 import { content } from './website-content'
+import { legendItems } from './legend-items'
 import parse from 'html-react-parser'
 import { useState, useEffect } from 'react'
 import { getLocationsNearby, MakeQuerablePromise } from './helpers'
@@ -25,7 +26,26 @@ export default function Aricle(props) {
   }, [props.location])
 
   return (
-    <div className="p-6 md:py-4 flex items-center justify-center flex-col text-slate-900">
+    <div className="p-6 md:py-1 flex items-center justify-center flex-col text-slate-900">
+      
+      {/* legend */}
+      {legendItems &&
+      (
+        <div className="flex flex-item">
+          {legendItems.map(({ id, image, alt, title }) => {
+            return (
+              <div key={id} className="max-h-full flex flex-row items-center text-xs w-full">
+                <img
+                  className="max-h-full max-w-[50px] w-auto h-auto"
+                  src={image}
+                  alt={alt}
+                />
+                <span className="text-slate-900">{title}</span>
+              </div>
+            )
+          })}
+        </div>
+      )}
 
       {/* accordeon with table of nearby locations */}
       {props.location && (
