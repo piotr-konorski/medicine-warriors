@@ -70,6 +70,7 @@ const Map = (props) => {
     navigator?.geolocation.getCurrentPosition(
       ({ coords: { latitude: lat, longitude: lng } }) => {
         const pos = { lat, lng }
+        // const pos = { lat: 49.8396820, lng: 24.0297150 }  // DEV: center of Lviv
         props.setLocation(pos)
 
         // set map accordingly

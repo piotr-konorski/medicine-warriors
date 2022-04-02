@@ -63,11 +63,27 @@ export default function Aricle(props) {
               data-bs-parent="#accordionFlushExample">
               <div className="accordion-body py-4 px-5">
                 {locations.map((loc) => {
+                  let locAddress = loc.address
+                  if (locAddress.includes('_location_')) {
+                    locAddress = locAddress.split('_')[0];
+                  }
+
+                  let locContact = null
+                  if (loc.contact !== null && loc.contact !== undefined)
+                    locContact = loc.contact
+                  if (loc.contact_type !== null && loc.contact_type !== undefined) {
+                    locContact = loc.contact_type
+                    if (loc.contact_person !== null && loc.contact_person !== undefined)
+                      locContact += ` : ${loc.contact_person}`
+                    if (loc.contact_phone !== null && loc.contact_phone !== undefined)
+                      locContact += ` (${loc.contact_phone})`
+                  }
+
                 return (
                   <div key={loc.id}>
                     <h3 className="font-semibold">{loc.name} ({parseFloat(loc.distance).toFixed(1)} km)</h3>
-                    <p>{loc.address}</p>
-                    <p>{loc.contact}</p>
+                    <p>{locAddress}</p>
+                    {locContact !== null && <p>{locContact}</p>}
                   </div>
                 )
                 })}

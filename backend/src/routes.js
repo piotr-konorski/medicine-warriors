@@ -97,7 +97,7 @@ appRouter.post( '/locationsNearby', async function( req, res, next ) {
   // prepare query
   const query = `SELECT * from (
                     SELECT  *, calculate_distance(${query_latitude}, ${query_longitude}, latitude, longitude, 'K') AS distance 
-                    FROM locations_v2
+                    FROM locations_v3
                    ) al
                 where distance < ${query_distance}
                 ORDER BY distance
