@@ -63,13 +63,13 @@ export default function Aricle(props) {
               data-bs-parent="#accordionFlushExample">
               <div className="accordion-body py-4 px-5">
 
-                <table className="table-auto md:table-fixed">
+                <table className="table-auto md:table-fixed text-xs">
                   <thead>
                     <tr>
-                      <th>Distance</th>
-                      <th>Name</th>
-                      <th>Address</th>
-                      <th>Contact</th>
+                      <th>Відстань</th>
+                      <th>Назва аптеки</th>
+                      <th>Адреса</th>
+                      <th>Контакти</th>
                     </tr>
                   </thead>
                   <tbody>
