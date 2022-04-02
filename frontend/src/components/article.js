@@ -62,31 +62,46 @@ export default function Aricle(props) {
             <div id="flush-collapseTwo" className="accordion-collapse border-0 collapse" aria-labelledby="flush-headingTwo"
               data-bs-parent="#accordionFlushExample">
               <div className="accordion-body py-4 px-5">
-                {locations.map((loc) => {
-                  let locAddress = loc.address
-                  if (locAddress.includes('_location_')) {
-                    locAddress = locAddress.split('_')[0];
-                  }
 
-                  let locContact = null
-                  if (loc.contact !== null && loc.contact !== undefined)
-                    locContact = loc.contact
-                  if (loc.contact_type !== null && loc.contact_type !== undefined) {
-                    locContact = loc.contact_type
-                    if (loc.contact_person !== null && loc.contact_person !== undefined)
-                      locContact += ` : ${loc.contact_person}`
-                    if (loc.contact_phone !== null && loc.contact_phone !== undefined)
-                      locContact += ` (${loc.contact_phone})`
-                  }
+                <table className="table-auto md:table-fixed">
+                  <thead>
+                    <tr>
+                      <th>Distance</th>
+                      <th>Name</th>
+                      <th>Address</th>
+                      <th>Contact</th>
+                    </tr>
+                  </thead>
+                  <tbody>
 
-                return (
-                  <div key={loc.id}>
-                    <h3 className="font-semibold">{loc.name} ({parseFloat(loc.distance).toFixed(1)} km)</h3>
-                    <p>{locAddress}</p>
-                    {locContact !== null && <p>{locContact}</p>}
-                  </div>
-                )
-                })}
+                    {locations.map((loc) => {
+                      let locAddress = loc.address
+                      if (locAddress.includes('_location_')) {
+                        locAddress = locAddress.split('_')[0];
+                      }
+
+                      let locContact = null
+                      if (loc.contact !== null && loc.contact !== undefined)
+                        locContact = loc.contact
+                      if (loc.contact_type !== null && loc.contact_type !== undefined) {
+                        locContact = loc.contact_type
+                        if (loc.contact_person !== null && loc.contact_person !== undefined)
+                          locContact += ` : ${loc.contact_person}`
+                        if (loc.contact_phone !== null && loc.contact_phone !== undefined)
+                          locContact += ` (${loc.contact_phone})`
+                      }
+
+                      return (
+                        <tr key={loc.id} className="hover:bg-gray-200">
+                          <td className="border border-slate-300">{parseFloat(loc.distance).toFixed(1)} km</td>
+                          <td className="border border-slate-300">{loc.name}</td>
+                          <td className="border border-slate-300">{locAddress}</td>
+                          <td className="border border-slate-300">{locContact !== null && locContact}</td>
+                        </tr>
+                      )
+                    })}
+                  </tbody>
+                </table>
               </div>
             </div>
           </div>
