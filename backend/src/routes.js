@@ -66,7 +66,7 @@ appRouter.get( '/locations', async function( req, res, next ) {
       .then(async client => {
         try {
           const db_response = await client
-            .query('SELECT * FROM locations_v3');
+            .query('SELECT * FROM locations_v4');
           client.release();
           res.json({ code: 'success', locations: db_response.rows });
         } catch (err_client) {
@@ -97,7 +97,7 @@ appRouter.post( '/locationsNearby', async function( req, res, next ) {
   // prepare query
   const query = `SELECT * from (
                     SELECT  *, calculate_distance(${query_latitude}, ${query_longitude}, latitude, longitude, 'K') AS distance 
-                    FROM locations_v3
+                    FROM locations_v4
                    ) al
                 where distance < ${query_distance}
                 ORDER BY distance

@@ -30,12 +30,11 @@ const Map = (props) => {
     lng: 31.602030139697213,
   }
 
-  const marker_types = ['pharmacy', 'storage', 'location_cukrzyca.pl']
   const map_icons = {
     default: '/map_markers/blue_marker.png',
     pharmacy: '/map_markers/blue_marker.png',
     storage: '/map_markers/blue_marker.png',
-    'location_cukrzyca.pl': '/map_markers/green_marker.png',
+    'fundacja-cukrzyca.pl': '/map_markers/green_marker.png',
   }
 
   const handleActiveMarker = (marker_id) => {
@@ -162,71 +161,43 @@ const Map = (props) => {
             maxZoom={17}
           >
             {(clusterer) =>
-              markers.map((marker) => {
-                let locLat = marker.latitude
-                if (marker.google_latitude !== null)
-                  locLat = marker.google_latitude
-
-                let locLng = marker.longitude
-                if (marker.google_latitude !== null)
-                  locLng = marker.google_longitude
-
+              markers.filter(function(marker) {
+                if (!marker.operational) {
+                  return false;
+                }
+                return true;
+              }).map((marker) => {
                 let locType = marker.type
-                if (!marker_types.includes(locType)) locType = 'default'
-
-                let locName = marker.name
-                if (marker.google_name !== null)
-                  locName = locName + ' (' + marker.google_name + ')'
-
-                let locAddress = marker.address
-                if (marker.google_address !== null)
-                  locAddress = marker.google_address
-                
-                // handle special location without address - Cukrzyca.pl
-                if (locAddress.includes('_location_')) locAddress = null
+                if (!(locType in map_icons)) locType = 'default'
 
                 let locContact = null
-                if (marker.contact !== null)
-                  locContact = 'Contact: ' + marker.contact
-                if (marker.contact_type !== null) {
-                  locContact = `Contact: ${marker.contact_type}`
-                  if (marker.contact_person !== null)
-                    locContact += `<br /> ${marker.contact_person}`
-                  if (marker.contact_phone !== null)
-                    locContact += `<br /> ${marker.contact_phone}`
-                }
+                if (marker.contact_name !== null)
+                  locContact = 'Contact: ' + marker.contact_name
+                if (marker.contact_type !== null)
+                  locContact += `(${marker.contact_type})`
 
                 let locTel = null
-                if (marker.google_international_phone_number !== null)
-                  locTel = 'tel:' + marker.google_international_phone_number
-                else if (marker.google_formatted_phone_number !== null)
-                  locTel = 'tel:' + marker.google_formatted_phone_number
+                if (marker.contact_phones !== null) {
+                  locTel = marker.contact_phones.split(';')
+                }
 
                 let locMapUrl = null
                 if (marker.google_map_url !== null)
                   locMapUrl = marker.google_map_url
 
                 let locUrl = null
-                if (marker.google_url !== null && marker.google_url !== '') locUrl = marker.google_url
-                if (marker.website_link !== null && marker.website_link !== '') locUrl = marker.website_link
+                if (marker.www !== null && marker.www !== '') locUrl = marker.www
 
-                let locInfo = null
-                if (marker.info !== null)
-                  locInfo = marker.info
-
-                let locUrgentInfo = null
-                if (marker.urgent_info !== null)
-                  locUrgentInfo = marker.urgent_info
-                
-                if (marker.last_transport !== null)
-                  locUrgentInfo = `Останній транспорт інсуліну: ${marker.last_transport}`
+                let last_resupplyInfo = null
+                if (marker.last_resupply !== null)
+                last_resupplyInfo = `Останній транспорт інсуліну: ${marker.last_resupply}`
 
                 return (
                   <Marker
                     key={marker.id}
                     position={{
-                      lat: parseFloat(locLat),
-                      lng: parseFloat(locLng),
+                      lat: parseFloat(marker.latitude),
+                      lng: parseFloat(marker.longitude),
                     }}
                     clusterer={clusterer}
                     icon={{
@@ -249,15 +220,14 @@ const Map = (props) => {
                         }}
                       >
                         <div>
-                          <h1 className="h1_info">{locName}</h1>
-                          {locAddress}
+                          <h1 className="h1_info">{marker.name}</h1>
+                          {marker.address}
                           {locContact !== null && <div><br />{parse(locContact)}</div>}
 
                           {locTel !== null && (
                             <div>
-                              <a className="a_info" href={locTel}>
-                                {locTel}
-                              </a>
+                              tel:{' '}
+                              {locTel.map((tel, i) => <a key={i} className="a_info" href={'tel:'+tel}>{tel}</a>)}
                             </div>
                           )}
                           {locMapUrl !== null && (
@@ -280,18 +250,11 @@ const Map = (props) => {
                             </div>
                           )}
 
-                          {locInfo && locInfo !== null && (
-                            <div>
-                              <br />
-                              <p className="markerInfo">{locInfo}</p>
-                            </div>
-                          )}
-
-                          {locUrgentInfo && locUrgentInfo !== null && (
+                          {last_resupplyInfo && last_resupplyInfo !== null && (
                             <div>
                               <br />
                               <p className="markerUrgentInfo">
-                                {locUrgentInfo}
+                                {last_resupplyInfo}
                               </p>
                             </div>
                           )}
