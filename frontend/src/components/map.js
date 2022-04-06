@@ -97,7 +97,7 @@ const Map = (props) => {
           options={{
             minZoom: 6,
             gestureHandling: 'cooperative',
-            zoomControl: false,
+            zoomControl: true,
             mapTypeControl: false,
             scaleControl: false,
             streetViewControl: false,
