@@ -32,6 +32,11 @@ code {
   color: blue;
 }
 
+.txt_important {
+  color: rgb(145, 25, 7);
+  font-weight: 600;
+}
+
 .h1_info {
   font-size: larger;
   font-weight: bolder;
