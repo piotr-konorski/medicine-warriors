@@ -1,7 +1,7 @@
 export const options = [
   {
     name: 'Карта',
-    id: 'map',
+    id: 'map-description',
   },
   {
     name: 'інсулін',
