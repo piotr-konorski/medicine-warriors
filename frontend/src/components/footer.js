@@ -12,39 +12,43 @@ export default function Footer() {
         <a
           href="https://www.facebook.com/MedicineWarriors.org"
           className="hover:text-gray-200"
+          target="_blank"
+          rel="noreferrer"
         >
           <FontAwesomeIcon icon={faFacebookSquare} size="lg" />
         </a>
         <a
           href="https://instagram.com/MedicineWarriors"
           className="hover:text-gray-200"
+          target="_blank"
+          rel="noreferrer"
         >
           <FontAwesomeIcon icon={faInstagramSquare} size="lg" />
         </a>
         <a
           href="https://github.com/rupikon/Medicine-Warriors"
           className="hover:text-gray-200"
+          target="_blank"
+          rel="noreferrer"
         >
           <FontAwesomeIcon icon={faGithub} size="lg" />
         </a>
       </div>
 
       <footer className="px-6 py-12 text-center bg-slate-800 text-white flex flex-col justify-center items-center bottom-0">
-        <a href="https://medicinewarriors.org">
-          <h1 className="text-xl md:text-2xl font-bold ">Medicine Warriors</h1>
-          <h2 className="text-bg md:text-xl font-semibold">
-            На варті Вашого здоров'я!
-          </h2>
-          <h3 className="text-md md:text-bg font-medium">
-            We are guarding your health!
-          </h3>
-        </a>
+        <h1 className="text-xl md:text-2xl font-bold ">Medicine Warriors</h1>
+        <h2 className="text-bg md:text-xl font-semibold">
+          На варті Вашого здоров'я!
+        </h2>
+        <h3 className="text-md md:text-bg font-medium">
+          We are guarding your health!
+        </h3>
 
         <br />
         <small>
           <div className="flex">
             Powered by&nbsp;
-            <a className="inline" href="https://cloudlets.zone">
+            <a className="inline" target="_blank" rel="noreferrer" href="https://cloudlets.zone">
               Cloudlets.Zone
             </a>
           </div>
