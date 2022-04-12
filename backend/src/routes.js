@@ -44,10 +44,8 @@ appRouter.get( '/locations_v2_test', function( req, res ) {
 // last data update  - TODO: quick fix! currently manually updated every day -> automate!
 appRouter.get( '/lastUpdate', async function( req, res, next ) {
   const token = req.headers['token'];
-  console.log('token:', token);
-  console.log('apiToken:', apiToken);
-  // if (!token || token != apiToken)
-  //   return res.status(403).send({ auth: false, message: 'No correct token provided.' });
+  if (!token || token != apiToken)
+    return res.status(403).send({ auth: false, message: 'No correct token provided.' });
 
   let date_ob = new Date();
   
@@ -70,8 +68,8 @@ appRouter.get( '/lastUpdate', async function( req, res, next ) {
 // DB: locations        // id,name,address,contact,longitude,latitude,type,status,google_place_id,google_latitude,google_longitude,google_name,google_address,google_formatted_phone_number,google_international_phone_number,google_map_url,google_url
 appRouter.get( '/locations', async function( req, res, next ) {
   const token = req.headers['token'];
-  // if (!token || token != apiToken)
-  //   return res.status(403).send({ auth: false, message: 'No correct token provided.' });
+  if (!token || token != apiToken)
+    return res.status(403).send({ auth: false, message: 'No correct token provided.' });
 
   try{
     pool
@@ -96,8 +94,8 @@ appRouter.get( '/locations', async function( req, res, next ) {
 // DB: locations nearby
 appRouter.post( '/locationsNearby', async function( req, res, next ) {
   const token = req.headers['token'];
-  // if (!token || token != apiToken)
-  //   return res.status(403).send({ auth: false, message: 'No correct token provided.' });
+  if (!token || token != apiToken)
+    return res.status(403).send({ auth: false, message: 'No correct token provided.' });
 
   // get body data
   let query_latitude, query_longitude, query_distance, query_limit;
