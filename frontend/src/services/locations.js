@@ -6,11 +6,26 @@ function get_api_url() {
   }
 }
 
+function get_api_token() {
+  try {
+    return `${window._env_.API_TOKEN}`
+  } catch (err) {
+    return 'dev_token!' // safe! real token overwritten via secrets
+  }
+}
+
 
 async function getLastUpdate() {
   const api_url = get_api_url()
   const url_endpoint = `${api_url}/lastUpdate`
-  const response = await fetch( url_endpoint )
+  const response = await fetch( url_endpoint, {
+    method: "GET",
+    headers: {
+      Accept: "application/json",
+      "Content-Type": "application/json",
+      token: get_api_token()
+    }
+  })
   const data_json = await response.json()
   return data_json;
 }
@@ -19,7 +34,14 @@ async function getLastUpdate() {
 async function getAll() {
   const api_url = get_api_url()
   const url_endpoint = `${api_url}/locations`
-  const response = await fetch( url_endpoint )
+  const response = await fetch( url_endpoint, {
+    method: "GET",
+    headers: {
+      Accept: "application/json",
+      "Content-Type": "application/json",
+      token: get_api_token()
+    }
+  })
   const data_json = await response.json()
   return data_json;
 }
@@ -41,6 +63,7 @@ async function getNearby(location, distance, limit=10) {
     headers: {
         Accept: 'application/json',
         'Content-Type': 'application/json',
+        token: get_api_token()
     },
     body: JSON.stringify(request_body)
   };

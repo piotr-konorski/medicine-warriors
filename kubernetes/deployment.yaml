@@ -78,6 +78,11 @@ spec:
             secretKeyRef:
               name: medicine-secrets
               key: DB_NAME
+        - name: API_TOKEN
+          valueFrom:
+            secretKeyRef:
+              name: medicine-secrets
+              key: API_TOKEN
 ---
 apiVersion: v1
 kind: Service
@@ -169,6 +174,11 @@ spec:
             secretKeyRef:
               name: medicine-secrets
               key: GOOGLEMAPS_API_KEY
+        - name: API_TOKEN
+          valueFrom:
+            secretKeyRef:
+              name: medicine-secrets
+              key: API_TOKEN
         volumeMounts:
         - mountPath: /etc/nginx/conf.d
           readOnly: true
