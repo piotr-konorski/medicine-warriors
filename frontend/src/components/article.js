@@ -1,4 +1,4 @@
-import { content } from './website-content'
+import { englishContent, ukrainianContent } from './website-content'
 import { legendItems } from './legend-items'
 import parse from 'html-react-parser'
 import { useState, useEffect } from 'react'
@@ -24,6 +24,15 @@ export default function Aricle(props) {
       })
     }
   }, [props.location])
+
+  const [content, setContent] = useState(ukrainianContent)
+  useEffect(() => {
+    if (props.english) {
+      setContent(englishContent)
+    } else {
+      setContent(ukrainianContent)
+    }
+  }, [props.english])
 
   return (
     <div className="p-6 md:py-1 flex items-center justify-center flex-col text-slate-900 ">

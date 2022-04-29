@@ -1,4 +1,4 @@
-export const content = [
+export const ukrainianContent = [
   {
     id: 'map-description',
     header: 'Карта',
@@ -8,7 +8,6 @@ export const content = [
       `<br /><br />Шановні користувачі! Функція пошуку найближчих аптек може працювати лише за умови увімкненої геолокації на Вашому пристрої та надання у браузері спеціального дозволу Вами після натискання на кнопку в правому нижньому куті карти. Ми розуміємо, наскільки важливою та цінною для кожного сьогодні є персональна інформація, тому хочемо запевнити, що не збираємо та нікуди не передаємо дані про Ваше місцезнаходження.`,
     ],
   },
-
   {
     id: 'insulin',
     header: 'Як отримати інсуліни?',
@@ -20,7 +19,7 @@ export const content = [
       `<br /><br />Детальніше про процес отримання електронного рецепту на інсулін можна дізнатися <a class="a_info" target="_blank" href="https://moz.gov.ua/article/news/elektronni-recepti-na-insulin">на сторінці МОЗ</a>.`,
       `<br /><br />Отримати паперовий рецепт можна у лікаря, з яким підписано декларацію на обслуговування (в Центрах первинної-медико-санітарної допомоги), або у вузького спеціаліста (в Консультативно-діагностичних центрах). Для цього хворому або його представнику необхідно звернутися у заклад без попереднього запису, але з урахуванням вимог комендантської години.`,
       `<br /><br />Окрім інсулінів, паперові рецепти наразі діють і на життєво необхідні ліки для хронічних хворих, а також препарати, які відпускаються по програмі <a class="a_info" target="_blank" href="https://moz.gov.ua/dostupni-liki">Доступні ліки</a>.`,
-      `<br /><br />Якщо поблизу вас є одинокі хворі люди - дізнайтеся, чи потрібні їм ліки. Якщо є можливість - сходіть отримати їх рецепт та придбайте медикаменти, які збережуть їм життя.`
+      `<br /><br />Якщо поблизу вас є одинокі хворі люди - дізнайтеся, чи потрібні їм ліки. Якщо є можливість - сходіть отримати їх рецепт та придбайте медикаменти, які збережуть їм життя.`,
     ],
   },
   {
@@ -44,7 +43,7 @@ export const content = [
     subheader: 'About us',
     content: [
       `Ми - багатонаціональна команда молодих людей, натхненних ідеєю допомогти інсулінозалежним українцям, що опинились у скруті. Об’єднавшись задля досягнення цієї мети під час участі в Міжнародному хакатоні Code4Ukraine, ми розробили цей інформаційний ресурс, що надає найсвіжішу інформацію з офіційних джерел про наявність інсуліну в аптеках по всій Україні. Перемога у хакатоні не стала фінальним акордом в історії нашого проекту, а лише спонукала до ще активнішої роботи над його розвитком. Чим ми наразі й займаємось.`,
-      `<br /><br />Більше інформації:&nbsp;&nbsp;<a class="a_info" target="_blank" href="PressReleaseUA.pdf">Українська</a>&nbsp;&nbsp;&nbsp;&nbsp;<a class="a_info" target="_blank" href="PressRelease.pdf">English</a>&nbsp;&nbsp;&nbsp;&nbsp;<a class="a_info" target="_blank" href="PressReleasePL.pdf">Polski</a>`
+      `<br /><br />Більше інформації:&nbsp;&nbsp;<a class="a_info" target="_blank" href="PressReleaseUA.pdf">Українська</a>&nbsp;&nbsp;&nbsp;&nbsp;<a class="a_info" target="_blank" href="PressRelease.pdf">English</a>&nbsp;&nbsp;&nbsp;&nbsp;<a class="a_info" target="_blank" href="PressReleasePL.pdf">Polski</a>`,
     ],
   },
 
@@ -59,7 +58,7 @@ export const content = [
       `<a key="partner1_2" className="inline" target="_blank" href="https://diabetyk.org.pl"><img className="parnerLogo" src="images/logo_psd.png"></a>`,
       `<a key="partner1_3" className="inline" target="_blank" href="https://www.idf.org"><img className="parnerLogo" src="images/logo_idf.png"></a>`,
     ],
-    omitSeparator: true
+    omitSeparator: true,
   },
 
   {
@@ -72,7 +71,17 @@ export const content = [
       `<a key="partner2_2" className="inline" target="_blank" href="https://gdsc.community.dev/national-technical-university-of-ukraine-kyiv-polytechnic-institute-natsionalnii-tekhnichnii-universitet-ukrayini-kiyivskii-politekhnichnii-institut"><img className="parnerLogo" src="images/logo_gdsc_kiev.svg"></a>`,
       `<a key="partner2_3" className="inline" target="_blank" href="https://gdsc.community.dev/eindhoven-university-of-technology"><img className="parnerLogo" src="images/logo_gdsc_eindhoven.svg"></a>`,
     ],
-    omitSeparator: true
+    omitSeparator: true,
   },
+]
 
+export const englishContent = [
+  {
+    id: 'map-description',
+    header: 'Map',
+    content: [
+      `<p>Welcome to the <span class="h1_bold">Code4Ukraine</span> website</p>`,
+    ],
+    omitSeparator: true,
+  },
 ]

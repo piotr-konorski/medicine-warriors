@@ -24,13 +24,19 @@ export default function App() {
     }
   }, [])
 
-
+  const [english, setEnglish] = useState(false)
+  const changeLang = () => setEnglish(!english)
   return (
     <>
-      <Navbar open={open} toggle={toggle} />
+      <Navbar
+        open={open}
+        toggle={toggle}
+        english={english}
+        changeLang={changeLang}
+      />
       <main className="pt-14">
         <Map id="map" location={location} setLocation={setLocation} />
-        <Article location={location} />
+        <Article location={location} english={english} />
         <Footer />
       </main>
     </>
