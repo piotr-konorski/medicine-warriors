@@ -42,16 +42,23 @@ function Navbar(props) {
                 className="p-4 md:py-2 border-b-[1px] md:border-none md:rounded-md hover:bg-gray-100"
                 style={{ cursor: 'pointer' }}
                 key={option.name}
-                onClick={() => {
-                  props.toggle()
-                  const anchor = document.querySelector(`#${option.id}`)
-                  window.scrollTo({
-                    behavior: 'smooth',
-                    top: anchor.offsetTop - 56, // 56 is the height of the navbar
-                  })
-                }}
+                onClick={
+                  option.id === 'language'
+                    ? () => {
+                        props.changeLang()
+                        props.toggle()
+                      }
+                    : () => {
+                        props.toggle()
+                        const anchor = document.querySelector(`#${option.id}`)
+                        window.scrollTo({
+                          behavior: 'smooth',
+                          top: anchor.offsetTop - 56, // 56 is the height of the navbar
+                        })
+                      }
+                }
               >
-                {option.name}
+                {props.english ? option.englishName : option.name}
               </li>
             ))}
           </ul>
