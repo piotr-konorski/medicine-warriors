@@ -21,7 +21,7 @@ export const options = [
   },
   {
     name: 'English',
-    englishName: 'англійська',
+    englishName: 'Український',
     id: 'language',
   },
 ]
