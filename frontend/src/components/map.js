@@ -51,18 +51,22 @@ const Map = (props) => {
       if (locations && locations !== 'undefined' && 'locations' in locations) {
         setMarkers(locations.locations)
       }
+      map.setCenter(mapCenter)
     })
 
     // set lastUpdated info
     const lastUpdatePromise = MakeQuerablePromise(getLastUpdate())
     lastUpdatePromise.then(function (lastUpdate) {
-      if (lastUpdate && lastUpdate !== 'undefined' && 'last_update' in lastUpdate) {
-        const lastUpdateTxt = lastUpdate.last_update;
-        var lastUpdateStatus = document.getElementById('lastUpdateStatus');
-        lastUpdateStatus.innerHTML = `Останнє оновлення: ${lastUpdateTxt}`;
+      if (
+        lastUpdate &&
+        lastUpdate !== 'undefined' &&
+        'last_update' in lastUpdate
+      ) {
+        const lastUpdateTxt = lastUpdate.last_update
+        var lastUpdateStatus = document.getElementById('lastUpdateStatus')
+        lastUpdateStatus.innerHTML = `Останнє оновлення: ${lastUpdateTxt}`
       }
     })
-
   }, [])
 
   const localizeMe = (map, setStatus, status) => {
@@ -90,9 +94,7 @@ const Map = (props) => {
       <LoadScript googleMapsApiKey={GMAPS_API_KEY}>
         <GoogleMap
           mapContainerClassName="map"
-          center={mapCenter}
           zoom={7}
-          onLoad={onLoad}
           version="weekly"
           options={{
             minZoom: 6,
@@ -105,10 +107,12 @@ const Map = (props) => {
             fullscreenControl: false,
           }}
           on
+          onLoad={onLoad}
+          onClick={() => setActiveMarker(null)}
         >
           <LocationButton localizeMe={localizeMe} />
           {props.location && <CurrentLocation location={props.location} />}
-          
+
           <MarkerClusterer
             styles={[
               {
@@ -161,116 +165,134 @@ const Map = (props) => {
             maxZoom={17}
           >
             {(clusterer) =>
-              markers.filter(function(marker) {
-                if (!marker.operational) {
-                  return false;
-                }
-                return true;
-              }).map((marker) => {
-                let locType = marker.type
-                if (!(locType in map_icons)) locType = 'default'
+              markers
+                .filter(function (marker) {
+                  if (!marker.operational) {
+                    return false
+                  }
+                  return true
+                })
+                .map((marker) => {
+                  let locType = marker.type
+                  if (!(locType in map_icons)) locType = 'default'
 
-                let locContact = null
-                if (marker.contact_name !== null)
-                  locContact = 'Contact: ' + marker.contact_name
-                if (marker.contact_type !== null)
-                  locContact += `(${marker.contact_type})`
+                  let locContact = null
+                  if (marker.contact_name !== null)
+                    locContact = 'Contact: ' + marker.contact_name
+                  if (marker.contact_type !== null)
+                    locContact += `(${marker.contact_type})`
 
-                let locTel = null
-                if (marker.contact_phones !== null) {
-                  locTel = marker.contact_phones.split(';')
-                }
+                  let locTel = null
+                  if (marker.contact_phones !== null) {
+                    locTel = marker.contact_phones.split(';')
+                  }
 
-                let locMapUrl = null
-                if (marker.google_map_url !== null)
-                  locMapUrl = marker.google_map_url
+                  let locMapUrl = null
+                  if (marker.google_map_url !== null)
+                    locMapUrl = marker.google_map_url
 
-                let locUrl = null
-                if (marker.www !== null && marker.www !== '') locUrl = marker.www
+                  let locUrl = null
+                  if (marker.www !== null && marker.www !== '')
+                    locUrl = marker.www
 
-                let last_resupplyInfo = null
-                if (marker.last_resupply !== null)
-                last_resupplyInfo = `Останній транспорт інсуліну: ${marker.last_resupply}`
+                  let last_resupplyInfo = null
+                  if (marker.last_resupply !== null)
+                    last_resupplyInfo = `Останній транспорт інсуліну: ${marker.last_resupply}`
 
-                return (
-                  <Marker
-                    key={marker.id}
-                    position={{
-                      lat: parseFloat(marker.latitude),
-                      lng: parseFloat(marker.longitude),
-                    }}
-                    clusterer={clusterer}
-                    icon={{
-                      url: `${map_icons[locType]}`,
-                      scaledSize: { width: 40, height: 40 },
-                      labelOrigin: { x: 16, y: -10 },
-                    }}
-                    onClick={() => handleActiveMarker(marker.id)}
-                  >
-                    {activeMarker === marker.id ? (
-                      <InfoWindow
-                        onCloseClick={() => setActiveMarker(null)}
-                        options={{
-                          pixelOffset: {
-                            width: 0,
-                            height: 0,
-                          },
-                          maxWidth: 320,
-                          maxHeight: 320,
-                        }}
-                      >
-                        <div>
-                          <h1 className="h1_info">{marker.name}</h1>
-                          {marker.address}
-                          {locContact !== null && <div><br />{parse(locContact)}</div>}
+                  return (
+                    <Marker
+                      key={marker.id}
+                      position={{
+                        lat: parseFloat(marker.latitude),
+                        lng: parseFloat(marker.longitude),
+                      }}
+                      clusterer={clusterer}
+                      icon={{
+                        url: `${map_icons[locType]}`,
+                        scaledSize: { width: 40, height: 40 },
+                        labelOrigin: { x: 16, y: -10 },
+                      }}
+                      onClick={() => handleActiveMarker(marker.id)}
+                    >
+                      {activeMarker === marker.id ? (
+                        <InfoWindow
+                          onCloseClick={() => setActiveMarker(null)}
+                          options={{
+                            pixelOffset: {
+                              width: 0,
+                              height: 0,
+                            },
+                            maxWidth: 320,
+                            maxHeight: 320,
+                          }}
+                        >
+                          <div>
+                            <h1 className="h1_info">{marker.name}</h1>
+                            {marker.address}
+                            {locContact !== null && (
+                              <div>
+                                <br />
+                                {parse(locContact)}
+                              </div>
+                            )}
 
-                          {locTel !== null && (
-                            <div>
-                              tel:{' '}
-                              {locTel.map((tel, i) => <a key={i} className="a_info" href={'tel:'+tel}>{tel}</a>)}
-                            </div>
-                          )}
-                          {locMapUrl !== null && (
-                            <div>
-                              <br />
-                              Google Maps:{' '}
-                              <a className="a_info" href={locMapUrl}>
-                                {locMapUrl}
-                              </a>
-                            </div>
-                          )}
+                            {locTel !== null && (
+                              <div>
+                                tel:{' '}
+                                {locTel.map((tel, i) => (
+                                  <a
+                                    key={i}
+                                    className="a_info"
+                                    href={'tel:' + tel}
+                                  >
+                                    {tel}
+                                  </a>
+                                ))}
+                              </div>
+                            )}
+                            {locMapUrl !== null && (
+                              <div>
+                                <br />
+                                Google Maps:{' '}
+                                <a className="a_info" href={locMapUrl}>
+                                  {locMapUrl}
+                                </a>
+                              </div>
+                            )}
 
-                          {locUrl !== null && (
-                            <div>
-                              <br />
-                              www:{' '}
-                              <a className="a_info" href={locUrl}>
-                                {locUrl}
-                              </a>
-                            </div>
-                          )}
+                            {locUrl !== null && (
+                              <div>
+                                <br />
+                                www:{' '}
+                                <a className="a_info" href={locUrl}>
+                                  {locUrl}
+                                </a>
+                              </div>
+                            )}
 
-                          {last_resupplyInfo && last_resupplyInfo !== null && (
-                            <div>
-                              <br />
-                              <p className="markerUrgentInfo">
-                                {last_resupplyInfo}
-                              </p>
-                            </div>
-                          )}
-                        </div>
-                      </InfoWindow>
-                    ) : null}
-                  </Marker>
-                )
-              })
+                            {last_resupplyInfo && last_resupplyInfo !== null && (
+                              <div>
+                                <br />
+                                <p className="markerUrgentInfo">
+                                  {last_resupplyInfo}
+                                </p>
+                              </div>
+                            )}
+                          </div>
+                        </InfoWindow>
+                      ) : null}
+                    </Marker>
+                  )
+                })
             }
           </MarkerClusterer>
         </GoogleMap>
       </LoadScript>
 
-      <div id="lastUpdateStatus" className="absolute top-0 right-1 text-l text-red-700 font-semibold bg-gray-100 bg-opacity-80 px-2" />
-
+      <div
+        id="lastUpdateStatus"
+        className="absolute top-0 right-1 text-l text-red-700 font-semibold bg-gray-100 bg-opacity-80 px-2"
+      />
     </div>
   )
 }

@@ -19,7 +19,7 @@ code {
 }
 
 .map {
-  width: 100%;
+  width: 100vw;
   min-height: calc(100vh - 56px);
 }
 
