@@ -1,8 +1,13 @@
 # Medicine Warriors
 
-Webpage: [www.medicinewarriors.org](https://www.medicinewarriors.org)
+Webpage: [www.medicinewarriors.org](https://www.medicinewarriors.org) (temporarily suspended -> see [webpage](https://piotr-konorski.github.io/medicine-warriors))
 
-All relevant information about insulin availability in war zones, currently focusing on **Ukraine** :ukraine:
+**Press Release**
+* in [English](https://piotr-konorski.github.io/medicine-warriors/frontend/public/PressRelease.pdf)
+* in [Ukrainian](https://piotr-konorski.github.io/medicine-warriors/frontend/public/PressReleaseUA.pdf)
+* in [Polish](https://piotr-konorski.github.io/medicine-warriors/frontend/public/PressReleasePL.pdf)
+
+All relevant information about insulin availability in war zones, currently focusing on **Ukraine**
 - **Up-to-date** map with locations of **insulin availability** — sourced from Ukrainian government notices
 
 *Implementing the winning solution of the Core4Ukraine hackathon, organized by [Eindhoven University of Technology, Netherlands](https://www.tue.nl/en)
@@ -12,7 +17,7 @@ We are an interdisciplinary group of researchers & IT specialists from Ukraine, 
 
 
 ### Contact
-- Olha Baliasina: [kvitkadykogogranatu@gmail.com](mailto:kvitkadykogogranatu@gmail.com)
+- Olha Baliasina: [olhabaliasina@gmail.com](mailto:olhabaliasina@gmail.com)
 - Piotr Konorski: [piotr.konorski@gmail.com](mailto:piotr.konorski@gmail.com)
 
 ### Contribution (alphabetical)
